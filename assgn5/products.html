@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PUI/SSUI Lab Week 1" />
+    <title>Muddy Paws Adventure Gear</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link />
+
+    <nav>
+      <a href ="index.html"> Home </a>
+       <a href="products.html">Products</a>
+       <a href="about.html">About</a>
+       <a href=>Cart</a>
+    </nav>
+  </head>
+
+  <body>
+      <div class="sidebar">
+          <h4>Filter By: </h4>
+
+          <label for="Animal">Animal: </label>
+          <select id="Animal" name="Animal">
+            <option value="All">All</option>
+            <option value="Dogs">Dogs</option>
+            <option value="Cats">Cats</option>
+          </select> <br><br>
+
+          <form>
+            <label for ="harnesses">Harnesses</label>
+            <input type="checkbox" id="harnesses" name="harnesses"> <br><br>
+            <label for ="attachements">Attachments</label>
+            <input type="checkbox" id ="attachements" name="attachments"><br><br>
+            <label for ="electronics">Electronics</label>
+            <input type="checkbox" id="electronics" name="electronics"><br><br>
+
+            <h5 id="filtering-price"> Price </h6>
+
+              <label for="High-Low">High-to-Low</label>
+              <input type="checkbox" id = "High-Low" name = "High-Low"><br><br>
+              <label for="Low-High">Low-to-High</label>
+              <input type="checkbox" id="Low-High" name="Low-High"><br><br>
+
+          </form>
+      </div>
+      <div class ="main-content">
+        <h1 id = "product-header">Our Products: </h1>
+
+        <div class ="products"> 
+            <h2> <a href="harness_detail.html">Dog Harness </a></h2>
+            <a href="harness_detail.html"><img src="images/dog_harness.jpg"></a>
+
+            <h2>Cat Harness</h2>
+            <img src="images/cat_harness.jpg">
+
+            <h2>Food Storage Attachment</h2>
+            <img src="images/food_container.png">
+
+            <h2>Water Storage Attachment</h2>
+            <img src= "images/water_storage.jpg">
+
+            <h2>GPS Tracker Collar</h2>
+            <img src="images/tracker_collar.png">
+
+            <h2>Cat Backpack</h2> 
+            <img src= "images/cat_backpack.jpg">
+
+        </div>
+
+      </div>
+    <!--
+    Useful Tags:
+    - <div>...</div>                    ==> block-level container for content
+    - <span>...</span>                  ==> inline container for content
+    - <h1>...</h1>(<h2>...</h2>, etc.)  ==> headings (h1 through h6)
+    - <p>...</p>                        ==> paragraph of text
+    - <img src=”...” />                 ==> image, src specifying path to image
+    - <a href=”...”>Link Text</a>       ==> link, href specifying destination
+  -->
+  
+    </div>
+  </body>
+</html>
