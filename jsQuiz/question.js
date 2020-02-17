@@ -7,9 +7,9 @@ class Question {
 }
 
 var questions = [
-new Question("Hyper Text Markup Language Stand For?", ["JavaScript", "XHTML","CSS", "HTML"], "HTML"),
-new Question("Which language is used for styling web pages?", ["HTML", "JQuery", "CSS", "XML"], "CSS"),
-new Question("What has not been covered in PUI lab?", ["HTML", "CSS","Javascript", "Java"], "Java"),
+	new Question("Hyper Text Markup Language Stand For?", ["JavaScript", "XHTML","CSS", "HTML"], "HTML"),
+	new Question("Which language is used for styling web pages?", ["HTML", "JQuery", "CSS", "XML"], "CSS"),
+	new Question("What has not been covered in PUI lab?", ["HTML", "CSS","Javascript", "Java"], "Java"),
 ];
 
 
@@ -22,7 +22,6 @@ class Quiz {
 
 	
 	getQuestion() {
-
 		return this.questions[this.questionIndex];
 	
 	}
@@ -37,17 +36,12 @@ class Quiz {
     }
 		this.questionIndex++;
 	}
-};
 
-	function guess(id, guess) {
-    var button = document.getElementById(id);
-    button.onclick = function() {
-   	 	quiz.guess(guess);
-   	 	populate();
-    };
+	isEnded() {
+		return this.questionIndex === this.questions.length;
+	}
 
-
-    function populate() {
+	function populate() {
 	if(quiz.isEnded()) {
     	showScores();
 	}
@@ -66,16 +60,32 @@ class Quiz {
 		}
 	};
 
-	function showScores() {
+	function guess(id, guess) {
+    var button = document.getElementById(id);
+    button.onclick = function() {
+   	 	quiz.guess(guess);
+   	 	populate();
+    };
+
+    function showScores() {
 	var gameOverHTML = "<h1>Result</h1>";
 	gameOverHTML += "<h2 id='score'> Your scores: " + quiz.score + "</h2>";
 	var element = document.getElementById("quiz");
 	element.innerHTML = gameOverHTML;
-	};
+};
+
+};
 
 
-    var quiz = new Quiz(questions);
-	populate();
+
+
+
+
+
+
+
+var quiz = new Quiz(questions);
+populate();
 
 
 
