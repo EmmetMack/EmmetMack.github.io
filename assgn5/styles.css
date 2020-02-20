@@ -3,3 +3,51 @@ body {
   font-family: Helvetica;
   background-color: white;
 }
+
+nav {
+	background-color: #607D8B;
+	display: inline-block;
+	width: 100%;
+	margin: auto;
+}
+
+nav h1{
+	
+	color: white;
+	float: left;
+	position: relative;
+	margin: 0;
+	padding: 8px;
+	display: inline;
+}
+
+nav ul {
+	float: right;
+	list-style-type: none;
+  	margin: auto;
+  	padding: 0;
+	display: inline;
+	color: white;
+	
+}
+
+nav ul li {
+	float: right;
+	padding: 8px;
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
+}
+
+nav ul li:last-child {
+	float: right;
+	padding: 8px;
+	border-right: none;
+	border-left: 1px solid #000000;
+}
+
+nav ul li a {
+	display: block;
+	padding: 8px;
+	color: white;
+	text-align: center;
+}
