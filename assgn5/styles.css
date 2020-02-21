@@ -9,6 +9,7 @@ nav {
 	display: inline-block;
 	width: 100%;
 	margin: auto;
+	min-height: 100px;
 }
 
 nav h1{
@@ -17,7 +18,8 @@ nav h1{
 	float: left;
 	position: relative;
 	margin: 0;
-	padding: 8px;
+	font-size: 24px;
+	padding: 35px;
 	display: inline;
 }
 
@@ -33,8 +35,10 @@ nav ul {
 
 nav ul li {
 	float: right;
-	padding: 8px;
-	/*border-right: 1px solid #000000;*/
+	top: 50%;
+  	left: 50%;
+	padding: 32px;
+	font-size: 20px;
 	border-left: 1px solid #000000;
 }
 
@@ -59,4 +63,59 @@ h3 {
 	height: 600px;
 	margin: auto;
 	align-content: center ;
+}
+
+body .sidebar {
+	min-height: 400px;
+	float: left;
+	height: auto;
+	padding: 5px;
+	font-size: 18px;
+	width: 20%; 
+	background-color: #CFD8DC;
+	margin-top: 85px;
+	text-align: left;
+}
+
+.sidebar .filters {
+	text-align: left;
+	margin: 10px;
+}
+
+.main-content #product-header {
+	text-align: left;
+	padding: 0px;
+	position: relative;
+	margin-left: 358px;
+}
+
+/* from https://code-boxx.com/simple-css-product-grid/#sec-grid */
+
+#p-flex {
+	max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+   	flex-direction: row;
+    flex-wrap: wrap;
+}
+
+div.p-flex {
+   	width: 33.3%;
+}
+
+div.p-flex-in {
+	box-sizing: border-box;
+    margin: 5px; 
+    padding: 10px;
+    background: #CFD8DC;
+}
+
+img.p-img {
+   	width: 100%;
+   	height: auto;
+}
+
+div.p-name {
+    font-weight: bold;
+    font-size: 1.1em;
 }
