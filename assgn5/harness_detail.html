@@ -22,57 +22,67 @@
   </head>
 
   <body>
-    <div class ="main-content">
-        
+
+    <div class = "detail_page">
+
+      <h1>Dog Harness</h1>
+      <img id = "harness" src="images/bigger_dog_harness.png">
+
+      <div class ="description">
+        <h3>Item Description:</h3>
+
+        <p>This harness will help your dog enjoy the outdoors like never before! By providing great control when on the leash, your dog can stay
+            comfortable and safe while exploring nature. Our harness comes in all different sizes and colors so you can get the right fit and show off your individualism with lots of colors. Order the product below: </p>
+
+        <label for="Size">Size: </label>
+        <select id="Size" name ="Size">
+            <option value="Tiny">Tiny</option>
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+        </select> <br><br>
+
+        <label for="Color">Color: </label>
+        <select id="Color" name ="Color">
+            <option value="Strawberry">Strawberry</option>
+            <option value="Crazyberry">Crazyberry</option>
+            <option value="Blackberry">Blackberry</option>
+            <option value="FireOrange">Fire Orange</option>
+        </select> <br><br>
+
+        <form>
+          <label for ="Quantity">Quantity</label>
+          <input type ="number" id="Quantity" name="Quantity"> <br><br>
+
+          <input type="button" id="cart" name ="cart" value="Add to Cart">
+        </form>
+
+        <h4 id="price">Price: </h4>
+
+      </div>
+
+      <div class ="similar-items">
+        <h2> Similar Items </h2>
+
+        <div id ="p-flex"> 
+          <div class = "p-flex"><div class="p-flex-in">
+            <div class = "p-name"><h2>Food Storage</h2></div>
+            <img class="p-img" src="images/food_container.png">
+          </div></div>
+
+         <div class = "p-flex"><div class="p-flex-in">
+            <div class = "p-name"><h2>Water Storage</h2></div>
+            <img class="p-img" src= "images/water_storage.jpg">
+          </div></div>
+
+          <div class = "p-flex"><div class="p-flex-in">
+            <div class = "p-name"><h2>GPS Tracker Collar</h2></div>
+            <img class="p-img" src="images/tracker_collar.png">
+          </div></div>
+
+      </div>
+
     </div>
-
-    <h1>Dog Harness</h1>
-    <img src="images/bigger_dog_harness.png">
-
-    <div class ="description">
-      <h3>Item Description:</h3>
-      <p></p>
-
-      <label for="Size">Size: </label>
-      <select id="Size" name ="Size">
-          <option value="Tiny">Tiny</option>
-          <option value="Small">Small</option>
-          <option value="Medium">Medium</option>
-          <option value="Large">Large</option>
-      </select> <br><br>
-
-      <label for="Color">Color: </label>
-      <select id="Color" name ="Color">
-          <option value="Strawberry">Strawberry</option>
-          <option value="Crazyberry">Crazyberry</option>
-          <option value="Blackberry">Blackberry</option>
-          <option value="FireOrange">Fire Orange</option>
-      </select> <br><br>
-
-      <form>
-        <label for ="Quantity">Quantity</label>
-        <input type ="number" id="Quantity" name="Quantity"> <br><br>
-
-        <input type="button" id="cart" name ="cart" value="Add to Cart">
-      </form>
-
-      <h6 id="price">Price: </h6>
-
-    </div>
-
-    <div class ="Similar items">
-      
-       <h2> Similar Items </h2>
-       <h2>Food Storage Attachment</h2>
-       <img src="images/food_container.png">
-
-       <h2>Water Storage Attachment</h2>
-       <img src= "images/water_storage.jpg">
-
-       <h2>GPS Tracker Collar</h2>
-       <img src="images/tracker_collar.png">
-    </div>
-
     <!--
     Useful Tags:
     - <div>...</div>                    ==> block-level container for content
@@ -82,7 +92,5 @@
     - <img src=”...” />                 ==> image, src specifying path to image
     - <a href=”...”>Link Text</a>       ==> link, href specifying destination
   -->
-  
-    </div>
   </body>
 </html>

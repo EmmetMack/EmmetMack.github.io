@@ -119,3 +119,38 @@ div.p-name {
     font-weight: bold;
     font-size: 1.1em;
 }
+
+.detail_page #harness {
+	float:left;
+	margin: 30px;
+	display: inline-block;
+}
+
+.detail_page h1 {
+	text-align: left;
+	margin-left: 30px;
+}
+
+.detail_page .description {
+	display: inline-block;
+	margin: auto;
+	padding: 20px;
+	margin-top: 30px;
+	margin-left: 22px;
+	background-color: #607D8B;
+	color: #FFFFFF;
+	min-width: 600px;
+	max-width:800px;
+	min-height: 300px;
+}
+
+.detail_page .description #cart {
+	float: center;
+	margin: auto;
+	display: inline-block;
+	background-color: #CFD8DC;
+	padding: 20px;
+	font-size: 20px;
+	color: #000000;
+	border-color: #000000;
+}
