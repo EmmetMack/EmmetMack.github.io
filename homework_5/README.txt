@@ -1,0 +1,3 @@
+# EmmetMack.github.io
+
+For homework_5 I included an extra page - an About page. This page lists information about Muddy Paws, its mission, some story (founder picture/bio), as well as how to reach support staff. This information is common on most sites and I felt it would add to the company's store and goals and thus should be included (I also found that cute picture of the dog so I needed to include it somewhere!)

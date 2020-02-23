@@ -166,7 +166,6 @@ div.p-name {
 }
 
 .detail_page .description #cart {
-	float: center;
 	margin: auto;
 	display: inline-block;
 	background-color: #CFD8DC;
