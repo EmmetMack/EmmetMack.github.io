@@ -4,6 +4,7 @@ body {
   background-color: white;
 }
 
+/* nav bar styling for all pages */
 nav {
 	background-color: #607D8B;
 	display: inline-block;
@@ -49,6 +50,7 @@ nav ul li a {
 	text-align: center;
 }
 
+/* header styling for home page and home page images */
 h2 {
 	text-align: center;
 }
@@ -64,6 +66,8 @@ h3 {
 	margin: auto;
 	align-content: center ;
 }
+
+/* Product list page */
 
 body .sidebar {
 	min-height: 400px;
@@ -120,6 +124,7 @@ div.p-name {
     font-size: 1.1em;
 }
 
+/* Harness detail page */
 .detail_page #harness {
 	float:left;
 	margin: 30px;
@@ -171,6 +176,7 @@ div.p-name {
 	border-color: #000000;
 }
 
+/* About us page */
 .image-header {
 	float: left;
 	margin-left: 30px;
