@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PUI Assignment 5" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <title>Muddy Paws Adventure Gear</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <link/>
+
+    <nav>
+      <!-- nav bar for all pages -->
+        <h1> Muddy Paws Adventure Gear</h1>
+        <ul>
+          <li><a href=>Cart</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href ="index.html"> Home </a></li>
+      </ul>
+    </nav>
+  </head>
+
+  <body>
+
+      <div class="sidebar"> <!-- side bar for filtering out products --> 
+
+          <div class = "filters">
+              <h4>Filter By: </h4>
+
+              <label for="Animal">Animal: </label>
+              <select id="Animal" name="Animal">
+                <option value="All">All</option>
+                <option value="Dogs">Dogs</option>
+                <option value="Cats">Cats</option>
+              </select> <br><br>
+
+              <form>
+                <label for ="harnesses">Harnesses</label>
+                <input type="checkbox" id="harnesses" name="harnesses"> <br><br>
+                <label for ="attachements">Attachments</label>
+                <input type="checkbox" id ="attachements" name="attachments"><br><br>
+                <label for ="electronics">Electronics</label>
+                <input type="checkbox" id="electronics" name="electronics"><br><br>
+
+                <h5 id="filtering-price"> Price </h5>
+
+                  <label for="High-Low">High-to-Low</label>
+                  <input type="checkbox" id = "High-Low" name = "High-Low"><br><br>
+                  <label for="Low-High">Low-to-High</label>
+                  <input type="checkbox" id="Low-High" name="Low-High"><br><br>
+
+              </form>
+           </div>
+      </div>
+    
+      <div class ="main-content">
+
+        <h1 id = "product-header">Our Products: </h1>
+        
+        <!-- from https://code-boxx.com/simple-css-product-grid/#sec-grid -->
+        <div id ="p-flex"> 
+            <div class = "p-flex"><div class="p-flex-in">
+              <div class = "p-name"><h2> <a href="harness_detail.html">Dog Harness</a></h2></div>
+              <a href="harness_detail.html"><img class="p-img" src="images/dog_harness.jpg"></a>
+            </div></div>
+
+            <div class = "p-flex"><div class="p-flex-in">
+                <div class="p-name"><h2>Cat Harness</h2></div>
+                <img class="p-img" src="images/cat_harness.jpg">
+            </div></div>
+
+            <div class = "p-flex"><div class="p-flex-in">
+                <div class="p-name"><h2>Food Storage</h2></div>
+                <img class = "p-img" src="images/food_container.png">
+            </div></div>
+
+            <div class = "p-flex"><div class="p-flex-in">
+             <div class="p-name"><h2>Water Storage</h2> </div>
+              <img class="p-img" src= "images/water_storage.jpg">
+            </div></div>
+
+            <div class = "p-flex"><div class="p-flex-in">
+              <div class ="p-name"><h2>GPS Tracker Collar</h2></div>
+              <img class = "p-img" src="images/tracker_collar.png">
+            </div></div>
+
+            <div class = "p-flex"><div class="p-flex-in">
+              <div class ="p-name" ><h2>Cat Backpack</h2></div>
+              <img class="p-img" src= "images/cat_backpack.jpg"> 
+            </div>
+
+        </div>
+
+      </div>
+  
+    </div>
+  </body>
+</html>
