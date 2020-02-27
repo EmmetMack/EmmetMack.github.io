@@ -23,12 +23,15 @@
 
   <body>
     <div class ="main-content">
-        <table id="cart-table" style="width:75%">
+        <h1 id="cart-header">Cart</h1>
+
+        <!-- referenced https://www.w3schools.com/html/html_tables.asp --> 
+        <table id="cart-table">
           <tr id ="headers">
-            <th>Item</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th id="item-header">Item</th>
+            <th id="description-header">Description</th>
+            <th id="quantity-header">Quantity</th>
+            <th id="price-header">Price</th>
           </tr>
           <tr>
             <td>Dog Harness</td>
@@ -45,15 +48,14 @@
         </table>
 
         <input type="button" id="checkout" name ="checkout" value="Checkout">
-        <h3 id="total">Total: </h3>
-        <h3 id="shipping">Shipping: </h3>
-        <h3 id="final-cost">Your cost: </h3>
-
+        <div class="cost-totals">
+          <h3 id="total">Total: </h3>
+          <h3 id="shipping">Shipping: </h3>
+          <h3 id="final-cost">Your cost: </h3>
         </div>
 
     </div>
 
   
-    </div>
   </body>
 </html>

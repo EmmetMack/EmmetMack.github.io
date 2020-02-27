@@ -212,6 +212,61 @@ div.p-name {
 
 .main-content .founder img {
 	margin-top: 0px;
+}
 
 
+/* Cart page */
 
+#cart-header {
+	margin-left: auto;
+	float: left;
+	text-align: center;
+	width: 25%;
+}
+
+#checkout {
+	margin-top: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20%;
+	background-color: #CFD8DC;
+	padding: 20px;
+	font-size: 20px;
+	color: #000000;
+	border-color: #000000;
+	justify-content: center;
+	display: flex;
+}
+
+/* referenced https://www.w3schools.com/css/css_table.asp */
+table{
+	padding: 5px;
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+	margin-top: 25px;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 18px;
+}
+
+#item-header {
+	width: 20px;
+}
+
+#description-header {
+	width: 40px;
+}
+
+#quantity-header {
+	width: 20px;
+}
+
+#price-header {
+	width: 20px;
+}
