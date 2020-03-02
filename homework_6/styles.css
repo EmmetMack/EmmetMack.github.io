@@ -1,10 +1,17 @@
 body {
   font-size: 16px;
+<<<<<<< HEAD
   font-family: Lato;
   background-color: white;
 }
 
 /* nav bar styling for all pages */
+=======
+  font-family: Helvetica;
+  background-color: white;
+}
+
+>>>>>>> dev
 nav {
 	background-color: #607D8B;
 	display: inline-block;
@@ -50,7 +57,10 @@ nav ul li a {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 /* header styling for home page and home page images */
+=======
+>>>>>>> dev
 h2 {
 	text-align: center;
 }
@@ -67,8 +77,11 @@ h3 {
 	align-content: center ;
 }
 
+<<<<<<< HEAD
 /* Product list page */
 
+=======
+>>>>>>> dev
 body .sidebar {
 	min-height: 400px;
 	float: left;
@@ -124,7 +137,10 @@ div.p-name {
     font-size: 1.1em;
 }
 
+<<<<<<< HEAD
 /* Harness detail page */
+=======
+>>>>>>> dev
 .detail_page #harness {
 	float:left;
 	margin: 30px;
@@ -136,6 +152,7 @@ div.p-name {
 	margin-left: 30px;
 }
 
+<<<<<<< HEAD
 .detail_page h3 a {
 	text-align: left;
 	margin-bottom: 26px;
@@ -148,11 +165,17 @@ div.p-name {
 	margin-right: 390px;
 }
 
+=======
+>>>>>>> dev
 .detail_page .description {
 	display: inline-block;
 	margin: auto;
 	padding: 20px;
+<<<<<<< HEAD
 	margin-top: 45px;
+=======
+	margin-top: 30px;
+>>>>>>> dev
 	margin-left: 22px;
 	background-color: #607D8B;
 	color: #FFFFFF;
@@ -166,6 +189,10 @@ div.p-name {
 }
 
 .detail_page .description #cart {
+<<<<<<< HEAD
+=======
+	float: center;
+>>>>>>> dev
 	margin: auto;
 	display: inline-block;
 	background-color: #CFD8DC;
@@ -175,7 +202,10 @@ div.p-name {
 	border-color: #000000;
 }
 
+<<<<<<< HEAD
 /* About us page */
+=======
+>>>>>>> dev
 .image-header {
 	float: left;
 	margin-left: 30px;
@@ -205,7 +235,11 @@ div.p-name {
 	margin-left: 75px;
 	color: #FFFFFF;
 	margin-top: 97px;
+<<<<<<< HEAD
 	padding: 27px 0;
+=======
+	padding: 30px 0;
+>>>>>>> dev
 	width: 20%;
 	text-align: center;
 	float: left;
@@ -221,7 +255,76 @@ div.p-name {
 	margin-right: 30px;
 	font-size: 14px;
 	text-align: center;
+<<<<<<< HEAD
 	margin-top: 60px;
 }
 
 
+=======
+}
+
+.main-content .founder h1 p {
+	margin-top: 5px;
+}
+
+.main-content .founder img {
+	margin-top: 0px;
+}
+
+
+/* Cart page */
+
+#cart-header {
+	margin-left: auto;
+	float: left;
+	text-align: center;
+	width: 25%;
+}
+
+#checkout {
+	margin-top: 25px;
+	margin-left: 100px;
+	margin-right: auto;
+	width: 20%;
+	background-color: #CFD8DC;
+	padding: 20px;
+	font-size: 20px;
+	color: #000000;
+	border-color: #000000;
+	justify-content: center;
+	display: flex;
+}
+
+/* referenced https://www.w3schools.com/css/css_table.asp */
+table{
+	padding: 5px;
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+	margin-top: 25px;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 18px;
+}
+
+#item-header {
+	width: 20px;
+}
+
+#description-header {
+	width: 40px;
+}
+
+#quantity-header {
+	width: 20px;
+}
+
+#price-header {
+	width: 20px;
+}
+>>>>>>> dev
