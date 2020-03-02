@@ -7,11 +7,6 @@ body {
 
 /* nav bar styling for all pages */
 
-  font-family: Helvetica;
-  background-color: white;
-}
-
-
 nav {
 	background-color: #607D8B;
 	display: inline-block;
