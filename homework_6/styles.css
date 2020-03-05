@@ -50,6 +50,7 @@ nav ul li a {
 	padding: 8px;
 	color: white;
 	text-align: center;
+	text-decoration: none; 
 }
 
 /* header styling for home page and home page images */
@@ -133,6 +134,8 @@ div.p-name {
 	float: left;
 	margin: 30px;
 	display: inline-block;
+	width: 25%;
+	
 }
 
 .detail_page h1 {
@@ -140,6 +143,10 @@ div.p-name {
 	margin-left: 30px;
 }
 
+
+#price {
+	text-align: left;
+}
 
 .detail_page h3 a {
 	text-align: left;
@@ -151,6 +158,12 @@ div.p-name {
 .detail_page #similar-title {
 	text-align: center;
 	margin-right: 390px;
+}
+
+.detail_page h4 {
+	display: inline-block;
+	float: left;
+
 }
 
 

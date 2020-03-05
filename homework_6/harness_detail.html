@@ -35,10 +35,9 @@
 
       <h1 id ='item-name'>Dog Harness</h1>
       
-      <img id = "harness" src="images/bigger_dog_harness.png">
+      <img id = "harness" src="images/red-dog-harness-tiny.jpg">
 
       <h3><a href="products.html">Back to Products</a></h3>
-
 
      <!-- product description box -->
 
@@ -51,7 +50,7 @@
             comfortable and safe while exploring nature. Our harness comes in all different sizes and colors so you can get the right fit and show off your individualism with lots of colors. Order the product below: </p>
 
         <label for="Size">Size: </label>
-        <select id="size" name ="size">
+        <select id="size" name ="size" onchange="updateProductImage()">
             <option value="Tiny">Tiny</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
@@ -59,7 +58,7 @@
         </select> <br><br>
 
         <label for="Color">Color: </label>
-        <select id="color" name ="color">
+        <select id="color" name ="color" onchange="updateProductImage()">
             <option value="Strawberry">Strawberry</option>
             <option value="Crazyberry">Crazyberry</option>
             <option value="Blackberry">Blackberry</option>
@@ -73,7 +72,7 @@
           <input type="button" id="cart" name ="cart" value="Add to Cart" onclick="addToCart()">
         </form>
 
-        <h4 id="price">Price: </h4>
+        <h3 id="price">Price: </h3>
 
       </div>
 
