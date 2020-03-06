@@ -105,7 +105,8 @@ function addToCart() {
 
 	cartTotalSize += parseInt(quantity);
 
-	document.getElementById("cart-link").innerHTML = "Cart(" + (cartTotalSize) + ")";
+	document.getElementById("cart-link-detail").innerHTML = "Cart(" + (cartTotalSize) + ")";
+	
 
 	
 }
