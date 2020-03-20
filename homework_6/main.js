@@ -112,6 +112,8 @@ function addToCart() {
 
 	document.getElementById("cart-link-detail").innerHTML = "Cart(" + (cartTotalSize) + ")";
 
+	localStorage.setItem("cart", JSON.stringify(mainCart));
+
 	return mainCart;
 }
 
@@ -121,8 +123,10 @@ function displayCart() {
 
 	console.log("Called");
 
+	let cart = JSON.parse(localStorage.getItem("cart"));
+	console.log(cart);
 
-	for (i in mainCart.items) {
+	for (i in cart.items) {
 		console.log("In loop");
 
 		console.log(i.item);
