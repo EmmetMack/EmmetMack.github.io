@@ -1,3 +1,4 @@
+
 function updateProductImage() {
 
 	var size = document.getElementById("size").value;
@@ -83,6 +84,10 @@ var mainCart = new Cart([]);
 
 var cartTotalSize = 0;
 
+var tableSize = 1;
+
+var itemTotal = 0.00;
+
 function addToCart() {
 
 	var name = document.getElementById("item-name").innerHTML;
@@ -106,9 +111,40 @@ function addToCart() {
 	cartTotalSize += parseInt(quantity);
 
 	document.getElementById("cart-link-detail").innerHTML = "Cart(" + (cartTotalSize) + ")";
-	
 
-	
+	return mainCart;
+}
+
+function displayCart() {
+
+	var table = document.getElementById("cart-table");
+
+	console.log("Called");
+
+
+	for (i in mainCart.items) {
+		console.log("In loop");
+
+		console.log(i.item);
+		var newRow = table.insertRow(tableSize);
+		tableSize += 1;
+
+		var itemCol = newRow.insertCell(0);
+		var descriptionCol = newRow.insertCell(1);
+		var quantityCol = newRow.insertCell(2);
+		var priceCol = newRow.insertCell(3);
+
+		itemCol.innerHTML = i.name;
+		descriptionCol.innerHTML = i.color + " and " +  i.size;
+		quantityCol.innerHTML = i.quantity;
+		priceCol.innerHTML = "$ " + (i.quantity * 10.00);
+
+		itemTotal += (i.quantity * 10.00);
+
+	}
+
+	document.getElementById("total").innerHTML = "Total: $" + itemTotal;
+	document.getElementById('final-cost').innerHTML = "Your Cost: $" + (itemTotal + 5.99);
 }
 
 function Item(name, color, size, quantity, price) {

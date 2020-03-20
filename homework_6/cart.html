@@ -7,13 +7,13 @@
     <title>Muddy Paws Adventure Gear</title>
 
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src=“main.js“ type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
     <nav>
       <h1> Muddy Paws Adventure Gear</h1>
        <ul>
-          <li><a id = "cart-link-cart" href="cart.html">Cart (0)</a></li>
+          <li><a id = "cart-link-cart" href="cart.html"  onclick = "displayCart()">Cart ()</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href ="index.html"> Home </a></li>
@@ -27,31 +27,21 @@
 
         <!-- referenced https://www.w3schools.com/html/html_tables.asp --> 
         <table id="cart-table">
+
           <tr id ="headers">
             <th id="item-header">Item</th>
             <th id="description-header">Description</th>
             <th id="quantity-header">Quantity</th>
             <th id="price-header">Price</th>
           </tr>
-          <tr>
-            <td>Dog Harness</td>
-            <td>Tiny and Fire Orange</td>
-            <td>1</td>
-            <td>$24.99</td>
-          </tr>
-          <tr>
-            <td>Cat Backpack</td>
-            <td>Large and Blackberry</td>
-            <td>2</td>
-            <td>$100.00</td>
-          </tr>
+
         </table>
 
         <input type="button" id="checkout" name ="checkout" value="Checkout">
         <div class="cost-totals">
-          <h3 id="total">Total: 124.99 </h3>
-          <h3 id="shipping">Shipping: 5.99 </h3>
-          <h3 id="final-cost">Your cost: 130.98 </h3>
+          <h3 id="total">Total: </h3>
+          <h3 id="shipping">Shipping: $5.99 </h3>
+          <h3 id="final-cost">Your cost: </h3>
         </div>
 
     </div>
