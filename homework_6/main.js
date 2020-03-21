@@ -112,7 +112,7 @@ function addToCart() {
 
 	document.getElementById("cart-link-detail").innerHTML = "Cart(" + (cartTotalSize) + ")";
 
-	localStorage.setItem("cart", JSON.stringify(mainCart));
+	sessionStorage.setItem("cart", JSON.stringify(mainCart));
 
 	return mainCart;
 }
@@ -123,7 +123,7 @@ function displayCart() {
 
 	console.log("Called");
 
-	let cart = JSON.parse(localStorage.getItem("cart"));
+	let cart = JSON.parse(sessionStorage.getItem("cart"));
 	console.log(cart);
 
 	for (i in cart.items) {
