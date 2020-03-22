@@ -13,7 +13,7 @@
     <nav>
       <h1> Muddy Paws Adventure Gear</h1>
        <ul>
-          <li><a id = "cart-link-cart" href="cart.html">Cart ()</a></li>
+          <li><a id = "cart-link" href="cart.html">Cart ()</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href ="index.html"> Home </a></li>
@@ -21,8 +21,8 @@
     </nav>
   </head>
 
-  <body>
-    <div class ="main-content" onload = "displayCart()">
+  <body onload = "displayCart()" onload="updateNavBar()">
+    <div class ="main-content">
         <h1 id="cart-header">Cart</h1>
 
         <!-- referenced https://www.w3schools.com/html/html_tables.asp --> 

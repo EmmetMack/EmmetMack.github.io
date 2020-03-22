@@ -82,13 +82,20 @@ function Cart(items) {
 
 var mainCart = new Cart([]);
 
+sessionStorage.setItem("cart", JSON.stringify(mainCart));
+
+
 var cartTotalSize = 0;
+
+sessionStorage.setItem("cartSize", cartTotalSize);
 
 var tableSize = 1;
 
 var itemTotal = 0.00;
 
 function addToCart() {
+
+	var cart = JSON.parse(sessionStorage.getItem("cart"));
 
 	var name = document.getElementById("item-name").innerHTML;
 	console.log(name);
@@ -103,18 +110,21 @@ function addToCart() {
 	var newItem = new Item(name, color, size, quantity);
 
 
-	mainCart.items.push(newItem);
-
+	cart.items.push(newItem);
 
 	console.log(parseInt(quantity));
 
+	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
+
 	cartTotalSize += parseInt(quantity);
 
-	document.getElementById("cart-link-detail").innerHTML = "Cart(" + (cartTotalSize) + ")";
+	sessionStorage.setItem("cartSize", cartTotalSize);
 
-	sessionStorage.setItem("cart", JSON.stringify(mainCart));
+	console.log(JSON.stringify(cart));
 
-	return mainCart;
+	sessionStorage.setItem("cart", JSON.stringify(cart));
+
+
 }
 
 function displayCart() {
@@ -123,13 +133,18 @@ function displayCart() {
 
 	console.log("Called");
 
-	let cart = JSON.parse(sessionStorage.getItem("cart"));
-	console.log(cart);
+	var cart = JSON.parse(sessionStorage.getItem("cart"));
+
+	console.log(cart.items);
 
 	for (i in cart.items) {
-		console.log("In loop");
+		console.log(i);
 
-		console.log(i.item);
+		var item = cart.items[i];
+
+		console.log(item)
+
+		console.log(item.name);
 		var newRow = table.insertRow(tableSize);
 		tableSize += 1;
 
@@ -138,17 +153,28 @@ function displayCart() {
 		var quantityCol = newRow.insertCell(2);
 		var priceCol = newRow.insertCell(3);
 
-		itemCol.innerHTML = i.name;
-		descriptionCol.innerHTML = i.color + " and " +  i.size;
-		quantityCol.innerHTML = i.quantity;
-		priceCol.innerHTML = "$ " + (i.quantity * 10.00);
+		itemCol.innerHTML = item.name;
+		descriptionCol.innerHTML = item.color + " and " +  item.size;
+		quantityCol.innerHTML = parseInt(item.quantity);
+		priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-		itemTotal += (i.quantity * 10.00);
+		itemTotal += (parseInt(item.quantity) * 10.00);
 
 	}
 
 	document.getElementById("total").innerHTML = "Total: $" + itemTotal;
 	document.getElementById('final-cost').innerHTML = "Your Cost: $" + (itemTotal + 5.99);
+
+	updateNavBar();
+}
+
+function updateNavBar() {
+
+	console.log("called");
+	var cartSize = sessionStorage.getItem("cartSize");
+
+	console.log(cartSize);
+	document.getElementById("cart-link").innerHTML = "Cart(" + (cartSize) + ")";
 }
 
 function Item(name, color, size, quantity, price) {
