@@ -80,23 +80,27 @@ function Cart(items) {
 	this.items = items;
 }
 
-var mainCart = new Cart([]);
-
-// sessionStorage.setItem("cart", JSON.stringify(mainCart));
 
 var cartTotalSize = 0;
-
-// sessionStorage.setItem("cartSize", cartTotalSize);
 
 var tableSize = 1;
 
 var itemTotal = 0.00;
 
-// sessionStorage.setItem("price", itemTotal);
+
+	// sessionStorage.setItem("cart", JSON.stringify(mainCart));
+	// sessionStorage.setItem("cartSize", cartTotalSize);
+	// sessionStorage.setItem("price", itemTotal);
+
 
 function addToCart() {
 
+
 	var cart = JSON.parse(sessionStorage.getItem("cart"));
+
+	if (cart === null) {
+		var cart = new Cart([]);
+	}
 
 	var name = document.getElementById("item-name").innerHTML;
 	console.log(name);
@@ -112,9 +116,11 @@ function addToCart() {
 
 	cart.items.push(newItem);
 
-	console.log(cart.items);
-
 	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
+
+	if (!window.cartTotalSize || cartTotalSize === null) {
+		cartTotalSize = 0;
+	}
 
 	cartTotalSize += parseInt(quantity);
 
@@ -135,37 +141,43 @@ function displayCart() {
 
 	console.log(cart);
 
-	for (i in cart.items) {
-		console.log(i);
+	if (cart != null) {
 
-		var item = cart.items[i];
+		for (i in cart.items) {
+			console.log(i);
 
-		console.log(item)
+			var item = cart.items[i];
 
-		console.log(item.name);
-		var newRow = table.insertRow(tableSize);
-		tableSize += 1;
+			var newRow = table.insertRow(tableSize);
 
-		var itemCol = newRow.insertCell(0);
-		var descriptionCol = newRow.insertCell(1);
-		var quantityCol = newRow.insertCell(2);
-		var priceCol = newRow.insertCell(3);
+			//newRow.onclick = removeRow(tableSize);
 
-		itemCol.innerHTML = item.name;
-		descriptionCol.innerHTML = item.color + " and " +  item.size;
-		quantityCol.innerHTML = parseInt(item.quantity);
-		priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
+			tableSize += 1;
 
-		var itemTotal = parseInt(sessionStorage.getItem("price"));
+			var itemCol = newRow.insertCell(0);
+			var descriptionCol = newRow.insertCell(1);
+			var quantityCol = newRow.insertCell(2);
+			var priceCol = newRow.insertCell(3);
 
-		itemTotal += (parseInt(item.quantity) * 10.00);
 
-		sessionStorage.setItem("price", itemTotal);
+			itemCol.innerHTML = item.name;
+			descriptionCol.innerHTML = item.color + " and " +  item.size;
+			quantityCol.innerHTML = parseInt(item.quantity);
+			priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
+			var itemTotal = parseInt(sessionStorage.getItem("price"));
+
+			itemTotal += (parseInt(item.quantity) * 10.00);
+
+			sessionStorage.setItem("price", itemTotal);
+
+		}
+
+		document.getElementById("total").innerHTML = "Total: $" + parseInt(sessionStorage.getItem("price"));
+		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(sessionStorage.getItem("price")) + 5.99);
 	}
+	
 
-	document.getElementById("total").innerHTML = "Total: $" + parseInt(sessionStorage.getItem("price"));
-	document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(sessionStorage.getItem("price")) + 5.99);
 
 	updateNavBar();
 }
@@ -174,7 +186,15 @@ function updateNavBar() {
 	
 	var cartTotalSize = sessionStorage.getItem("cartSize");
 
+	if (cartTotalSize === null || !window.cartTotalSize) {
+		cartTotalSize = 0;
+	}
+
 	document.getElementById("cart-link").innerHTML = "Cart(" + (cartTotalSize) + ")";
+}
+
+function removeRow(i) {
+  document.getElementById("cart-table").deleteRow(i);
 }
 
 function Item(name, color, size, quantity, price) {
