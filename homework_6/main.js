@@ -88,15 +88,15 @@ var tableSize = 1;
 var itemTotal = 0.00;
 
 
-	// sessionStorage.setItem("cart", JSON.stringify(mainCart));
-	// sessionStorage.setItem("cartSize", cartTotalSize);
-	// sessionStorage.setItem("price", itemTotal);
+	// localStorage.setItem("cart", JSON.stringify(mainCart));
+	// localStorage.setItem("cartSize", cartTotalSize);
+	// localStorage.setItem("price", itemTotal);
 
 
 function addToCart() {
 
 
-	var cart = JSON.parse(sessionStorage.getItem("cart"));
+	var cart = JSON.parse(localStorage.getItem("cart"));
 
 	if (cart === null) {
 		var cart = new Cart([]);
@@ -116,7 +116,7 @@ function addToCart() {
 
 	cart.items.push(newItem);
 
-	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
+	var cartTotalSize = parseInt(localStorage.getItem("cartSize"));
 
 	if (!window.cartTotalSize || cartTotalSize === null) {
 		cartTotalSize = 0;
@@ -124,9 +124,9 @@ function addToCart() {
 
 	cartTotalSize += parseInt(quantity);
 
-	sessionStorage.setItem("cartSize", cartTotalSize);
+	localStorage.setItem("cartSize", cartTotalSize);
 
-	sessionStorage.setItem("cart", JSON.stringify(cart));
+	localStorage.setItem("cart", JSON.stringify(cart));
 
 	updateNavBar();
 }
@@ -137,7 +137,7 @@ function displayCart() {
 
 	console.log("Called");
 
-	var cart = JSON.parse(sessionStorage.getItem("cart"));
+	var cart = JSON.parse(localStorage.getItem("cart"));
 
 	console.log(cart);
 
@@ -165,16 +165,16 @@ function displayCart() {
 			quantityCol.innerHTML = parseInt(item.quantity);
 			priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-			var itemTotal = parseInt(sessionStorage.getItem("price"));
+			var itemTotal = parseInt(localStorage.getItem("price"));
 
 			itemTotal += (parseInt(item.quantity) * 10.00);
 
-			sessionStorage.setItem("price", itemTotal);
+			localStorage.setItem("price", itemTotal);
 
 		}
 
-		document.getElementById("total").innerHTML = "Total: $" + parseInt(sessionStorage.getItem("price"));
-		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(sessionStorage.getItem("price")) + 5.99);
+		document.getElementById("total").innerHTML = "Total: $" + parseInt(localStorage.getItem("price"));
+		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(localStorage.getItem("price")) + 5.99);
 	}
 	
 
@@ -184,7 +184,7 @@ function displayCart() {
 
 function updateNavBar() {
 	
-	var cartTotalSize = sessionStorage.getItem("cartSize");
+	var cartTotalSize = localStorage.getItem("cartSize");
 
 	if (cartTotalSize === null || !window.cartTotalSize) {
 		cartTotalSize = 0;
