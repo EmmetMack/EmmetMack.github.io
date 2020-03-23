@@ -84,7 +84,6 @@ var mainCart = new Cart([]);
 
 sessionStorage.setItem("cart", JSON.stringify(mainCart));
 
-
 var cartTotalSize = 0;
 
 sessionStorage.setItem("cartSize", cartTotalSize);
@@ -93,9 +92,12 @@ var tableSize = 1;
 
 var itemTotal = 0.00;
 
+sessionStorage.setItem("price", itemTotal);
+
 function addToCart() {
 
 	var cart = JSON.parse(sessionStorage.getItem("cart"));
+
 
 	var name = document.getElementById("item-name").innerHTML;
 	console.log(name);
@@ -109,10 +111,12 @@ function addToCart() {
 
 	var newItem = new Item(name, color, size, quantity);
 
+	
 
 	cart.items.push(newItem);
 
-	console.log(parseInt(quantity));
+	console.log(cart.items);
+
 
 	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
 
@@ -158,12 +162,16 @@ function displayCart() {
 		quantityCol.innerHTML = parseInt(item.quantity);
 		priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
+		var itemTotal = sessionStorage.getItem("price");
+
 		itemTotal += (parseInt(item.quantity) * 10.00);
+
+		sessionStorage.setItem("price", itemTotal);
 
 	}
 
-	document.getElementById("total").innerHTML = "Total: $" + itemTotal;
-	document.getElementById('final-cost').innerHTML = "Your Cost: $" + (itemTotal + 5.99);
+	document.getElementById("total").innerHTML = "Total: $" + parseInt(sessionStorage.getItem("price"));
+	document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(sessionStorage.getItem("price")) + 5.99);
 
 	updateNavBar();
 }
