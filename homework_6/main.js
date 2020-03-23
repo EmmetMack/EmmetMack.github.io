@@ -82,22 +82,21 @@ function Cart(items) {
 
 var mainCart = new Cart([]);
 
-sessionStorage.setItem("cart", JSON.stringify(mainCart));
+// sessionStorage.setItem("cart", JSON.stringify(mainCart));
 
 var cartTotalSize = 0;
 
-sessionStorage.setItem("cartSize", cartTotalSize);
+// sessionStorage.setItem("cartSize", cartTotalSize);
 
 var tableSize = 1;
 
 var itemTotal = 0.00;
 
-sessionStorage.setItem("price", itemTotal);
+// sessionStorage.setItem("price", itemTotal);
 
 function addToCart() {
 
 	var cart = JSON.parse(sessionStorage.getItem("cart"));
-
 
 	var name = document.getElementById("item-name").innerHTML;
 	console.log(name);
@@ -111,25 +110,15 @@ function addToCart() {
 
 	var newItem = new Item(name, color, size, quantity);
 
-	
-
 	cart.items.push(newItem);
 
 	console.log(cart.items);
 
-
 	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
 
-	
 	cartTotalSize += parseInt(quantity);
 
-	console.log(cartTotalSize);
-
 	sessionStorage.setItem("cartSize", cartTotalSize);
-
-	console.log(parseInt(sessionStorage.getItem("cartSize")));
-
-	console.log(JSON.stringify(cart));
 
 	sessionStorage.setItem("cart", JSON.stringify(cart));
 
@@ -144,7 +133,7 @@ function displayCart() {
 
 	var cart = JSON.parse(sessionStorage.getItem("cart"));
 
-	console.log(cart.items);
+	console.log(cart);
 
 	for (i in cart.items) {
 		console.log(i);
@@ -167,7 +156,7 @@ function displayCart() {
 		quantityCol.innerHTML = parseInt(item.quantity);
 		priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-		var itemTotal = sessionStorage.getItem("price");
+		var itemTotal = parseInt(sessionStorage.getItem("price"));
 
 		itemTotal += (parseInt(item.quantity) * 10.00);
 
