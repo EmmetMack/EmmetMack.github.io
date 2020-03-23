@@ -120,15 +120,20 @@ function addToCart() {
 
 	var cartTotalSize = parseInt(sessionStorage.getItem("cartSize"));
 
+	
 	cartTotalSize += parseInt(quantity);
 
+	console.log(cartTotalSize);
+
 	sessionStorage.setItem("cartSize", cartTotalSize);
+
+	console.log(parseInt(sessionStorage.getItem("cartSize")));
 
 	console.log(JSON.stringify(cart));
 
 	sessionStorage.setItem("cart", JSON.stringify(cart));
 
-
+	updateNavBar();
 }
 
 function displayCart() {
@@ -177,12 +182,10 @@ function displayCart() {
 }
 
 function updateNavBar() {
+	
+	var cartTotalSize = sessionStorage.getItem("cartSize");
 
-	console.log("called");
-	var cartSize = sessionStorage.getItem("cartSize");
-
-	console.log(cartSize);
-	document.getElementById("cart-link").innerHTML = "Cart(" + (cartSize) + ")";
+	document.getElementById("cart-link").innerHTML = "Cart(" + (cartTotalSize) + ")";
 }
 
 function Item(name, color, size, quantity, price) {
