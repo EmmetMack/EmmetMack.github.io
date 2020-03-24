@@ -92,7 +92,6 @@ var itemTotal = 0.00;
 	// localStorage.setItem("cartSize", cartTotalSize);
 	// localStorage.setItem("price", itemTotal);
 
-
 function addToCart() {
 
 
@@ -118,11 +117,11 @@ function addToCart() {
 
 	var cartTotalSize = parseInt(localStorage.getItem("cartSize"));
 
-	if (!window.cartTotalSize || cartTotalSize === null) {
+	if (cartTotalSize === null) {
 		cartTotalSize = 0;
 	}
 
-	cartTotalSize += parseInt(quantity);
+	cartTotalSize += parseInt(newItem.quantity);
 
 	localStorage.setItem("cartSize", cartTotalSize);
 
@@ -133,9 +132,9 @@ function addToCart() {
 
 function displayCart() {
 
-	var table = document.getElementById("cart-table");
+	console.log(localStorage.getItem("price"));
 
-	console.log("Called");
+	var table = document.getElementById("cart-table");
 
 	var cart = JSON.parse(localStorage.getItem("cart"));
 
@@ -144,7 +143,6 @@ function displayCart() {
 	if (cart != null) {
 
 		for (i in cart.items) {
-			console.log(i);
 
 			var item = cart.items[i];
 
@@ -165,19 +163,23 @@ function displayCart() {
 			btn.value = "Delete"
 			btn.onclick = "removeRow(this)";
       		deleteCol.appendChild(btn);
+
       		document.getElementById("btn" + i).addEventListener("click", function(e) {
 				removeRow(this);
 			});
-
-      		console.log(btn);
-
 		
 			itemCol.innerHTML = item.name;
 			descriptionCol.innerHTML = item.color + " and " +  item.size;
 			quantityCol.innerHTML = parseInt(item.quantity);
 			priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-			var itemTotal = parseInt(localStorage.getItem("price"));
+			var itemTotal = localStorage.getItem("price");
+
+			console.log(itemTotal);
+
+			if (itemTotal === null || itemTotal === undefined ) {
+				itemTotal = 0;
+			}
 
 			itemTotal += (parseInt(item.quantity) * 10.00);
 
@@ -187,11 +189,11 @@ function displayCart() {
 
 		document.getElementById("total").innerHTML = "Total: $" + parseInt(localStorage.getItem("price"));
 		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(localStorage.getItem("price")) + 5.99);
+
+		updateNavBar();
 	}
+
 	
-
-
-	updateNavBar();
 }
 
 function updateNavBar() {
@@ -207,16 +209,8 @@ function updateNavBar() {
 
 function removeRow(row) {
 
-console.log("Called");
   if (row != null) {
-  	console.log("row" + row);
-  	console.log("row.parentNode" + row.parentNode);
-
-  	console.log(row.parentNode.parentNode)
-  	console.log(row.parentNode.parentNode.rowIndex);
   	var d = row.parentNode.parentNode.rowIndex;
-
-
 
   	var currentCart = JSON.parse(localStorage.getItem("cart"));
 
@@ -227,6 +221,7 @@ console.log("Called");
   	currentCart.items.splice(d-1);
 
   	localStorage.setItem("cart", JSON.stringify(currentCart));
+
   	document.getElementById("cart-table").deleteRow(d);
 
   	updateNavBar();
