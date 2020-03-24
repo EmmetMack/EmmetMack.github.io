@@ -132,8 +132,6 @@ function addToCart() {
 
 function displayCart() {
 
-	console.log(localStorage.getItem("price"));
-
 	var table = document.getElementById("cart-table");
 
 	var cart = JSON.parse(localStorage.getItem("cart"));
@@ -175,20 +173,38 @@ function displayCart() {
 
 			var itemTotal = localStorage.getItem("price");
 
+			if (!window.currentPrice) {
+				itemTotal = 0;
+			}
+
 			console.log(itemTotal);
 
 			if (itemTotal === null || itemTotal === undefined ) {
 				itemTotal = 0;
+				console.log(itemTotal);
 			}
 
 			itemTotal += (parseInt(item.quantity) * 10.00);
 
+			console.log("price: " + itemTotal);
+
 			localStorage.setItem("price", itemTotal);
+
+			console.log(localStorage.getItem("price", itemTotal));
 
 		}
 
-		document.getElementById("total").innerHTML = "Total: $" + parseInt(localStorage.getItem("price"));
-		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(localStorage.getItem("price")) + 5.99);
+		var currentPrice = localStorage.getItem("price");
+
+		console.log("currentPrice: " + currentPrice);
+
+		if (typeof(currentPrice) == "undefined" || currentPrice === null) {
+			console.log("set price to 0");
+			currentPrice = 0;
+		}
+
+		document.getElementById("total").innerHTML = "Total: $" + currentPrice;
+		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(currentPrice) + 5.99);
 
 		updateNavBar();
 	}
@@ -217,6 +233,10 @@ function removeRow(row) {
   	var size = localStorage.getItem("cartSize");
 
   	localStorage.setItem("cartSize", size - currentCart.items[d-1].quantity);
+
+  	var currentPrice = localStorage.getItem("price");
+
+  	localStorage.setItem("price", currentPrice - (parseInt(currentCart.items[d-1].quantity) * 10.00))
 
   	currentCart.items.splice(d-1);
 
