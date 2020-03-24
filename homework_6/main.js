@@ -127,9 +127,29 @@ function addToCart() {
 
 	localStorage.setItem("cartSize", cartTotalSize);
 
+
+
 	localStorage.setItem("cart", JSON.stringify(cart));
 
-	localStorage.setItem("newItem", true);
+
+	var itemCost = parseInt(newItem.quantity) * 10.00;
+
+	console.log("itemCost: " + itemCost);
+
+	var totalPrice = localStorage.getItem("price");
+
+	console.log(totalPrice);
+
+	if (totalPrice === null || typeof(totalPrice) === "undefined" ) {
+		totalPrice = 0;
+		console.log(itemTotal);
+	}
+
+	totalPrice = parseInt(totalPrice);
+	totalPrice += itemCost;
+	console.log("price: " + totalPrice);
+	localStorage.setItem("price", totalPrice);
+	console.log(localStorage.getItem("price"));
 
 	updateNavBar();
 }
@@ -175,29 +195,6 @@ function displayCart() {
 			quantityCol.innerHTML = parseInt(item.quantity);
 			priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-			var itemCost = parseInt(item.quantity) * 10.00;
-
-			var totalPrice = localStorage.getItem("price");
-
-			console.log(totalPrice);
-
-			if (totalPrice === null || typeof(totalPrice) === "undefined" ) {
-				totalPrice = 0;
-				console.log(itemTotal);
-			}
-
-			if (localStorage.getItem("newItem") === "true") {
-				totalPrice = parseInt(totalPrice);
-				totalPrice += itemCost;
-				console.log("price: " + totalPrice);
-				localStorage.setItem("price", totalPrice);
-				console.log(localStorage.getItem("price"));
-
-				localStorage.setItem("newItem", false);
-
-			}
-			
-
 		}
 
 		var currentPrice = localStorage.getItem("price");
@@ -232,25 +229,52 @@ function updateNavBar() {
 function removeRow(row) {
 
   if (row != null) {
+
   	var d = row.parentNode.parentNode.rowIndex;
 
   	var currentCart = JSON.parse(localStorage.getItem("cart"));
 
+
   	var size = localStorage.getItem("cartSize");
 
-  	localStorage.setItem("cartSize", size - currentCart.items[d-1].quantity);
+ 	console.log(d);
+
+ 	console.log(currentCart.items);
+
+ 	console.log(currentCart.items[(d)]);
+
+  	var sizeUpdate =  size - currentCart.items[(d-1)].quantity;
+
+  	if (sizeUpdate <= 0) {
+  		sizeUpdate = 0;
+  	}
+
+  	localStorage.setItem("cartSize", sizeUpdate);
 
   	var currentPrice = localStorage.getItem("price");
 
-  	localStorage.setItem("price", currentPrice - (parseInt(currentCart.items[d-1].quantity) * 10.00))
+  	var priceUpdate = currentPrice - (parseInt(currentCart.items[(d-1)].quantity) * 10.00);
 
-  	currentCart.items.splice(d-1);
+  	console.log("priceUpdate: " + priceUpdate);
+
+  	if (priceUpdate <= 0) {
+  		priceUpdate = 0;
+  	}
+
+  	localStorage.setItem("price", priceUpdate);
+
+  	currentCart.items.splice(d-1, 1);
 
   	localStorage.setItem("cart", JSON.stringify(currentCart));
 
   	document.getElementById("cart-table").deleteRow(d);
 
-  	displayCart();
+  	document.getElementById("total").innerHTML = "Total: $" + localStorage.getItem("price");
+	document.getElementById('final-cost').innerHTML = "Your Cost: $" + Math.round(((parseInt(localStorage.getItem("price")) + 5.99) + Number.EPSILON) * 100) / 100;
+
+  	//displayCart();
+
+
 
   	updateNavBar();
 
