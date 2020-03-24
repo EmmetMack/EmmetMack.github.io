@@ -117,15 +117,19 @@ function addToCart() {
 
 	var cartTotalSize = parseInt(localStorage.getItem("cartSize"));
 
-	if (cartTotalSize === null) {
+	console.log("cartTotalSize: " + cartTotalSize);
+
+	if (typeof(cartTotalSize) === "undefined" || cartTotalSize === null || isNaN(cartTotalSize)) {
 		cartTotalSize = 0;
 	}
 
-	cartTotalSize += parseInt(newItem.quantity);
+	cartTotalSize += parseInt(quantity);
 
 	localStorage.setItem("cartSize", cartTotalSize);
 
 	localStorage.setItem("cart", JSON.stringify(cart));
+
+	localStorage.setItem("newItem", true);
 
 	updateNavBar();
 }
@@ -171,26 +175,28 @@ function displayCart() {
 			quantityCol.innerHTML = parseInt(item.quantity);
 			priceCol.innerHTML = "$ " + (parseInt(item.quantity) * 10.00);
 
-			var itemTotal = localStorage.getItem("price");
+			var itemCost = parseInt(item.quantity) * 10.00;
 
-			if (!window.currentPrice) {
-				itemTotal = 0;
-			}
+			var totalPrice = localStorage.getItem("price");
 
-			console.log(itemTotal);
+			console.log(totalPrice);
 
-			if (itemTotal === null || itemTotal === undefined ) {
-				itemTotal = 0;
+			if (totalPrice === null || typeof(totalPrice) === "undefined" ) {
+				totalPrice = 0;
 				console.log(itemTotal);
 			}
 
-			itemTotal += (parseInt(item.quantity) * 10.00);
+			if (localStorage.getItem("newItem") === "true") {
+				totalPrice = parseInt(totalPrice);
+				totalPrice += itemCost;
+				console.log("price: " + totalPrice);
+				localStorage.setItem("price", totalPrice);
+				console.log(localStorage.getItem("price"));
 
-			console.log("price: " + itemTotal);
+				localStorage.setItem("newItem", false);
 
-			localStorage.setItem("price", itemTotal);
-
-			console.log(localStorage.getItem("price", itemTotal));
+			}
+			
 
 		}
 
@@ -198,13 +204,13 @@ function displayCart() {
 
 		console.log("currentPrice: " + currentPrice);
 
-		if (typeof(currentPrice) == "undefined" || currentPrice === null) {
+		if (typeof(currentPrice) === "undefined" || currentPrice === null) {
 			console.log("set price to 0");
 			currentPrice = 0;
 		}
 
 		document.getElementById("total").innerHTML = "Total: $" + currentPrice;
-		document.getElementById('final-cost').innerHTML = "Your Cost: $" + (parseInt(currentPrice) + 5.99);
+		document.getElementById('final-cost').innerHTML = "Your Cost: $" + Math.round(((parseInt(currentPrice) + 5.99) + Number.EPSILON) * 100) / 100;
 
 		updateNavBar();
 	}
@@ -243,6 +249,8 @@ function removeRow(row) {
   	localStorage.setItem("cart", JSON.stringify(currentCart));
 
   	document.getElementById("cart-table").deleteRow(d);
+
+  	displayCart();
 
   	updateNavBar();
 
