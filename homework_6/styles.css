@@ -317,8 +317,11 @@ table, th, td {
 	width: 20px;
 }
 
-.cost-totals {
+#delete {
+	width: 20px;
+}
 
+.cost-totals {
 	display: inline-block;
 	margin-left: 275px;
 	margin-right: auto;

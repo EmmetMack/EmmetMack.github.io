@@ -150,16 +150,28 @@ function displayCart() {
 
 			var newRow = table.insertRow(tableSize);
 
-			//newRow.onclick = removeRow(tableSize);
-
 			tableSize += 1;
 
 			var itemCol = newRow.insertCell(0);
 			var descriptionCol = newRow.insertCell(1);
 			var quantityCol = newRow.insertCell(2);
-			var priceCol = newRow.insertCell(3);
+			var deleteCol = newRow.insertCell(3);
+			var priceCol = newRow.insertCell(4);
 
+		
+      		var btn = document.createElement('input');
+			btn.type = "button";
+			btn.id = "btn" + i;
+			btn.value = "Delete"
+			btn.onclick = "removeRow(this)";
+      		deleteCol.appendChild(btn);
+      		document.getElementById("btn" + i).addEventListener("click", function(e) {
+				removeRow(this);
+			});
 
+      		console.log(btn);
+
+		
 			itemCol.innerHTML = item.name;
 			descriptionCol.innerHTML = item.color + " and " +  item.size;
 			quantityCol.innerHTML = parseInt(item.quantity);
@@ -186,15 +198,41 @@ function updateNavBar() {
 	
 	var cartTotalSize = localStorage.getItem("cartSize");
 
-	if (cartTotalSize === null || !window.cartTotalSize) {
+	if (cartTotalSize === null) {
 		cartTotalSize = 0;
 	}
 
 	document.getElementById("cart-link").innerHTML = "Cart(" + (cartTotalSize) + ")";
 }
 
-function removeRow(i) {
-  document.getElementById("cart-table").deleteRow(i);
+function removeRow(row) {
+
+console.log("Called");
+  if (row != null) {
+  	console.log("row" + row);
+  	console.log("row.parentNode" + row.parentNode);
+
+  	console.log(row.parentNode.parentNode)
+  	console.log(row.parentNode.parentNode.rowIndex);
+  	var d = row.parentNode.parentNode.rowIndex;
+
+
+
+  	var currentCart = JSON.parse(localStorage.getItem("cart"));
+
+  	var size = localStorage.getItem("cartSize");
+
+  	localStorage.setItem("cartSize", size - currentCart.items[d-1].quantity);
+
+  	currentCart.items.splice(d-1);
+
+  	localStorage.setItem("cart", JSON.stringify(currentCart));
+  	document.getElementById("cart-table").deleteRow(d);
+
+  	updateNavBar();
+
+  }
+ 
 }
 
 function Item(name, color, size, quantity, price) {
@@ -204,4 +242,5 @@ function Item(name, color, size, quantity, price) {
 	this.quantity = quantity;
 	this.price = price
 }
+
 
