@@ -67,14 +67,28 @@ function getTeams() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		teams = data['api']['teams'];
-		for (var i = 0; i < teams.length; i++) {
-			console.log(teams[i]['name']);
-		}
+		addTeams(teams);
 	})
 	.catch(err => {
 		console.log(err);
 	});
+}
+
+function addTeams(teams) {
+
+	document.getElementById('team-sel').options.length = 0; //clear out the dropdown options and then add the new ones
+
+	console.log(teams);
+
+	var dropdown = document.getElementById("team-sel");
+
+	for (var i = 0; i < teams.length; i ++) {
+		var option = document.createElement("option");
+		option.text = teams[i]["name"];
+		option.value = teams[i]["team_id"];
+		dropdown.add(option);
+	}
+	
 }
 
