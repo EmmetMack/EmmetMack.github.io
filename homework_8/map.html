@@ -66,12 +66,13 @@
             <form>
               <div class ="form-group">
                   <label for="country-sel">Country:</label>
-                  <select class="form-control" id="country-sel">
-                    <option>England</option>
-                    <option>Spain</option>
-                    <option>Germany</option>
-                    <option>France</option>
-                    <option>Italy</option>
+                  <select class="form-control" id="country-sel" onchange= "getTeams()">
+                    <option value = "Pick team here" >Pick team here</option>
+                    <option value = "england">England</option>
+                    <option value = "spain">Spain</option>
+                    <option value = "germany">Germany</option>
+                    <option value = "france">France</option>
+                    <option value = "italy" >Italy</option>
                   </select>
               </div>
 
