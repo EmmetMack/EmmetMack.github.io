@@ -57,12 +57,38 @@
       <div class ="row">
         <div class = "col">
             <div id="mapid">
-               <script src="main.js" type="text/javascript"></script>
+               
             </div>
         </div>
       </div>
       <div class = "row">
           <div class ="col">
+            <form>
+              <div class ="form-group">
+                  <label for="country-sel">Country:</label>
+                  <select class="form-control" id="country-sel">
+                    <option>England</option>
+                    <option>Spain</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Italy</option>
+                  </select>
+              </div>
+
+
+            </form>
+
+            </div>
+            <div class ="col">
+              <form>
+                  <div class ="form-group">
+                      <label for="team-sel">Team:</label>
+                      <select class="form-control" id="team-sel">
+                      </select>
+                  </div>
+              </form>
+
+            </div>
           </div>
       </div>
     </div>
@@ -75,5 +101,7 @@
     - <img src=”...” />                 ==> image, src specifying path to image
     - <a href=”...”>Link Text</a>       ==> link, href specifying destination
   -->
+  <!-- have to link the main.js after creating the Leaflet div or else it doesn't load-->
+    <script src="main.js" type="text/javascript"></script>
   </body>
 </html>
