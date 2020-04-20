@@ -67,7 +67,7 @@
               <div class ="form-group">
                   <label for="country-sel">Country:</label>
                   <select class="form-control" id="country-sel" onchange= "getTeams()">
-                    <option value = "Pick team here" >Pick team here</option>
+                    <option value = "Pick team here" >Pick league here</option>
                     <option value = "england">England</option>
                     <option value = "spain">Spain</option>
                     <option value = "germany">Germany</option>
@@ -84,7 +84,8 @@
               <form>
                   <div class ="form-group">
                       <label for="team-sel">Team:</label>
-                      <select class="form-control" id="team-sel">
+                      <select class="form-control" id="team-sel" onchange= "getPlayers()">
+                        <option value = "Pick team here" >Pick team here</option>
                       </select>
                   </div>
               </form>

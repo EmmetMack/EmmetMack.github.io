@@ -70,6 +70,7 @@ function getTeams() {
 	.then(data => {
 		teams = data['api']['teams'];
 		addTeams(teams);
+		createLeagueStats(teams);
 	})
 	.catch(err => {
 		console.log(err);
@@ -79,7 +80,7 @@ function getTeams() {
 //adds the teams for the selected league to the 'Teams' dropdown
 function addTeams(teams) {
 
-	document.getElementById('team-sel').options.length = 0; //clear out the dropdown options and then add the new ones
+	document.getElementById('team-sel').options.length = 1; //clear out the dropdown options and then add the new ones
 
 	console.log(teams);
 
@@ -94,3 +95,74 @@ function addTeams(teams) {
 	
 }
 
+function getPlayers() {
+
+	selectElement = document.querySelector('#team-sel'); 
+
+	console.log(selectElement);
+                      
+    output = selectElement.options[selectElement.selectedIndex].value;
+
+    console.log(output);
+
+    fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + output + "/2019-2020", {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+			"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
+		}
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		for (var i = 0; i < data.length; i++) {
+			console.log(data['api']['player_name']);
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	});
+}
+
+function createLeagueStats(teams) {
+	var leaguePlayers = [];
+
+	for(var i = 0; i < teams.length; i++) {
+
+		 fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + teams[i]["team_id"] + "/2019-2020", {
+			"method": "GET",
+			"headers": {
+				"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+				"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			var players = data['api']['players'];
+
+			for (var j = 0; j < players.length; j++) {
+				var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
+
+				// console.log(player);
+				if (!leaguePlayers.includes(player)) {
+					leaguePlayers.push(player);
+				}			
+			}
+			
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+	console.log("leaguePlayers:");
+	console.log(leaguePlayers);
+
+}
+
+function Player(name, city, country, team) {
+		this.name = name;
+		this.city = city;
+		this.country = country;
+		this.team = team;
+}
