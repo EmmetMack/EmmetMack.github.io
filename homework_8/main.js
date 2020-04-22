@@ -95,38 +95,56 @@ function addTeams(teams) {
 	
 }
 
-function getPlayers() {
+// function getPlayers() {
 
-	selectElement = document.querySelector('#team-sel'); 
+// 	selectElement = document.querySelector('#team-sel'); 
 
-	console.log(selectElement);
+// 	console.log(selectElement);
                       
-    output = selectElement.options[selectElement.selectedIndex].value;
+//     output = selectElement.options[selectElement.selectedIndex].value;
 
-    console.log(output);
+//     console.log(output);
 
-    fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + output + "/2019-2020", {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-			"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
-		}
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		for (var i = 0; i < data.length; i++) {
-			console.log(data['api']['player_name']);
-		}
-	})
-	.catch(err => {
-		console.log(err);
-	});
-}
+//     fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + output + "/2019-2020", {
+// 		"method": "GET",
+// 		"headers": {
+// 			"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+// 			"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
+// 		}
+// 	})
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		console.log(data);
+// 		for (var i = 0; i < data.length; i++) {
+// 			console.log(data['api']['player_name']);
+// 		}
+// 	})
+// 	.catch(err => {
+// 		console.log(err);
+// 	});
+// }
+
+// found at this link https://www.quora.com/How-do-I-make-a-JSON-file-with-JavaScript, just used to download CSVs so i wouldn't run into API rate limits
+var saveData = (function () {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (data, fileName) {
+        var json = JSON.stringify(data),
+            blob = new Blob([json], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
 
 function createLeagueStats(teams) {
 	var leaguePlayers = [];
 
+	console.log(teams.length);
+	
 	for(var i = 0; i < teams.length; i++) {
 
 		 fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + teams[i]["team_id"] + "/2019-2020", {
@@ -138,19 +156,32 @@ function createLeagueStats(teams) {
 		})
 		.then(response => response.json())
 		.then(data => {
+
 			console.log(data);
+
 			var players = data['api']['players'];
 
-			for (var j = 0; j < players.length; j++) {
-				var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
+			var teamName = data['api']['players'][0]['team_name'];
 
-				// console.log(player);
-				if (!leaguePlayers.includes(player)) {
-					leaguePlayers.push(player);
-				}			
-			}
-			
+			// var teamName = new Blob(JSON.stringify(players, null, parseInt(data['api']['results'])), {type : 'application/json'});
+			fileName = teamName + ".json";
+ 
+			saveData(players, fileName);
+
+		    console.log("file saved item set");
+
 		})
+
+
+			// for (var j = 0; j < players.length; j++) {
+			// 	var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
+
+			// 	// console.log(player);
+			// 	if (!leaguePlayers.includes(player)) {
+			// 		leaguePlayers.push(player);
+			// 	}			
+			// }
+			
 		.catch(err => {
 			console.log(err);
 		});
