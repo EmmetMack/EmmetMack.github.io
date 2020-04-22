@@ -124,7 +124,7 @@ function addTeams(teams) {
 // 	});
 // }
 
-// found at this link https://www.quora.com/How-do-I-make-a-JSON-file-with-JavaScript, just used to download CSVs so i wouldn't run into API rate limits
+// found at this link https://www.quora.com/How-do-I-make-a-JSON-file-with-JavaScript, just used to download JSON so i wouldn't run into API rate limits
 var saveData = (function () {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -139,12 +139,30 @@ var saveData = (function () {
         window.URL.revokeObjectURL(url);
     };
 }());
+// found at this link https://www.quora.com/In-JavaScript-how-do-I-read-a-local-JSON-file, need this to read in the JSON data that was created with API calls, doing to avoid rate limits 
+function readJSON(path) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function(e) { 
+      if (this.status == 200) {
+          var file = new File([this.response], 'temp');
+          var fileReader = new FileReader();
+          fileReader.addEventListener('load', function(){
+               //do stuff with fileReader.result
+          });
+          fileReader.readAsText(file);
+      } 
+    }
+    xhr.send();
+}
 
+//using this function create player JSON per team in a league, then once JSON is loaded will create player inforamtion 
 function createLeagueStats(teams) {
 	var leaguePlayers = [];
 
 	console.log(teams.length);
-	
+
 	for(var i = 0; i < teams.length; i++) {
 
 		 fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + teams[i]["team_id"] + "/2019-2020", {
@@ -186,9 +204,6 @@ function createLeagueStats(teams) {
 			console.log(err);
 		});
 	}
-	console.log("leaguePlayers:");
-	console.log(leaguePlayers);
-
 }
 
 function Player(name, city, country, team) {
