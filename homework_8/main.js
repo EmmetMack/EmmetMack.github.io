@@ -139,25 +139,8 @@ var saveData = (function () {
         window.URL.revokeObjectURL(url);
     };
 }());
-// found at this link https://www.quora.com/In-JavaScript-how-do-I-read-a-local-JSON-file, need this to read in the JSON data that was created with API calls, doing to avoid rate limits 
-function readJSON(path) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', path, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function(e) { 
-      if (this.status == 200) {
-          var file = new File([this.response], 'temp');
-          var fileReader = new FileReader();
-          fileReader.addEventListener('load', function(){
-               //do stuff with fileReader.result
-          });
-          fileReader.readAsText(file);
-      } 
-    }
-    xhr.send();
-}
 
-//using this function create player JSON per team in a league, then once JSON is loaded will create player inforamtion 
+//using this function create player JSON per team in a league, then once JSON is loaded will create player information 
 function createLeagueStats(teams) {
 	var leaguePlayers = [];
 
