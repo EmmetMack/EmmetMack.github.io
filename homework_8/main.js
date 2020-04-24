@@ -50,6 +50,8 @@ function getTeams() {
                       
     var output = selectElement.options[selectElement.selectedIndex].value; 
 
+    console.log(output);
+
     var selectedLeagueId;
 
     var teams;
