@@ -53,6 +53,8 @@ function getTeams() {
 
     var selectedLeagueId;
 
+    var teams;
+
     if (output === "england") {
     	console.log("England");
     	selectedLeagueId = EnglandLeagueID;
