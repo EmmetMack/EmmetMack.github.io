@@ -73,7 +73,7 @@ function getTeams() {
 
     console.log(selectedLeagueId);
 
-    if (selectedLeagueId) {
+    if (typeof(selectedLeagueId) !== "undefined") {
 
     	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
 		"method": "GET",
