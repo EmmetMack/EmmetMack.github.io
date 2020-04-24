@@ -243,6 +243,8 @@ function createLeagueStats(teams) {
 				}			
 		}
 	}
+
+	console.log(leaguePlayers);
 			
 }
 
