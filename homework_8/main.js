@@ -82,6 +82,10 @@ function getTeams() {
 	});
 }
 
+document.getElementById('country-sel').addEventListener('change', getTeams());
+
+document.getElementById('team-sel').addEventListener('change', getPlayers());
+
 //adds the teams for the selected league to the 'Teams' dropdown
 function addTeams(teams) {
 
