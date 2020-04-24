@@ -70,7 +70,7 @@ function getTeams() {
     	console.log("Spain");
     	selectedLeagueId = SpainCountryID;
     } else {
-    	break;
+    	return;
     }
 
     console.log(selectedLeagueId);
