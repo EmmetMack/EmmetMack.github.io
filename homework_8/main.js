@@ -37,10 +37,12 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 
 	
-//document.querySelector('#country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+//document.getElementById('country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+
+$('#country-sel').on('change',getTeams()); //trying jquery bc yolo
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
-export function getTeams() {
+function getTeams() {
 
 	console.log('get teams');
 	
