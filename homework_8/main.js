@@ -39,7 +39,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 	
 //document.getElementById('country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
 
-$('#country-sel').on('change',getTeams()); //trying jquery bc yolo
+$(document).ready(() => { 
+	$('#country-sel').on('change',getTeams()); //trying jquery bc yolo
+});
 
 console.log('#country-sel');
 
