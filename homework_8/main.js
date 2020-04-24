@@ -1,8 +1,8 @@
-import * as EPL from './epl-JSON.js' 
-import * as SerieA from './seriea-JSON.js' 
-import * as Ligue1 from './ligue1-JSON.js' 
-import * as Bundes from './bundes-JSON.js' 
-import * as LaLiga from './laliga-JSON.js'
+import * as EPL from './modules/epl-JSON.js' 
+import * as SerieA from './modules/seriea-JSON.js' 
+import * as Ligue1 from './modules/ligue1-JSON.js' 
+import * as Bundes from './modules/bundes-JSON.js' 
+import * as LaLiga from './modules/laliga-JSON.js'
 
 //mapbox library api access token
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
