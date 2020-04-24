@@ -229,7 +229,8 @@ function createLeagueStats(teams) {
 		var nameJSON = prefix + "." + name.replace(" ", "");
 		console.log(nameJSON); 
 		var data = JSON.parse(eval(nameJSON));
-
+		
+		console.log(data);
 		var players = data['api']['players'];
 
 		for (var j = 0; j < players.length; j++) {
