@@ -236,7 +236,7 @@ function createLeagueStats(teams) {
 		for (var j = 0; j < players.length; j++) {
 
 				var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
-				var found = leaguePlayers.some(el => el.name == player.name);
+				var found = leaguePlayers.some(el => (el.name === player.name && el.team === player.team) );
 				// console.log(player);
 				if (!found) {
 					leaguePlayers.push(player);
