@@ -1,3 +1,8 @@
+import * as EPL from './epl-JSON.js' 
+import * as SerieA from './seriea-JSON.js' 
+import * as Ligue1 from './ligue1-JSON.js' 
+import * as Bundes from './bundes-JSON.js' 
+import * as LaLiga from './laliga-JSON.js'
 
 //mapbox library api access token
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
@@ -141,52 +146,82 @@ var saveData = (function () {
 }());
 
 //using this function create player JSON per team in a league, then once JSON is loaded will create player information 
+// function createLeagueStats(teams) {
+// 	
+
+// 	console.log(teams.length);
+
+// 	for(var i = 0; i < teams.length; i++) {
+
+// 		 fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + teams[i]["team_id"] + "/2019-2020", {
+// 			"method": "GET",
+// 			"headers": {
+// 				"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+// 				"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
+// 			}
+// 		})
+// 		.then(response => response.json())
+// 		.then(data => {
+
+// 			console.log(data);
+
+// 			var players = data['api']['players'];
+
+// 			var teamName = data['api']['players'][0]['team_name'];
+
+// 			// var teamName = new Blob(JSON.stringify(players, null, parseInt(data['api']['results'])), {type : 'application/json'});
+// 			fileName = teamName + ".json";
+ 
+// 			saveData(players, fileName);
+
+// 		    console.log("file saved item set");
+
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 		});
+// 	}
+// }
+
 function createLeagueStats(teams) {
+
 	var leaguePlayers = [];
 
-	console.log(teams.length);
+	if (teams[0]["country"]=== "England") {
+		var prefix = "EPL";
+	} else if (teams[0]["country"] === "Italy") {
+		var prefix = "SerieA";
+	} else if (teams[0]["country"] === "Germany") {
+		var prefix = "Bundes";
+	} else if (teams[0]["country"] === "France") {
+		var prefix = "Ligue1";
+	} else if (teams[0]["country"] === "Spain") {
+		var prefix = "LaLiga";
+	}
 
 	for(var i = 0; i < teams.length; i++) {
 
-		 fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + teams[i]["team_id"] + "/2019-2020", {
-			"method": "GET",
-			"headers": {
-				"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-				"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
-			}
-		})
-		.then(response => response.json())
-		.then(data => {
+		var name = teams[i]["name"] 
 
-			console.log(data);
+		if (name === "1899Hoffenheim") {
+			name = "Hoffenheim";
+		}
+		
+		var data = JSON.parse(eval(prefix + "."+ name.replace(" ", ""))):
 
-			var players = data['api']['players'];
+		var players = data['api']['players'];
 
-			var teamName = data['api']['players'][0]['team_name'];
+		for (var j = 0; j < players.length; j++) {
 
-			// var teamName = new Blob(JSON.stringify(players, null, parseInt(data['api']['results'])), {type : 'application/json'});
-			fileName = teamName + ".json";
- 
-			saveData(players, fileName);
+				var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
 
-		    console.log("file saved item set");
-
-		})
-
-
-			// for (var j = 0; j < players.length; j++) {
-			// 	var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
-
-			// 	// console.log(player);
-			// 	if (!leaguePlayers.includes(player)) {
-			// 		leaguePlayers.push(player);
-			// 	}			
-			// }
-			
-		.catch(err => {
-			console.log(err);
-		});
+				// console.log(player);
+				if (!leaguePlayers.includes(player)) {
+					leaguePlayers.push(player);
+				}			
+		}
 	}
+			
 }
 
 function Player(name, city, country, team) {
