@@ -49,7 +49,7 @@ function getTeams() {
 
 	console.log(selectElement);
                       
-    output = selectElement.options[selectElement.selectedIndex].value; 
+    var output = selectElement.options[selectElement.selectedIndex].value; 
 
     var selectedLeagueId;
 
