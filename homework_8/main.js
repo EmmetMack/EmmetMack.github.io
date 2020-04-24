@@ -69,30 +69,32 @@ function getTeams() {
     } else if (output === "spain") {
     	console.log("Spain");
     	selectedLeagueId = SpainCountryID;
-    } else {
-    	return;
     }
 
     console.log(selectedLeagueId);
 
-	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
+    if (selectedLeagueId != "Pick Team Here") {
+
+    	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
 		"method": "GET",
 		"headers": {
 			"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
 			"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
 		}
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		console.log("teams: " + teams);
-		teams = data['api']['teams'];
-		addTeams(teams);
-		createLeagueStats(teams);
-	})
-	.catch(err => {
-		console.log(err);
-	});
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			console.log("teams: " + teams);
+			teams = data['api']['teams'];
+			addTeams(teams);
+			createLeagueStats(teams);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+    }
+
 }
 
 // document.getElementById('team-sel').addEventListener('change', getPlayers());  event listner for getting the players from a team
