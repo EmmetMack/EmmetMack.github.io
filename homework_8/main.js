@@ -38,8 +38,9 @@ const SpainCountryID = "775";
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 
 
-
-document.getElementById('#country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+window.onload=function(){
+	document.getElementById('#country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+}
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
