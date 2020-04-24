@@ -225,7 +225,8 @@ function createLeagueStats(teams) {
 		if (name === "1899Hoffenheim") {
 			name = "Hoffenheim";
 		}
-		
+		console.log(name);
+		console.log(name.replace(" ", ""));
 		var nameJSON = prefix + "." + name.replace(" ", "");
 		console.log(nameJSON); 
 		var data = JSON.parse(eval(nameJSON));
