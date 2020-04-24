@@ -44,6 +44,7 @@ $(document).ready(() => {
 });
 
 console.log($('#country-sel'));
+console.log(document.getElementById('country-sel'));
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
