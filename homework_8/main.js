@@ -81,6 +81,8 @@ function getTeams() {
 	})
 	.then(response => response.json())
 	.then(data => {
+		console.log(data);
+		console.log("teams: " + teams);
 		teams = data['api']['teams'];
 		addTeams(teams);
 		createLeagueStats(teams);
