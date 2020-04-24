@@ -45,7 +45,7 @@ window.onload=function(){
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
 
-	selectElement = document.getElementById('country-sel'); 
+	var selectElement = document.getElementById('country-sel'); 
 
 	console.log(selectElement);
                       
