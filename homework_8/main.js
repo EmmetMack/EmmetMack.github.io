@@ -37,14 +37,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 
 	
-//document.getElementById('country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+var select = document.getElementById('country-sel') // event listner for when a team is selected
 
-$(document).ready(() => { 
-	$('#country-sel').on('change',getTeams()); //trying jquery bc yolo
-});
-
-console.log($('#country-sel'));
-console.log(document.getElementById('country-sel'));
+select.addEventListener('change', function() { getTeams()}); 
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
