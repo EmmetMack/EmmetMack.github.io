@@ -69,11 +69,11 @@ function getTeams() {
     } else if (output === "spain") {
     	console.log("Spain");
     	selectedLeagueId = SpainCountryID;
-    }
+    } 
 
     console.log(selectedLeagueId);
 
-    if (selectedLeagueId != "Pick Team Here") {
+    if (selectedLeagueId) {
 
     	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
 		"method": "GET",
