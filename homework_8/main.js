@@ -37,7 +37,7 @@ const SpainCountryID = "775";
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 
-function getTeams() {
+export function getTeams() {
 
 	selectElement = document.querySelector('#country-sel'); 
 
@@ -83,7 +83,7 @@ function getTeams() {
 }
 
 //adds the teams for the selected league to the 'Teams' dropdown
-function addTeams(teams) {
+export function addTeams(teams) {
 
 	document.getElementById('team-sel').options.length = 1; //clear out the dropdown options and then add the new ones
 
