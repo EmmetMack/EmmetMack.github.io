@@ -45,8 +45,6 @@ function getTeams() {
 	const SpainCountryID = "775";
 
 	var selectElement = document.getElementById('country-sel'); 
-
-	console.log(selectElement);
                       
     var output = selectElement.options[selectElement.selectedIndex].value; 
 
@@ -71,6 +69,8 @@ function getTeams() {
     } else if (output === "spain") {
     	console.log("Spain");
     	selectedLeagueId = SpainCountryID;
+    } else {
+    	break;
     }
 
     console.log(selectedLeagueId);
