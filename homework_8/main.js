@@ -37,6 +37,11 @@ const SpainCountryID = "775";
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 
+
+
+document.getElementById('country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
+
+//function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
 
 	selectElement = document.getElementById('#country-sel'); 
@@ -81,8 +86,6 @@ function getTeams() {
 		console.log(err);
 	});
 }
-
-document.getElementById('country-sel').addEventListener('change', getTeams()); // event listner for when a team is selected
 
 // document.getElementById('team-sel').addEventListener('change', getPlayers());  event listner for getting the players from a team
 
