@@ -226,7 +226,9 @@ function createLeagueStats(teams) {
 			name = "Hoffenheim";
 		}
 		
-		var data = JSON.parse(eval(prefix + "."+ name.replace(" ", "")));
+		var nameJSON = prefix + "." + name.replace(" ". "");
+		console.log(nameJSON); 
+		var data = JSON.parse(eval(nameJSON));
 
 		var players = data['api']['players'];
 
