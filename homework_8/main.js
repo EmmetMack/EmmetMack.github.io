@@ -43,7 +43,7 @@ $(document).ready(() => {
 	$('#country-sel').on('change',getTeams()); //trying jquery bc yolo
 });
 
-console.log('#country-sel');
+console.log($('#country-sel'));
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
