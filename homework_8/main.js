@@ -224,10 +224,8 @@ function createLeagueStats(teams) {
 
 		if (name === "1899 Hoffenheim") {
 			name = "Hoffenheim";
-		} else if (name === "SC Paderborn 07") {
-			name = "SCPaderBorn07";
 		}
-		var nameJSON = prefix + "." + name.replace(" ", "");
+		var nameJSON = prefix + "." + name.replace(/ /g,'');
 		console.log(nameJSON); 
 		var data = JSON.parse(eval(nameJSON));
 
