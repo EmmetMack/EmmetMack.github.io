@@ -41,6 +41,8 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 $('#country-sel').on('change',getTeams()); //trying jquery bc yolo
 
+console.log('#country-sel');
+
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
 
