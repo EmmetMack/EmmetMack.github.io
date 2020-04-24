@@ -28,7 +28,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 // const SpainCountryId = "111";
 
 //league id for top 5 european leagues for the 2019 season
-
+	const EnglandLeagueID = "524";
+	const FranceLeagueID = "525";
+	const GermanyLeagueID = "754";
+	const ItalyLeagueID = "891";
+	const SpainCountryID = "775";
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 
 
@@ -37,16 +41,13 @@ window.onload=function(){
 	document.getElementById('country-sel').addEventListener('change', getTeams(), false); // event listner for when a team is selected
 }
 
+	
 
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 function getTeams() {
 
-	const EnglandLeagueID = "524";
-	const FranceLeagueID = "525";
-	const GermanyLeagueID = "754";
-	const ItalyLeagueID = "891";
-	const SpainCountryID = "775";
-
+	console.log('get teams');
+	
 	var selectElement = document.getElementById('country-sel'); 
                       
     var output = selectElement.options[selectElement.selectedIndex].value; 
@@ -76,6 +77,7 @@ function getTeams() {
 
     console.log(selectedLeagueId);
 
+    if (typeof(selectedLeagueId) !== "undefined") {
     	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
 		"method": "GET",
 		"headers": {
@@ -94,6 +96,8 @@ function getTeams() {
 		.catch(err => {
 			console.log(err);
 		});
+    }
+    	
 
 }
 
