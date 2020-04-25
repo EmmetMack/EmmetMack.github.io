@@ -19,6 +19,137 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: mapboxToken
 }).addTo(mymap);
 
+const maps_api_key = "AIzaSyA6uo6kw29gNWaveg8aCuy2TxMz5PITSqA";
+
+
+//country names to codes for geodecoding 
+const country_codes = {
+	"Andorra": "AD",
+	"United Arab Emirates": "AE",
+	"Afghanistan": "AF",
+	"Antigua and Barbuda": "AG",
+	"Anguilla": "AI",
+	"Albania": "AL",
+	"Armenia": "AM",
+	"Angola": "AO",
+	"Argentina": "AR",
+	"American Samoa": "AS",
+	"Austria": "AT",
+	"Australia": "AU",
+	"Aruba": "AW",
+	"Azerbaijan" : "AZ",
+	"Bosnia and Herzegovina": "BA",
+	"Barbados": "BB",
+	"Bangladesh" : "BD",
+	"Belgium" : "BE",
+	"Burkina Faso" : "BF",
+	"Bulgaria" : "BG",
+	"Bahrain" : "BH",
+	"Burundi" : "BI",
+	"Benin" : "BJ",
+	"Bermuda" : "BM",
+	"Bolivia" : "BO",
+	"Bonaire" : "BQ",
+	"Brazil" : "BR",
+	"Bahamas" : "BS",
+	"Botswana" : "BW",
+	"Belarus" : "BY",
+	"Belize" : "BZ",
+	"Canada" : "CA",
+	"Democratic Republic of the Congo" : "CD",
+	"Central African Republic" : "CF",
+	"Congo" : "CG",
+	"Switzerland" : "CH",
+	"Côte d'Ivoire": "CI",
+	"Chile" : "CL",
+	"Cameroon" : "CM",
+	"China" : "CN",
+	"Colombia" : "CO",
+	"Costa Rica" : "CR",
+	"Cuba" : "CU",
+	"Cyprus" : "CY",
+	'Czech Republic': "CZ",
+	"Germany" : "DE",
+	"Denmark" : "DK",
+	"Algeria" : "DZ",
+	"Ecuador" : "EC",
+	"Estonia" : "EE",
+	"Egypt" : "EG",
+	"Spain" : "ES",
+	"Ethiopia" : "ET",
+	"Finland" : "FI",
+	"Fiji" : "FJ",
+	"Falkland Islands" : "FK",
+	"Faroe Islands" : "FO",
+	"France" : "FR",
+	"Gabon" : "GA",
+	"England" : "GB",
+	"Scotland" : "GB",
+	"Wales" : "GB",
+	"Northern Ireland" : "GB",
+	"Ireland" : "IE",
+	"Grenada" : "GD",
+	"Georgia" : "GE",
+	"Ghana" : "GH",
+	"Gambia" : "GM",
+	"Greenland" : "GL",
+	"Greece" : "GR",
+	"Honduras" : "HN",
+	"Croatia" : "HR",
+	"Hungary" : "HU",
+	"Israel" : "IL",
+	"India" : "IN",
+	"Iraq" : "IQ",
+	"Iran" : "IR",
+	"Iceland" : "IS",
+	"Italy" : "IT",
+	"Jamaica" : "JM",
+	"Japan" : "JP",
+	"Kenya" : "KE",
+	"Kyrgyzstan" : "KG",
+	"Republic of Korea" : "KR",
+	"Kazakhstan" : "KZ",
+	"Morocco" : "MA",
+	"Montenegro" : "ME",
+	"Mexico" : "MX",
+	"Nigeria" : "NG",
+	"Netherlands": "NL",
+	"New Zealand" : "NZ",
+	"Panama" : "PA"
+	"Peru" : "PE",
+	"Poland" : "PL",
+	"Portugal": "PT",
+	"Paraguay" : "PY",
+	"Qatar" : "QA",
+	"Romania": "RO",
+	"Serbia" : "RS",
+	"Russian Federation" : "RU",
+	"Saudi Arabia" : "SA",
+	"Sweden" : "SE",
+	"Slovenia" : "SI",
+	"Slovakia" : "SK",
+	"San Marino" : "SM",
+	"Senegal" : "SN",
+	"El Salvador" : "SV",
+	"Togo" : "TG",
+	"Turkey" : "TR",
+	"Ukraine" : "UA",
+	"United States of America" : "UA",
+	"Uruguay" : "UY",
+	"South Africa" : "ZA"
+}
+
+var geo = new google.maps.Geocoder();
+
+geo.geocode();
+
+var geo_params = {
+	address: city + country_codes[country];
+
+}
+
+geocoder = new google.maps.Geocoder();
+
 //Football API requests
 
 // const EnglandCountryID = "41";
@@ -28,11 +159,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 // const SpainCountryId = "111";
 
 //league id for top 5 european leagues for the 2019 season
-	const EnglandLeagueID = "524";
-	const FranceLeagueID = "525";
-	const GermanyLeagueID = "754";
-	const ItalyLeagueID = "891";
-	const SpainCountryID = "775";
+const EnglandLeagueID = "524";
+const FranceLeagueID = "525";
+const GermanyLeagueID = "754";
+const ItalyLeagueID = "891";
+const SpainCountryID = "775";
 //function that gets the teams for a specified league then adds the teams to the Team dropdown menu
 
 
