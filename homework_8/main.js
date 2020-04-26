@@ -21,6 +21,20 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 const maps_api_key = "AIzaSyATi23iBvfHagwQ5C_U3-qPzCfBJCTzouE";
 
+var location = "Paris, " + country_codes["France"];
+
+var request = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + maps_api_key;
+
+var geocoder = new google.maps.Geocoder();
+geocoder.geocode( request , function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+        var location = results[0].geometry.location,
+            lat      = location.lat(),
+            lng      = location.lng();
+      console.log("Latitude: " + lat);
+      console.log("Longitude: " + lng);
+    }
+});
 
 //country names to codes for geodecoding 
 const country_codes = {
@@ -139,16 +153,7 @@ const country_codes = {
 	"South Africa" : "ZA"
 }
 
-var geocoder = new google.maps.Geocoder();
-geocoder.geocode( { "address": "Brussels" }, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-        var location = results[0].geometry.location,
-            lat      = location.lat(),
-            lng      = location.lng();
-      console.log("Latitude: " + lat);
-      console.log("Longitude: " + lng);
-    }
-});
+
 
 
 //Football API requests
