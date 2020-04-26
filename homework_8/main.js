@@ -386,9 +386,10 @@ function createGeoJSON(players) {
 
 		var location = getLocationString(player.city, player.country);
 		console.log("features array length" + locationJSON["features"].length);
+		
 		if (locationJSON["features"].length == 0) {
 			console.log(location);
-			geocoder.geocode( {address: location} , function(results, status) {
+			geocoder.geocode( {address: player.country} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 					    var google_location = results[0].geometry.location,
 					        lat = google_location.lat(),
@@ -401,7 +402,7 @@ function createGeoJSON(players) {
 								"type":"Feature",
 								"properties" : {
 									"names": [player.name],
-										"place": location,
+										"place": player.country,
 										"count": 1,
 										"teams": [player.team]
 									}
@@ -416,12 +417,12 @@ function createGeoJSON(players) {
 
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
-				if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
+				if (locationJSON["features"][j]['geometry']["properties"]["place"] == player.country) {
 					locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
 					locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 				} else {
-					geocoder.geocode( {address: location} , function(results, status) {
+					geocoder.geocode( {address: player.country} , function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 						    var google_location = results[0].geometry.location,
 						        lat = google_location.lat(),
@@ -434,7 +435,7 @@ function createGeoJSON(players) {
 										"type":"Feature",
 										"properties" : {
 											"names": [player.name],
-												"place": location,
+												"place": player.country,
 												"count": 1,
 												"teams": [player.team]
 											}
