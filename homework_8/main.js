@@ -397,7 +397,7 @@ async function createGeoJSON(players) {
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
-				console.log("features[j]: " + locationJSON["features"][j]);
+				console.log("features: " + locationJSON["features"]);
 				if (locationJSON["features"][j]["geometry"]["properties"]["place"] == player.country) {
 					locationJSON["features"][j]["geometry"]["properties"]["count"] += 1;
 					locationJSON["features"][j]["geometry"]["properties"]["names"].push(player.name);
