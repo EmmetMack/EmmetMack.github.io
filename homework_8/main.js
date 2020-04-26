@@ -352,6 +352,12 @@ function createPlayerForLeague(teams) {
 			
 }
 
+var locationJSON = {
+					    "type": "FeatureCollection",
+					    "features": [
+					        ]
+					};
+
 function createGeoJSON(players) {
 
 	//example GeoJSON
@@ -373,56 +379,50 @@ function createGeoJSON(players) {
 	// 				            ],
 	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
 	// 				    }
- //        			}
-	var locationJSON = {
-					    "type": "FeatureCollection",
-					    "features": [
-					        ]
-					    };
+ //        	
 
 	console.log(players.length);
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
 
-		var location = getLocationString(player.city, player.country);
+		// var location = getLocationString(player.city, player.country);
 		console.log("features array length: " + locationJSON["features"].length);
 		
-		if (locationJSON["features"].length == 0) {
-			geocoder.geocode( {address: player.country} , function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-					    var google_location = results[0].geometry.location,
-					        lat = google_location.lat(),
-					        lng = google_location.lng();
+		// if (locationJSON["features"].length == 0) {
+
+		// 	geocoder.geocode( {address: player.country} , function(results, status) {
+		// 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+		// 			    var google_location = results[0].geometry.location,
+		// 			        lat = google_location.lat(),
+		// 			        lng = google_location.lng();
 					        
-					    var playerJSON = {
-							"geometry" : {
-								"type": "Point",
-								"coordinates": [lat,lng]},
-								"type":"Feature",
-								"properties" : {
-									"names": [player.name],
-										"place": player.country,
-										"count": 1,
-										"teams": [player.team]
-									}
-							}
-					console.log("playerJSON: " + JSON.stringify(playerJSON));
-					locationJSON["features"].push(JSON.stringify(playerJSON));	
-					console.log("features array length after pushing: " + locationJSON["features"].length);
-				}
-			});
-
-			
-					
-		} else {
-
+		// 			    var playerJSON = {
+		// 					"geometry" : {
+		// 						"type": "Point",
+		// 						"coordinates": [lat,lng]},
+		// 						"type":"Feature",
+		// 						"properties" : {
+		// 							"names": [player.name],
+		// 								"place": player.country,
+		// 								"count": 1,
+		// 								"teams": [player.team]
+		// 							}
+		// 					}
+		// 			console.log("playerJSON: " + JSON.stringify(playerJSON));
+		// 			locationJSON["features"].push(playerJSON);	
+		// 			console.log("features array length after pushing: " + locationJSON["features"].length);
+		// 		}
+		// 	});			
+		// } else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
+
 				if (locationJSON["features"][j]['geometry']["properties"]["place"] == player.country) {
 					locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
 					locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
+
 				} else {
 					geocoder.geocode( {address: player.country} , function(results, status) {
 						if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -443,13 +443,13 @@ function createGeoJSON(players) {
 											}
 								}
 							console.log("playerJSON: " + JSON.stringify(playerJSON));
-							locationJSON["features"].push(JSON.stringify(playerJSON));	
+							locationJSON["features"].push(playerJSON);	
 							console.log("features array length after pushing: " + locationJSON["features"].length);
 						}
 					});
 				}
 			}
-		}
+		
 
 		
 	}
