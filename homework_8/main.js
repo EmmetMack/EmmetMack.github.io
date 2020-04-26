@@ -171,8 +171,6 @@ function getTeams() {
                       
     var output = selectElement.options[selectElement.selectedIndex].value; 
 
-    console.log(output);
-
     var selectedLeagueId;
 
     var teams;
@@ -194,8 +192,6 @@ function getTeams() {
     	selectedLeagueId = SpainCountryID;
     } 
 
-    console.log(selectedLeagueId);
-
     if (typeof(selectedLeagueId) !== "undefined") {
     	fetch("https://api-football-v1.p.rapidapi.com/v2/teams/league/" + selectedLeagueId, {
 		"method": "GET",
@@ -206,8 +202,6 @@ function getTeams() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
-			console.log("teams: " + teams);
 			teams = data['api']['teams'];
 			addTeams(teams);
 			createPlayerForLeague(teams);
@@ -395,7 +389,33 @@ function createGeoJSON(players) {
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
+		console.log(player)
 		var location = getLocationString(player.city, player.country);
+
+		if (locationJSON["features"].length == 0) {
+			geocoder.geocode( {address: location} , function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+					    var location = results[0].geometry.location,
+					        lat = location.lat(),
+					        lng = location.lng();
+					     
+					    }
+				});
+				var playerJSON = {
+					"geometry" : {
+						"type": "Point",
+						"coordinates": [lat, lng]},
+						"type":"Feature",
+						"properties" : {
+							"names": [player.name],
+								"place": location,
+								"count": 1,
+								"teams": [player.team]
+							}
+				}
+
+				locationJSON["features"].push(playerJSON);
+		}
 
 		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 			if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
