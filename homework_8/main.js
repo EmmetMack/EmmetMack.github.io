@@ -395,7 +395,7 @@ async function createGeoJSON(players) {
 			console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
 			console.log("locationJSON: " + JSON.stringify(locationJSON));
 			console.log("features" + locationJSON["features"]);
-			await locationJSON["features"].push(newPlayerJSON);	
+			locationJSON["features"].push(newPlayerJSON);	
 			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
 			console.log("feature length in else statement: " + locationJSON["features"].length);
@@ -410,7 +410,7 @@ async function createGeoJSON(players) {
 				} else {
 					var newPlayerJSON = await createPlayerJSON(player);
 					console.log("playerJSON: " + newPlayerJSON);
-					await locationJSON["features"].push(newPlayerJSON);	
+					locationJSON["features"].push(newPlayerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			}
