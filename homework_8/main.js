@@ -389,9 +389,10 @@ async function createGeoJSON(players) {
 		// var location = getLocationString(player.city, player.country);
 		console.log("features array length: " + locationJSON["features"].length);
 		
-		if (!(locationJSON["features"])) {
-			var playerJSON = await createPlayerJSON(player);
-			locationJSON["features"].push(playerJSON);
+		if (locationJSON["features"] == 0) {
+			var newPlayerJSON = await createPlayerJSON(player);
+			console.log("playerJSON: " + newPlayerJSON);
+			locationJSON["features"].push(newPlayerJSON);	
 			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
@@ -403,8 +404,9 @@ async function createGeoJSON(players) {
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 
 				} else {
-					var playerJSON = await createPlayerJSON(player);
-					locationJSON["features"].push(playerJSON);	
+					var newPlayerJSON = await createPlayerJSON(player);
+					console.log("playerJSON: " + newPlayerJSON);
+					locationJSON["features"].push(newPlayerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			}
@@ -418,7 +420,8 @@ async function createGeoJSON(players) {
 }
  
 function createPlayerJSON(player) {
-	geocoder.geocode( {address: player.country} ,  function(results, status) {
+	geocoder.geocode( {address: getLocationString(player.city, player.country)} ,  function(results, status) {
+		console.log("in geocoder");
 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 			var google_location = results[0].geometry.location,
 				lat = google_location.lat(),
