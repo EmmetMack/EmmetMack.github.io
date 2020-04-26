@@ -176,19 +176,14 @@ function getTeams() {
     var teams;
 
     if (output === "england") {
-    	console.log("England");
     	selectedLeagueId = EnglandLeagueID;
     } else if (output === "france") {
     	selectedLeagueId = FranceLeagueID;
-    	console.log("France");
     } else if (output === "germany") {
-    	console.log("Germany");
     	selectedLeagueId = GermanyLeagueID;
     } else if (output ==="italy") {
-    	console.log("Italy");
     	selectedLeagueId = ItalyLeagueID;
     } else if (output === "spain") {
-    	console.log("Spain");
     	selectedLeagueId = SpainCountryID;
     } 
 
@@ -218,10 +213,9 @@ function getTeams() {
 
 //adds the teams for the selected league to the 'Teams' dropdown
 function addTeams(teams) {
+	console.log("add teams");
 
 	document.getElementById('team-sel').options.length = 1; //clear out the dropdown options and then add the new ones
-
-	console.log(teams);
 
 	var dropdown = document.getElementById("team-sel");
 
@@ -395,16 +389,16 @@ function createGeoJSON(players) {
 		if (locationJSON["features"].length == 0) {
 			geocoder.geocode( {address: location} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-					    var location = results[0].geometry.location,
+					    var google_location = results[0].geometry.location,
 					        lat = location.lat(),
 					        lng = location.lng();
-					     
+					    console.log(google_location);
 					    }
 				});
 				var playerJSON = {
 					"geometry" : {
 						"type": "Point",
-						"coordinates": [lat, lng]},
+						"coordinates": [google_location[lat],google_location[lng]},
 						"type":"Feature",
 						"properties" : {
 							"names": [player.name],
