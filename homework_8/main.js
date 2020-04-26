@@ -383,15 +383,14 @@ function createGeoJSON(players) {
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
-		console.log(player)
 		var location = getLocationString(player.city, player.country);
 
 		if (locationJSON["features"].length == 0) {
 			geocoder.geocode( {address: location} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 					    var google_location = results[0].geometry.location,
-					        lat = location.lat(),
-					        lng = location.lng();
+					        lat = google_location.lat(),
+					        lng = google_location.lng();
 					    console.log(google_location);
 					    var playerJSON = {
 							"geometry" : {
@@ -423,9 +422,9 @@ function createGeoJSON(players) {
 			} else {
 				geocoder.geocode( {address: location} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-					    var location = results[0].geometry.location,
-					        lat = location.lat(),
-					        lng = location.lng();
+					    var google_location = results[0].geometry.location,
+					        lat = google_location.lat(),
+					        lng = google_location.lng();
 
 					        var playerJSON = {
 								"geometry" : {
