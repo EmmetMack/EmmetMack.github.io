@@ -354,8 +354,7 @@ function createPlayerForLeague(teams) {
 
 var locationJSON = {
 					    "type": "FeatureCollection",
-					    "features": [
-					        ]
+					    "features": []
 					};
 
 async function createGeoJSON(players) {
@@ -393,7 +392,7 @@ async function createGeoJSON(players) {
 			var newPlayerJSON = await createPlayerJSON(player);
 			console.log("playerJSON: " + newPlayerJSON);
 			console.log("locationJSON: " + locationJSON);
-			console.log("features" + locationJSON[features]);
+			console.log("features" + locationJSON["features"]);
 			locationJSON["features"].push(newPlayerJSON);	
 			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
@@ -421,7 +420,7 @@ async function createGeoJSON(players) {
 	
 }
  
-function createPlayerJSON(player) {
+async function createPlayerJSON(player) {
 	geocoder.geocode( {address: getLocationString(player.city, player.country)} ,  function(results, status) {
 		console.log("in geocoder");
 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
