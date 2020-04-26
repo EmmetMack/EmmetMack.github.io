@@ -84,7 +84,7 @@ const country_codes = {
 	"Scotland" : "GB",
 	"Wales" : "GB",
 	"Northern Ireland" : "GB",
-	"Ireland" : "IE",
+	"Republic of Ireland" : "IE",
 	"Grenada" : "GD",
 	"Georgia" : "GE",
 	"Ghana" : "GH",
