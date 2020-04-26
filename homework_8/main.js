@@ -407,7 +407,7 @@ function createGeoJSON(players) {
 							}
 
 					locationJSON["features"].push(playerJSON);
-					break;
+					continue;
 				}
 			});
 		}
