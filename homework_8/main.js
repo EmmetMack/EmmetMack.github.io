@@ -386,7 +386,7 @@ function createGeoJSON(players) {
 		var player = players[i];
 
 		var location = getLocationString(player.city, player.country);
-		console.log("features array length " + locationJSON["features"].length);
+		console.log("features array length: " + locationJSON["features"].length);
 		
 		if (locationJSON["features"].length == 0) {
 			geocoder.geocode( {address: player.country} , function(results, status) {
@@ -407,8 +407,8 @@ function createGeoJSON(players) {
 										"teams": [player.team]
 									}
 							}
-					console.log("playerJSON: " + playerJSON);
-					locationJSON["features"].push(playerJSON);	
+					console.log("playerJSON: " + JSON.stringify(playerJSON));
+					locationJSON["features"].push(JSON.stringify(playerJSON));	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			});
@@ -442,8 +442,8 @@ function createGeoJSON(players) {
 												"teams": [player.team]
 											}
 								}
-							console.log("playerJSON: " + playerJSON);
-							locationJSON["features"].push(playerJSON);	
+							console.log("playerJSON: " + JSON.stringify(playerJSON));
+							locationJSON["features"].push(JSON.stringify(playerJSON));	
 							console.log("features array length after pushing: " + locationJSON["features"].length);
 						}
 					});
