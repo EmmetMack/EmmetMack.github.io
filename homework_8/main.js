@@ -390,7 +390,9 @@ function createGeoJSON(players) {
 		console.log("features array length: " + locationJSON["features"].length);
 		
 		if (!(locationJSON["features"])) {
-			addToGeoJSON(player);		
+			var playerJSON = await addToGeoJSON(player);
+			locationJSON["features"].push(playerJSON);
+			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
@@ -401,7 +403,9 @@ function createGeoJSON(players) {
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 
 				} else {
-					addToGeoJSON(player);
+					var playerJSON = await addToGeoJSON(player);
+					locationJSON["features"].push(playerJSON);	
+					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			}
 		
@@ -412,8 +416,9 @@ function createGeoJSON(players) {
 	console.log(locationJSON);
 	
 }
-await function addToGeoJSON(player) {
-	geocoder.geocode( {address: player.country} , async function(results, status) {
+ 
+async function addToGeoJSON(player) {
+	geocoder.geocode( {address: player.country} ,  function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 			var google_location = results[0].geometry.location,
 				lat = google_location.lat(),
@@ -432,8 +437,9 @@ await function addToGeoJSON(player) {
 							}
 				}
 			console.log("playerJSON: " + JSON.stringify(playerJSON));
-			locationJSON["features"].push(playerJSON);	
-			console.log("features array length after pushing: " + locationJSON["features"].length);
+			return playerJSON;
+		
+			
 		}
 	});
 }
