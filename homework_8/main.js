@@ -393,22 +393,26 @@ function createGeoJSON(players) {
 					        lat = location.lat(),
 					        lng = location.lng();
 					    console.log(google_location);
-					    }
-				});
-				var playerJSON = {
-					"geometry" : {
-						"type": "Point",
-						"coordinates": [google_location[lat],google_location[lng]]},
-						"type":"Feature",
-						"properties" : {
-							"names": [player.name],
-								"place": location,
-								"count": 1,
-								"teams": [player.team]
+					    var playerJSON = {
+							"geometry" : {
+								"type": "Point",
+								"coordinates": [lat,lng]},
+								"type":"Feature",
+								"properties" : {
+									"names": [player.name],
+										"place": location,
+										"count": 1,
+										"teams": [player.team]
+									}
 							}
-				}
 
-				locationJSON["features"].push(playerJSON);
+					locationJSON["features"].push(playerJSON);
+				}
+			});
+
+					
+			
+				
 		}
 
 		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
@@ -422,23 +426,25 @@ function createGeoJSON(players) {
 					    var location = results[0].geometry.location,
 					        lat = location.lat(),
 					        lng = location.lng();
+
+					        var playerJSON = {
+								"geometry" : {
+									"type": "Point",
+									"coordinates": [lat, lng]},
+									"type":"Feature",
+									"properties" : {
+										"names": [player.name],
+											"place": location,
+											"count": 1,
+											"teams": [player.team]
+										}
+							}
+
+							locationJSON["features"].push(playerJSON);
 					     
 					    }
 				});
-				var playerJSON = {
-					"geometry" : {
-						"type": "Point",
-						"coordinates": [lat, lng]},
-						"type":"Feature",
-						"properties" : {
-							"names": [player.name],
-								"place": location,
-								"count": 1,
-								"teams": [player.team]
-							}
-				}
-
-				locationJSON["features"].push(playerJSON);
+				
 			}
 		}
 	}
