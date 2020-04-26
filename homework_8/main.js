@@ -115,7 +115,7 @@ const country_codes = {
 	"Nigeria" : "NG",
 	"Netherlands": "NL",
 	"New Zealand" : "NZ",
-	"Panama" : "PA"
+	"Panama" : "PA",
 	"Peru" : "PE",
 	"Poland" : "PL",
 	"Portugal": "PT",
