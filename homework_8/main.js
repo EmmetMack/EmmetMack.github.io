@@ -352,12 +352,14 @@ function createPlayerForLeague(teams) {
 			
 }
 
-var locationJSON = {
-					    "type": "FeatureCollection",
-					    "features": []
-					};
+
 
 async function createGeoJSON(players) {
+
+	var locationJSON = {
+					    "type": "FeatureCollection",
+					    "features": []
+	};
 
 	//example GeoJSON
 	// {
@@ -417,6 +419,8 @@ async function createGeoJSON(players) {
 	}
 	
 	console.log(locationJSON);
+
+	return locationJSON;
 	
 }
  
