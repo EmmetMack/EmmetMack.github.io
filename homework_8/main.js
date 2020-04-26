@@ -138,23 +138,7 @@ const country_codes = {
 
 const maps_api_key = "AIzaSyATi23iBvfHagwQ5C_U3-qPzCfBJCTzouE";
 
-var locationJSON = { "type": "FeatureCollection",
-					"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }
-
-var location = "Paris, " + country_codes["France"];
-
-var request = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + maps_api_key;
-
 var geocoder = new google.maps.Geocoder();
-geocoder.geocode( {address: location} , function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-        var location = results[0].geometry.location,
-            lat      = location.lat(),
-            lng      = location.lng();
-      console.log("Latitude: " + lat);
-      console.log("Longitude: " + lng);
-    }
-});
 
 //Football API requests
 
@@ -226,7 +210,7 @@ function getTeams() {
 			console.log("teams: " + teams);
 			teams = data['api']['teams'];
 			addTeams(teams);
-			createLeagueStats(teams);
+			createPlayerForLeague(teams);
 		})
 		.catch(err => {
 			console.log(err);
@@ -339,7 +323,7 @@ var saveData = (function () {
 // 	}
 // }
 
-function createLeagueStats(teams) {
+function createPlayerForLeague(teams) {
 
 	var leaguePlayers = [];
 
@@ -379,9 +363,81 @@ function createLeagueStats(teams) {
 				}			
 		}
 	}
-
-	console.log(leaguePlayers);
+	createGeoJSON(leaguePlayers);
 			
+}
+
+function createGeoJSON(players) {
+
+	//example GeoJSON
+	// {
+	// 	"geometry": {
+	// 				  	"type": "Point",
+	// 				     "coordinates": [
+	// 				       	-76.9750541388,
+	// 				        38.8410857803
+	// 				     ]},
+	// 				    "type": "Feature",
+	// 				    "properties": {
+	// 				            "description": "Southern Ave",
+	// 				            "marker-symbol": "rail-metro",
+	// 				            "title": "Southern Ave",
+	// 				            "url": "http://www.wmata.com/rider_tools/pids/showpid.cfm?station_id=107",
+	// 				            "lines": [
+	// 				                "Green"
+	// 				            ],
+	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
+	// 				    }
+ //        			}
+	var locationJSON = {
+					    "type": "FeatureCollection",
+					    "features": [
+					        ]};
+
+
+	for(var i = 0; i < players.length; i ++) {
+
+		var player = players[i];
+		var location = getLocation(player.city, player.country);
+
+		for (var j = 0; j < features.length; j ++ ) {
+			if (features[j]['geometry']["properties"]["place"] == location) {
+				features[j]['geometry']["properties"]["count"] ++;
+				features[j]['geometry']["properties"]["names"].push(player.name);
+				features[j]['geometry']["properties"]["teams"].push(player.team);
+			} else {
+				geocoder.geocode( {address: location} , function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+					    var location = results[0].geometry.location,
+					        lat = location.lat(),
+					        lng = location.lng();
+					     
+					    }
+				});
+				var playerJSON = {
+					"geometry" : {
+						"type": "Point"
+						"coordinates": [lat, lng]},
+						"type":"Feature",
+						"properties" : {
+							"names": [player.name],
+								"place": location,
+								"count": 1,
+								"teams": [player.team]
+							}
+				}
+
+				locationJSON["features"].push(playerJSON);
+			}
+		}
+	}
+	
+	console.log(locationJSON);
+	
+}
+
+function getLocation(city, country) {
+	return city +", " + country_codes[country];
 }
 
 function Player(name, city, country, team) {
