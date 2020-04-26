@@ -392,7 +392,6 @@ function createGeoJSON(players) {
 					    var google_location = results[0].geometry.location,
 					        lat = google_location.lat(),
 					        lng = google_location.lng();
-					    console.log(google_location);
 					    var playerJSON = {
 							"geometry" : {
 								"type": "Point",
@@ -410,17 +409,15 @@ function createGeoJSON(players) {
 					
 				}
 			});
-			continue;
-		}
-
-		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
+		} else {
+			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 			if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
 				locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
 				locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
 				locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 			} else {
 				geocoder.geocode( {address: location} , function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+					if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 					    var google_location = results[0].geometry.location,
 					        lat = google_location.lat(),
 					        lng = google_location.lng();
@@ -440,11 +437,14 @@ function createGeoJSON(players) {
 
 							locationJSON["features"].push(playerJSON);
 					     
-					    }
+					}
 				});
 				
+				}
 			}
 		}
+
+		
 	}
 	
 	console.log(locationJSON);
