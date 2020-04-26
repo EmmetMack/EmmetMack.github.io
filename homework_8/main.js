@@ -387,6 +387,7 @@ function createGeoJSON(players) {
 		var location = getLocationString(player.city, player.country);
 
 		if (locationJSON["features"].length == 0) {
+			console.log(location);
 			geocoder.geocode( {address: location} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 					    var google_location = results[0].geometry.location,
@@ -405,14 +406,12 @@ function createGeoJSON(players) {
 										"teams": [player.team]
 									}
 							}
-
-					
+					locationJSON["features"].push(playerJSON);	
 				}
 			});
 
-			if (playerJSON) {
-						locationJSON["features"].push(playerJSON);
-			}
+			
+					
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
@@ -439,14 +438,9 @@ function createGeoJSON(players) {
 												"teams": [player.team]
 											}
 								}
-								
+							locationJSON["features"].push(playerJSON);	
 						}
 					});
-
-					if (playerJSON) {
-						locationJSON["features"].push(playerJSON);
-					}
-
 				}
 			}
 		}
