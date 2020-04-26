@@ -389,32 +389,9 @@ function createGeoJSON(players) {
 		// var location = getLocationString(player.city, player.country);
 		console.log("features array length: " + locationJSON["features"].length);
 		
-		// if (locationJSON["features"].length == 0) {
-
-		// 	geocoder.geocode( {address: player.country} , function(results, status) {
-		// 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-		// 			    var google_location = results[0].geometry.location,
-		// 			        lat = google_location.lat(),
-		// 			        lng = google_location.lng();
-					        
-		// 			    var playerJSON = {
-		// 					"geometry" : {
-		// 						"type": "Point",
-		// 						"coordinates": [lat,lng]},
-		// 						"type":"Feature",
-		// 						"properties" : {
-		// 							"names": [player.name],
-		// 								"place": player.country,
-		// 								"count": 1,
-		// 								"teams": [player.team]
-		// 							}
-		// 					}
-		// 			console.log("playerJSON: " + JSON.stringify(playerJSON));
-		// 			locationJSON["features"].push(playerJSON);	
-		// 			console.log("features array length after pushing: " + locationJSON["features"].length);
-		// 		}
-		// 	});			
-		// } else {
+		if (!(locationJSON["features"])) {
+			addToGeoJSON(player);		
+		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
 
@@ -424,38 +401,41 @@ function createGeoJSON(players) {
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 
 				} else {
-					geocoder.geocode( {address: player.country} , function(results, status) {
-						if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-						    var google_location = results[0].geometry.location,
-						        lat = google_location.lat(),
-						        lng = google_location.lng();
-
-						        var playerJSON = {
-									"geometry" : {
-										"type": "Point",
-										"coordinates": [lat, lng]},
-										"type":"Feature",
-										"properties" : {
-											"names": [player.name],
-												"place": player.country,
-												"count": 1,
-												"teams": [player.team]
-											}
-								}
-							console.log("playerJSON: " + JSON.stringify(playerJSON));
-							locationJSON["features"].push(playerJSON);	
-							console.log("features array length after pushing: " + locationJSON["features"].length);
-						}
-					});
+					addToGeoJSON(player);
 				}
 			}
 		
-
+		}
 		
 	}
 	
 	console.log(locationJSON);
 	
+}
+await function addToGeoJSON(player) {
+	geocoder.geocode( {address: player.country} , async function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+			var google_location = results[0].geometry.location,
+				lat = google_location.lat(),
+				lng = google_location.lng();
+
+				var playerJSON = {
+					"geometry" : {
+						"type": "Point",
+						"coordinates": [lat, lng]},
+						"type":"Feature",
+						"properties" : {
+							"names": [player.name],
+							"place": player.country,
+							"count": 1,
+							"teams": [player.team]
+							}
+				}
+			console.log("playerJSON: " + JSON.stringify(playerJSON));
+			locationJSON["features"].push(playerJSON);	
+			console.log("features array length after pushing: " + locationJSON["features"].length);
+		}
+	});
 }
 
 function getLocationString(city, country) {
