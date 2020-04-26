@@ -425,7 +425,7 @@ async function createGeoJSON(players) {
 	
 }
  
-async function createPlayerJSON(player) {
+function createPlayerJSON(player) {
 	geocoder.geocode( {address: getLocationString(player.city, player.country)} ,  function(results, status) {
 		console.log("in geocoder");
 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -446,7 +446,11 @@ async function createPlayerJSON(player) {
 							}
 				}
 			console.log("playerJSON: " + JSON.stringify(playerJSON));
-			return playerJSON;	
+			
+			//need this for async??
+			return new Promise(resolve => {
+			      resolve(playerJSON);
+			 });
 		}
 	});
 }
