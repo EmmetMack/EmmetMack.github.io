@@ -383,6 +383,7 @@ function createGeoJSON(players) {
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
+
 		var location = getLocationString(player.city, player.country);
 
 		if (locationJSON["features"].length == 0) {
@@ -408,15 +409,12 @@ function createGeoJSON(players) {
 					locationJSON["features"].push(playerJSON);
 				}
 			});
-
-					
-			
-				
+			break;
 		}
 
 		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 			if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
-				locationJSON["features"][j]['geometry']["properties"]["count"] ++;
+				locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
 				locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
 				locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 			} else {
