@@ -358,7 +358,7 @@ var locationJSON = {
 					        ]
 					};
 
-function createGeoJSON(players) {
+async function createGeoJSON(players) {
 
 	//example GeoJSON
 	// {
@@ -390,7 +390,7 @@ function createGeoJSON(players) {
 		console.log("features array length: " + locationJSON["features"].length);
 		
 		if (!(locationJSON["features"])) {
-			var playerJSON = await addToGeoJSON(player);
+			var playerJSON = await createPlayerJSON(player);
 			locationJSON["features"].push(playerJSON);
 			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
@@ -403,7 +403,7 @@ function createGeoJSON(players) {
 					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 
 				} else {
-					var playerJSON = await addToGeoJSON(player);
+					var playerJSON = await createPlayerJSON(player);
 					locationJSON["features"].push(playerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
@@ -417,7 +417,7 @@ function createGeoJSON(players) {
 	
 }
  
-async function addToGeoJSON(player) {
+function createPlayerJSON(player) {
 	geocoder.geocode( {address: player.country} ,  function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 			var google_location = results[0].geometry.location,
@@ -437,9 +437,7 @@ async function addToGeoJSON(player) {
 							}
 				}
 			console.log("playerJSON: " + JSON.stringify(playerJSON));
-			return playerJSON;
-		
-			
+			return playerJSON;	
 		}
 	});
 }
