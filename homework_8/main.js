@@ -407,6 +407,7 @@ function createGeoJSON(players) {
 										"teams": [player.team]
 									}
 							}
+					console.log("printing features array: " + locationJSON["features"]);
 					locationJSON["features"].push(playerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
@@ -441,6 +442,7 @@ function createGeoJSON(players) {
 												"teams": [player.team]
 											}
 								}
+							console.log("printing features array: " + locationJSON["features"]);
 							locationJSON["features"].push(playerJSON);	
 							console.log("features array length after pushing: " + locationJSON["features"].length);
 						}
