@@ -377,7 +377,8 @@ function createGeoJSON(players) {
 	var locationJSON = {
 					    "type": "FeatureCollection",
 					    "features": [
-					        ]};
+					        ]
+					    };
 
 	console.log(players.length);
 	for(var i = 0; i < players.length; i ++) {
@@ -385,10 +386,9 @@ function createGeoJSON(players) {
 		var player = players[i];
 
 		var location = getLocationString(player.city, player.country);
-		console.log("features array length" + locationJSON["features"].length);
+		console.log("features array length " + locationJSON["features"].length);
 		
 		if (locationJSON["features"].length == 0) {
-			console.log(location);
 			geocoder.geocode( {address: player.country} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
 					    var google_location = results[0].geometry.location,
@@ -408,6 +408,7 @@ function createGeoJSON(players) {
 									}
 							}
 					locationJSON["features"].push(playerJSON);	
+					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			});
 
@@ -441,6 +442,7 @@ function createGeoJSON(players) {
 											}
 								}
 							locationJSON["features"].push(playerJSON);	
+							console.log("features array length after pushing: " + locationJSON["features"].length);
 						}
 					});
 				}
