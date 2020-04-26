@@ -138,6 +138,9 @@ const country_codes = {
 
 const maps_api_key = "AIzaSyATi23iBvfHagwQ5C_U3-qPzCfBJCTzouE";
 
+var locationJSON = { "type": "FeatureCollection",
+					"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }
+
 var location = "Paris, " + country_codes["France"];
 
 var request = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + maps_api_key;
