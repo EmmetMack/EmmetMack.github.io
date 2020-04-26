@@ -139,16 +139,17 @@ const country_codes = {
 	"South Africa" : "ZA"
 }
 
-var geo = new google.maps.Geocoder();
+var geocoder = new google.maps.Geocoder();
+geocoder.geocode( { "address": "Brussels" }, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+        var location = results[0].geometry.location,
+            lat      = location.lat(),
+            lng      = location.lng();
+      console.log("Latitude: " + lat);
+      console.log("Longitude: " + lng);
+    }
+});
 
-geo.geocode();
-
-var geo_params = {
-	address: city + country_codes[country];
-
-}
-
-geocoder = new google.maps.Geocoder();
 
 //Football API requests
 
