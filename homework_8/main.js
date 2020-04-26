@@ -143,7 +143,7 @@ var location = "Paris, " + country_codes["France"];
 var request = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + maps_api_key;
 
 var geocoder = new google.maps.Geocoder();
-geocoder.geocode( {address: location, key: maps_api_key} , function(results, status) {
+geocoder.geocode( {address: location} , function(results, status) {
     if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
         var location = results[0].geometry.location,
             lat      = location.lat(),
