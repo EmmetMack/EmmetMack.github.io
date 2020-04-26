@@ -390,16 +390,16 @@ async function createGeoJSON(players) {
 		console.log("features array: " + locationJSON["features"]);
 		if (locationJSON["features"].length == 0) {
 			var newPlayerJSON = await createPlayerJSON(player);
-			console.log("playerJSON: " + newPlayerJSON);
-			console.log("locationJSON: " + locationJSON);
+			console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
+			console.log("locationJSON: " + JSON.stringify(locationJSON));
 			console.log("features" + locationJSON["features"]);
-			locationJSON["features"].push(newPlayerJSON);	
+			await locationJSON["features"].push(newPlayerJSON);	
 			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
 				console.log("looping through features");
 				console.log("locationJSON: " + locationJSON);
-				if (locationJSON["features"][j]["geometry"]["properties"]["place"] == player.country) {
+				if (locationJSON["features"][j]["geometry"]["properties"]["place"] == getLocationString(player.city, player.country)) {
 					locationJSON["features"][j]["geometry"]["properties"]["count"] += 1;
 					locationJSON["features"][j]["geometry"]["properties"]["names"].push(player.name);
 					locationJSON["features"][j]["geometry"]["properties"]["teams"].push(player.team);
@@ -407,7 +407,7 @@ async function createGeoJSON(players) {
 				} else {
 					var newPlayerJSON = await createPlayerJSON(player);
 					console.log("playerJSON: " + newPlayerJSON);
-					locationJSON["features"].push(newPlayerJSON);	
+					await locationJSON["features"].push(newPlayerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			}
@@ -435,7 +435,7 @@ async function createPlayerJSON(player) {
 						"type":"Feature",
 						"properties" : {
 							"names": [player.name],
-							"place": player.country,
+							"place": getLocationString(player.city, player.country),
 							"count": 1,
 							"teams": [player.team]
 							}
