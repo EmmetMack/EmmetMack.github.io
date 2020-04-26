@@ -389,7 +389,7 @@ async function createGeoJSON(players) {
 		// var location = getLocationString(player.city, player.country);
 		console.log("features array length: " + locationJSON["features"].length);
 		
-		if (locationJSON["features"] == 0) {
+		if (locationJSON["features"].length == 0) {
 			var newPlayerJSON = await createPlayerJSON(player);
 			console.log("playerJSON: " + newPlayerJSON);
 			locationJSON["features"].push(newPlayerJSON);	
