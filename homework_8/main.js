@@ -19,7 +19,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: mapboxToken
 }).addTo(mymap);
 
-const maps_api_key = "AIzaSyA6uo6kw29gNWaveg8aCuy2TxMz5PITSqA";
+const maps_api_key = "AIzaSyATi23iBvfHagwQ5C_U3-qPzCfBJCTzouE";
 
 
 //country names to codes for geodecoding 
