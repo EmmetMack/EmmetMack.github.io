@@ -398,7 +398,7 @@ function createGeoJSON(players) {
 				var playerJSON = {
 					"geometry" : {
 						"type": "Point",
-						"coordinates": [google_location[lat],google_location[lng]},
+						"coordinates": [google_location[lat],google_location[lng]]},
 						"type":"Feature",
 						"properties" : {
 							"names": [player.name],
