@@ -347,10 +347,7 @@ function createPlayerForLeague(teams) {
 			name = "Hoffenheim";
 		}
 		var nameJSON = prefix + "." + name.replace(/ /g,'');
-		console.log(nameJSON); 
 		var data = JSON.parse(eval(nameJSON));
-
-		console.log(data);
 		var players = data;
 
 		for (var j = 0; j < players.length; j++) {
@@ -398,13 +395,13 @@ function createGeoJSON(players) {
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
-		var location = getLocation(player.city, player.country);
+		var location = getLocationString(player.city, player.country);
 
-		for (var j = 0; j < features.length; j ++ ) {
-			if (features[j]['geometry']["properties"]["place"] == location) {
-				features[j]['geometry']["properties"]["count"] ++;
-				features[j]['geometry']["properties"]["names"].push(player.name);
-				features[j]['geometry']["properties"]["teams"].push(player.team);
+		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
+			if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
+				locationJSON["features"][j]['geometry']["properties"]["count"] ++;
+				locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
+				locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
 			} else {
 				geocoder.geocode( {address: location} , function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -436,7 +433,7 @@ function createGeoJSON(players) {
 	
 }
 
-function getLocation(city, country) {
+function getLocationString(city, country) {
 	return city +", " + country_codes[country];
 }
 
