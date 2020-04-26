@@ -379,7 +379,7 @@ function createGeoJSON(players) {
 					    "features": [
 					        ]};
 
-
+	console.log(players.length);
 	for(var i = 0; i < players.length; i ++) {
 
 		var player = players[i];
@@ -392,6 +392,7 @@ function createGeoJSON(players) {
 					    var google_location = results[0].geometry.location,
 					        lat = google_location.lat(),
 					        lng = google_location.lng();
+					        
 					    var playerJSON = {
 							"geometry" : {
 								"type": "Point",
@@ -405,41 +406,47 @@ function createGeoJSON(players) {
 									}
 							}
 
-					locationJSON["features"].push(playerJSON);
 					
 				}
 			});
+
+			if (playerJSON) {
+						locationJSON["features"].push(playerJSON);
+			}
 		} else {
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
-			if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
-				locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
-				locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
-				locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
-			} else {
-				geocoder.geocode( {address: location} , function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-					    var google_location = results[0].geometry.location,
-					        lat = google_location.lat(),
-					        lng = google_location.lng();
+				console.log("looping through features");
+				if (locationJSON["features"][j]['geometry']["properties"]["place"] == location) {
+					locationJSON["features"][j]['geometry']["properties"]["count"] += 1;
+					locationJSON["features"][j]['geometry']["properties"]["names"].push(player.name);
+					locationJSON["features"][j]['geometry']["properties"]["teams"].push(player.team);
+				} else {
+					geocoder.geocode( {address: location} , function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+						    var google_location = results[0].geometry.location,
+						        lat = google_location.lat(),
+						        lng = google_location.lng();
 
-					        var playerJSON = {
-								"geometry" : {
-									"type": "Point",
-									"coordinates": [lat, lng]},
-									"type":"Feature",
-									"properties" : {
-										"names": [player.name],
-											"place": location,
-											"count": 1,
-											"teams": [player.team]
-										}
-							}
+						        var playerJSON = {
+									"geometry" : {
+										"type": "Point",
+										"coordinates": [lat, lng]},
+										"type":"Feature",
+										"properties" : {
+											"names": [player.name],
+												"place": location,
+												"count": 1,
+												"teams": [player.team]
+											}
+								}
+								
+						}
+					});
 
-							locationJSON["features"].push(playerJSON);
-					     
+					if (playerJSON) {
+						locationJSON["features"].push(playerJSON);
 					}
-				});
-				
+
 				}
 			}
 		}
