@@ -448,11 +448,13 @@ function createPlayerJSON(player) {
 			console.log("playerJSON: " + JSON.stringify(playerJSON));
 			
 			//need this for async??
+
+			return new Promise(resolve => {
+				resolve(playerJSON);
+			});
 		}
 	});
-	return new Promise(resolve => {
-		resolve(playerJSON);
-	});
+	
 }
 
 function getLocationString(city, country) {
