@@ -355,6 +355,8 @@ function createPlayerForLeague(teams) {
 						console.log(player);
 						
 						leaguePlayers.push(playerObj);		
+					} else {
+						console.log("geocoder error");
 					}
 				});
 					
@@ -363,7 +365,8 @@ function createPlayerForLeague(teams) {
 		});
 	}
 
-	createGeoJSON(leaguePlayers);
+	var geoJson = createGeoJSON(leaguePlayers);
+	console.log(geoJSON);
 			
 }
 
