@@ -687,7 +687,7 @@ function createGeoJSON(players) {
  	console.log(countryCounts);
  	
  	Object.keys(countryCounts).forEach(function(key) {
- 		if (key) {
+ 		if (country_lat[key], country_lng[key]) {
  			var countryJSON = {
 	 			"geometry": {
 
