@@ -630,13 +630,13 @@ function createPlayerForLeague(teams) {
 		if (count > maxCount) {
 			maxCount = count;
 		}
-		soccerPoints.push([latLng]);
+		soccerPoints.push(latLng);
 	});
 	console.log("soccerPoints: " + soccerPoints);
 
 	console.log("maxCount: " + maxCount);
 
-	var heat = L.heatLayer(soccerPoints,{
+	var heat = L.heatLayer(soccerPoints, {
             radius: 20,
             blur: 15, 
             maxZoom: 17,
