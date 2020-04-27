@@ -652,7 +652,6 @@ function createGeoJSON(players) {
  //        	
  	var countryCounts = {};
  	 countries.forEach(function(place) {
- 	 	console.log(place);
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
  		if (count !== 0) {
  			countryCounts[place] = count;
@@ -661,7 +660,8 @@ function createGeoJSON(players) {
 
  	console.log(countryCounts);
  	
- 	for (key in countryCounts) {
+ 	Object.keys(countryCounts).forEach(function(key) {
+
  		var countryJSON = {
  			"geometry": {
 
@@ -676,7 +676,7 @@ function createGeoJSON(players) {
 			}
  		}
  		locationJSON["features"].push(countryJSON);
- 	}
+ 	});
 
 
 	// for(var i = 0; i < players.length; i ++) {
