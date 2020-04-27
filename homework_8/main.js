@@ -149,7 +149,7 @@ const country_lat = {
 	"Zimbabwe" : -19.015438
 }
 
-const country_lng {
+const country_lng = {
 	"Andorra": 1.601554,
 	"United Arab Emirates": 53.847818,
 	"Afghanistan": 67.709953,
