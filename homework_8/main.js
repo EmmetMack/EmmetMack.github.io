@@ -8,7 +8,7 @@ import * as LaLiga from './modules/laliga-JSON.js'
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
 
 //Leaflet map stuff
-var mymap = L.map('mapid').setView([51.505, -0.09], 5);
+var mymap = L.map('mapid').setView([51.505, -0.09], 4);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -631,9 +631,6 @@ function createPlayerForLeague(teams) {
 		var count = feature["properties"]["count"];
 		soccerPoints.push([cords[1], cords[0], count]);
 	});
-
-	var maxVal = myGeoJSON["features"].keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b)
-
 
 	 var heat = L.heatLayer(soccerPoints,{
             radius: 20,
