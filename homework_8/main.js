@@ -617,31 +617,31 @@ function createPlayerForLeague(teams) {
 	var myGeoJSON = createGeoJSON(leaguePlayers);
 	console.log(myGeoJSON);
 	
-	//L.geoJSON(myGeoJSON["features"]).addTo(mymap);
-	var maxCount = -1;
+	L.geoJSON(myGeoJSON["features"]).addTo(mymap);
+	// var maxCount = -1;
 
-	var soccerPoints = [];
-	myGeoJSON["features"].forEach(function(feature){
-		console.log("creating heatmap points");
-		var cords = feature["geometry"]["coordinates"];
-		var count = feature["properties"]["count"];
-		if (count > maxCount) {
-			maxCount = count;
-		}
-		soccerPoints.push([[cords[0], cords[1], count]]);
-	});
-	console.log("soccerPoints: " + soccerPoints);
+	// var soccerPoints = [];
+	// myGeoJSON["features"].forEach(function(feature){
+	// 	console.log("creating heatmap points");
+	// 	var cords = feature["geometry"]["coordinates"];
+	// 	var count = feature["properties"]["count"];
+	// 	if (count > maxCount) {
+	// 		maxCount = count;
+	// 	}
+	// 	soccerPoints.push([[cords[0], cords[1], count]]);
+	// });
+	// console.log("soccerPoints: " + soccerPoints);
 
-	console.log("maxCount: " + maxCount);
+	// console.log("maxCount: " + maxCount);
 
-	var heat = L.heatLayer(soccerPoints,{
-            radius: 20,
-            blur: 15, 
-            maxZoom: 17,
-            max: maxCount,
-      }).addTo(mymap);
+	// var heat = L.heatLayer(soccerPoints,{
+ //            radius: 20,
+ //            blur: 15, 
+ //            maxZoom: 17,
+ //            max: maxCount,
+ //      }).addTo(mymap);
 
-	 heat.redraw();
+	//  heat.redraw();
 
 }
 
@@ -693,7 +693,7 @@ function createGeoJSON(players) {
 
 					"type": "Point",
 					"coordinates" : [
-						country_lat[key], country_lng[key]]},
+						country_lng[key], country_lat[key]]},
 
 				"type": "Feature",
 				"properties": {
