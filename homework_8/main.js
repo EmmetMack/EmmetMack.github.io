@@ -513,8 +513,8 @@ function createGeoJSON(players) {
 	// 				       	-76.9750541388,
 	// 				        38.8410857803
 	// 				     ]},
-	// 				    "type": "Feature",
-	// 				    "properties": {
+	// "type": "Feature",
+	// "properties": {
 	// 				            "description": "Southern Ave",
 	// 				            "marker-symbol": "rail-metro",
 	// 				            "title": "Southern Ave",
@@ -547,10 +547,10 @@ function createGeoJSON(players) {
 				console.log("looping through features");
 				console.log("locationJSON: " + JSON.stringify(locationJSON));
 				console.log("features[j]: " + JSON.stringify(locationJSON["features"][j]["geometry"]));
-				if (locationJSON["features"][j]["geometry"]["properties"]["place"] == player.country) {
-					locationJSON["features"][j]["geometry"]["properties"]["count"] += 1;
-					locationJSON["features"][j]["geometry"]["properties"]["names"].push(player.name);
-					locationJSON["features"][j]["geometry"]["properties"]["teams"].push(player.team);
+				if (locationJSON["features"][j]["properties"]["place"] == player.country) {
+					locationJSON["features"][j]["properties"]["count"] += 1;
+					locationJSON["features"][j]["properties"]["names"].push(player.name);
+					locationJSON["features"][j]["properties"]["teams"].push(player.team);
 
 				} else {
 					var newPlayerJSON = createPlayerJSON(player);
