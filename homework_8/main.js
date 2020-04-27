@@ -339,24 +339,26 @@ function createPlayerForLeague(teams) {
 		var players = data;
 
 		players.forEach(function(player) {
+			if (!(leaguePlayers.some(el => (el.name === player.name && el.team === player.team)))) {
+					geocoder.geocode( {address: getLocationString(player["birth_place"], player["birth_country"])}, function(results, status) {
 
-			geocoder.geocode( {address: getLocationString(player["birth_place"], player["birth_country"])} ,  function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+						var google_location = results[0].geometry.location,
+							lat = google_location.lat(),
+							lng = google_location.lng();
 
-				if (status == google.maps.GeocoderStatus.OK && results.length > 0 &&  !(leaguePlayers.some(el => (el.name === player.name && el.team === player.team)))) {
-					var google_location = results[0].geometry.location,
-						lat = google_location.lat(),
-						lng = google_location.lng();
+						console.log("player name: " + player[j]['player_name']);
+						var playerObj = new Player(player[j]['player_name'], player[j]['birth_place'], player[j]['birth_country'], player[j]["team_name"], lat, lng);
 
-					console.log("player name: " + player[j]['player_name']);
-					var playerObj = new Player(player[j]['player_name'], player[j]['birth_place'], player[j]['birth_country'], player[j]["team_name"], lat, lng);
-
-				
-					// console.log(player);
 					
-					leaguePlayers.push(playerObj);		
-				}
-			});
+						// console.log(player);
+						
+						leaguePlayers.push(playerObj);		
+					}
+				});
 					
+			}
+			
 		}
 	}
 
