@@ -651,9 +651,10 @@ function createGeoJSON(players) {
 	// 				    }
  //        	
  	var countryCounts = [];
- 	 countries.forEach(function(country) {
- 		var count = players.filter((el) => el.country === country).length;
- 		countryCounts.push({country : count});
+ 	 countries.forEach(function(place) {
+ 	 	console.log(place);
+ 		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
+ 		countryCounts.push({place : count});
  	});
  	console.log(countryCounts);
  	
@@ -699,7 +700,7 @@ function createGeoJSON(players) {
 		
 	// }
 
-	// return locationJSON;
+	return countryCounts;
 	
 }
 
