@@ -651,10 +651,10 @@ function createGeoJSON(players) {
 	// 				    }
  //        	
  	var countryCounts = [];
- 	for (const country in countries) {
+ 	 countries.forEach(function(country) {
  		var count = players.filter((el) => el.country === country).length;
- 		countryCounts.push({country: count});
- 	}
+ 		countryCounts.push({country : count});
+ 	});
  	console.log(countryCounts);
  	
 	// for(var i = 0; i < players.length; i ++) {
