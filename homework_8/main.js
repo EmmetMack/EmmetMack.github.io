@@ -715,7 +715,7 @@ function createPlayerForLeague(teams) {
 	'minzoom': 7,
 	'paint': {
 	// Size circle radius by earthquake magnitude and zoom level
-		'circle-radius': ['-'['number', ['get', 'count']]]
+		'circle-radius': [['number', ['get', 'count']]],
 		// Color circle by earthquake magnitude
 		'circle-color': [
 		'interpolate',
