@@ -340,15 +340,28 @@ function createPlayerForLeague(teams) {
 
 		for (var j = 0; j < players.length; j++) {
 
-				var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"]);
-				var found = leaguePlayers.some(el => (el.name === player.name && el.team === player.team) );
-				// console.log(player);
-				if (!found) {
-					leaguePlayers.push(player);
-				}			
+			geocoder.geocode( {address: getLocationString(players[j]["birth_place"], players[j]["birth_country"])} ,  function(results, status) {
+			console.log("in geocoder");
+				if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+					var google_location = results[0].geometry.location,
+						lat = google_location.lat(),
+						lng = google_location.lng();
+
+					var player = new Player(players[j]['player_name'], players[j]['birth_place'], players[j]['birth_country'], players[j]["team_name"], lat, lng);
+
+					var found = leaguePlayers.some(el => (el.name === player.name && el.team === player.team) );
+					// console.log(player);
+					if (!found) {
+						leaguePlayers.push(player);
+					}		
+				}
+			});
+
+					
 		}
 	}
-	createGeoJSON(leaguePlayers);
+
+	//createGeoJSON(leaguePlayers);
 			
 }
 
@@ -424,36 +437,6 @@ async function createGeoJSON(players) {
 	return locationJSON;
 	
 }
- 
-async function createPlayerJSON(player) {
-	geocoder.geocode( {address: getLocationString(player.city, player.country)} ,  function(results, status) {
-		console.log("in geocoder");
-		if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-			var google_location = results[0].geometry.location,
-				lat = google_location.lat(),
-				lng = google_location.lng();
-
-				var playerJSON = {
-					"geometry" : {
-						"type": "Point",
-						"coordinates": [lat, lng]},
-						"type":"Feature",
-						"properties" : {
-							"names": [player.name],
-							"place": getLocationString(player.city, player.country),
-							"count": 1,
-							"teams": [player.team]
-							}
-				}
-			console.log("playerJSON: " + JSON.stringify(playerJSON));
-			
-			//need this for async??
-
-			resolve(playerJSON);
-		}
-	});
-	
-}
 
 function getLocationString(city, country) {
 	if (city) {
@@ -464,9 +447,11 @@ function getLocationString(city, country) {
 	
 }
 
-function Player(name, city, country, team) {
+function Player(name, city, country, team, lat, lng) {
 		this.name = name;
 		this.city = city;
 		this.country = country;
 		this.team = team;
+		this.lat = lat
+		this.lng = lng;
 }
