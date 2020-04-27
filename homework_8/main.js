@@ -625,10 +625,12 @@ function createPlayerForLeague(teams) {
 		console.log("creating heatmap points");
 		var cords = feature["geometry"]["coordinates"];
 		var count = feature["properties"]["count"];
+		var latLng = L.latLng(cords[0], cords[1], count);
+		console.log(cords);
 		if (count > maxCount) {
 			maxCount = count;
 		}
-		soccerPoints.push([[cords[0], cords[1], count]]);
+		soccerPoints.push([latLng]);
 	});
 	console.log("soccerPoints: " + soccerPoints);
 
