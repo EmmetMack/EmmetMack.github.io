@@ -354,7 +354,7 @@ function createPlayerForLeague(teams) {
 
 
 
-async function createGeoJSON(players) {
+function createGeoJSON(players) {
 
 	var locationJSON = {
 					    "type": "FeatureCollection",
@@ -391,7 +391,7 @@ async function createGeoJSON(players) {
 		console.log("features array length: " + locationJSON["features"].length);
 		console.log("features array: " + locationJSON["features"]);
 		if (locationJSON["features"].length == 0) {
-			var newPlayerJSON = await createPlayerJSON(player);
+			var newPlayerJSON = createPlayerJSON(player);
 			console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
 			console.log("locationJSON: " + JSON.stringify(locationJSON));
 			console.log("features" + locationJSON["features"]);
@@ -408,7 +408,7 @@ async function createGeoJSON(players) {
 					locationJSON["features"][j]["geometry"]["properties"]["teams"].push(player.team);
 
 				} else {
-					var newPlayerJSON = await createPlayerJSON(player);
+					var newPlayerJSON = createPlayerJSON(player);
 					console.log("playerJSON: " + newPlayerJSON);
 					locationJSON["features"].push(newPlayerJSON);	
 					console.log("features array length after pushing: " + locationJSON["features"].length);
@@ -419,7 +419,7 @@ async function createGeoJSON(players) {
 		
 	}
 	
-	console.log(locationJSON);
+	console.log(JSON.stringify(locationJSON));
 
 	return locationJSON;
 	
@@ -449,9 +449,7 @@ function createPlayerJSON(player) {
 			
 			//need this for async??
 
-			return new Promise(resolve => {
-				resolve(playerJSON);
-			});
+			return playerJSON;
 		}
 	});
 	
