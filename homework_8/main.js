@@ -481,7 +481,7 @@ function createPlayerForLeague(teams) {
 		
 		players.forEach(function(player) {
 			var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], country_lat[player["birth_country"]], country_lng[player["birth_country"]]);
-			var found = leaguePlayers.some(el => (el.name === player.name && el.team === player.team;
+			var found = leaguePlayers.some(el => (el.name === player.name && el.team === player.team);
 			if (!found) {
 				leaguePlayers.push(playerObj);				
 			}
