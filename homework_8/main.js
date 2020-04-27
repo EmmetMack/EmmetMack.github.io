@@ -8,7 +8,7 @@ import * as LaLiga from './modules/laliga-JSON.js'
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
 
 //Leaflet map stuff
-var mymap = L.map('mapid').setView([51.505, -0.09], 2);
+var mymap = L.map('mapid').setView([51.505, -0.09], 5);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -632,19 +632,21 @@ function createPlayerForLeague(teams) {
 		soccerPoints.push([cords[1], cords[0], count]);
 	});
 
+	var maxVal = myGeoJSON["features"].keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b)
+
 
 	 var heat = L.heatLayer(soccerPoints,{
             radius: 20,
             blur: 15, 
             maxZoom: 17,
-            max: 400,
+            max: maxCount,
       }).addTo(mymap);
 
 	 heat.redraw();
 
 }
 
-
+var maxCount;
 
 function createGeoJSON(players) {
 
@@ -677,9 +679,17 @@ function createGeoJSON(players) {
  	var countryCounts = {};
  	 countries.forEach(function(place) {
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
+
  		if (count !== 0) {
  			countryCounts[place] = count;
  		}
+
+ 		if (typeof maxCount === "undefiend") {
+ 			maxCount = count;
+ 		} else if (count > maxCount) {
+ 			maxCount = count;
+ 		}
+ 		
  	});
 
  	console.log(countryCounts);
