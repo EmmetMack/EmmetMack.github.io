@@ -337,7 +337,8 @@ function createPlayerForLeague(teams) {
 		var nameJSON = prefix + "." + name.replace(/ /g,'');
 		var data = JSON.parse(eval(nameJSON));
 		var players = data;
-
+		console.log(players);
+		
 		players.forEach(function(player) {
 			if (!(leaguePlayers.some(el => (el.name === player.name && el.team === player.team)))) {
 					geocoder.geocode( {address: getLocationString(player["birth_place"], player["birth_country"])}, function(results, status) {
@@ -347,7 +348,7 @@ function createPlayerForLeague(teams) {
 							lat = google_location.lat(),
 							lng = google_location.lng();
 
-						console.log("player name: " + player[j]['player_name']);
+						console.log("player name: " + player['player_name']);
 						var playerObj = new Player(player[j]['player_name'], player[j]['birth_place'], player[j]['birth_country'], player[j]["team_name"], lat, lng);
 
 					
@@ -398,48 +399,70 @@ function createGeoJSON(players) {
 	// 				    }
  //        	
 
-	// console.log(players.length);
-	// for(var i = 0; i < players.length; i ++) {
+	console.log(players.length);
+	for(var i = 0; i < players.length; i ++) {
 
-	// 	var player = players[i];
+		var player = players[i];
 
-	// 	// var location = getLocationString(player.city, player.country);
-	// 	console.log("features array length: " + locationJSON["features"].length);
-	// 	console.log("features array: " + locationJSON["features"]);
-	// 	if (locationJSON["features"].length == 0) {
-	// 		var newPlayerJSON =  createPlayerJSON(player);
-	// 		console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
-	// 		console.log("locationJSON: " + JSON.stringify(locationJSON));
-	// 		console.log("features" + locationJSON["features"]);
-	// 		locationJSON["features"].push(newPlayerJSON);	
-	// 		console.log("features array length after pushing: " + locationJSON["features"].length);
-	// 	} else {
-	// 		console.log("feature length in else statement: " + locationJSON["features"].length);
-	// 		for (var j = 0; j < locationJSON["features"].length; j ++ ) {
-	// 			console.log("looping through features");
-	// 			console.log("locationJSON: " + JSON.stringify(locationJSON));
-	// 			if (locationJSON["features"][j]["geometry"]["properties"]["place"] == getLocationString(player.city, player.country)) {
-	// 				locationJSON["features"][j]["geometry"]["properties"]["count"] += 1;
-	// 				locationJSON["features"][j]["geometry"]["properties"]["names"].push(player.name);
-	// 				locationJSON["features"][j]["geometry"]["properties"]["teams"].push(player.team);
+		// var location = getLocationString(player.city, player.country);
+		console.log("features array length: " + locationJSON["features"].length);
+		console.log("features array: " + locationJSON["features"]);
+		if (locationJSON["features"].length == 0) {
+			var newPlayerJSON =  createPlayerJSON(player);
+			console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
+			console.log("locationJSON: " + JSON.stringify(locationJSON));
+			console.log("features" + locationJSON["features"]);
+			locationJSON["features"].push(newPlayerJSON);	
+			console.log("features array length after pushing: " + locationJSON["features"].length);
+		} else {
+			console.log("feature length in else statement: " + locationJSON["features"].length);
+			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
+				console.log("looping through features");
+				console.log("locationJSON: " + JSON.stringify(locationJSON));
+				if (locationJSON["features"][j]["geometry"]["properties"]["place"] == getLocationString(player.city, player.country)) {
+					locationJSON["features"][j]["geometry"]["properties"]["count"] += 1;
+					locationJSON["features"][j]["geometry"]["properties"]["names"].push(player.name);
+					locationJSON["features"][j]["geometry"]["properties"]["teams"].push(player.team);
 
-	// 			} else {
-	// 				var newPlayerJSON = createPlayerJSON(player);
-	// 				console.log("playerJSON: " + newPlayerJSON);
-	// 				locationJSON["features"].push(newPlayerJSON);	
-	// 				console.log("features array length after pushing: " + locationJSON["features"].length);
-	// 			}
-	// 		}
+				} else {
+					var newPlayerJSON = createPlayerJSON(player);
+					console.log("playerJSON: " + newPlayerJSON);
+					locationJSON["features"].push(newPlayerJSON);	
+					console.log("features array length after pushing: " + locationJSON["features"].length);
+				}
+			}
 		
-	// 	}
+		}
 		
-	// }
+	}
 	
-	// console.log(JSON.stringify(locationJSON));
+	console.log(JSON.stringify(locationJSON));
 
-	// return locationJSON;
+	return locationJSON;
 	
 }
+
+function createPlayerJSON(player) {
+
+	var playerJSON = {
+		"geometry": {
+			"type": "Point",
+			"cords" : [
+				player.lat, player.lng]},
+
+			"type": "Feature",
+			"properties": {
+				"place": getLocationString(player.name, player.country),
+				"count": 1,
+				"names" : [player.name],
+				"teams" : [player.team]
+			}
+	}
+
+	return playerJSON;
+
+}
+
 
 function getLocationString(city, country) {
 	if (city) {
