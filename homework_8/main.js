@@ -622,11 +622,11 @@ function createPlayerForLeague(teams) {
 
 	var soccerPoints = [];
 	myGeoJSON["features"].forEach(function(feature){
-		console.log("creating heatmap points");
+		console.log("feature: " + feature);
 		var cords = feature["geometry"]["coordinates"];
 		var count = feature["properties"]["count"];
 		var latLng = L.latLng(cords[0], cords[1], count);
-		console.log(cords);
+		console.log(latLng);
 		if (count > maxCount) {
 			maxCount = count;
 		}
@@ -679,7 +679,6 @@ function createGeoJSON(players) {
  //        	
  	var countryCounts = {};
  	 countries.forEach(function(place) {
- 	 	console.log(place);
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
 
  		if (count !== 0) {
