@@ -617,7 +617,7 @@ function createPlayerForLeague(teams) {
 	var myGeoJSON = createGeoJSON(leaguePlayers);
 	console.log(myGeoJSON);
 	
-	L.geoJSON(myGeoJSON).addTo(mymap);
+	L.geoJSON(myGeoJSON["features"]).addTo(mymap);
 }
 
 
@@ -627,7 +627,6 @@ function createGeoJSON(players) {
 	console.log("createGeoJSON called");
 
 	var locationJSON = {
-					    "type": "FeatureCollection",
 					    "features": []
 	};
 
