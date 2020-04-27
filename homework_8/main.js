@@ -627,6 +627,9 @@ function createPlayerForLeague(teams) {
 		'data': myGeoJSON
 	});
 
+	var map = gl.getMapboxMap();
+	console.log(map);
+	
 	gl.getMapboxMap().addLayer(
 		{
 		'id': 'soccer-nations',
@@ -744,7 +747,6 @@ function createGeoJSON(players) {
  	console.log(countryCounts);
  	
  	Object.keys(countryCounts).forEach(function(key) {
- 		console.log(key);
  		var countryJSON = {
  			"geometry": {
 
