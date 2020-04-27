@@ -703,7 +703,7 @@ function createPlayerForLeague(teams) {
 		0
 		]
 	}
-}
+});
 	// // L.geoJSON(myGeoJSON["features"]).addTo(mymap);
 	// var maxCount = -1;
 
