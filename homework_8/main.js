@@ -666,7 +666,7 @@ function createGeoJSON(players) {
  			"geometry": {
 
 				"type": "Point",
-				"cords" : [
+				"coordinates" : [
 					country_lat[key], country_lng[key]]},
 
 			"type": "Feature",
