@@ -19,8 +19,9 @@ var mymap = L.map('mapid').setView([51.509865, -0.118092], 4);
 //     accessToken: mapboxToken
 // }).addTo(mymap);
 17
+
 var map = new mapboxgl.Map({
-	container: 'map',
+	container: 'mapid',
 	style: 'mapbox://styles/mapbox/dark-v10',
 	center: [-120, 50],
 	zoom: 2
