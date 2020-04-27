@@ -624,10 +624,12 @@ function createPlayerForLeague(teams) {
 		console.log("creating heatmap points");
 		var cords = feature["geometry"]["coordinates"];
 		var count = feature["properties"]["count"];
-		soccerPoints.push([cords[1], cords[0], count]);
+		soccerPoints.push([cords[0], cords[1], count]);
 	});
 
-	 var heat = L.heatLayer(soccerPoints,{
+	console.log(maxCount);
+
+	var heat = L.heatLayer(soccerPoints,{
             radius: 20,
             blur: 15, 
             maxZoom: 17,
@@ -692,7 +694,7 @@ function createGeoJSON(players) {
 
 				"type": "Point",
 				"coordinates" : [
-					country_lng[key], country_lat[key]]},
+					country_lat[key], country_lng[key]]},
 
 			"type": "Feature",
 			"properties": {
