@@ -276,6 +276,134 @@ const country_lng = {
 	"Zimbabwe": 29.154857
 }
 
+const countries = [
+	"Andorra",
+	"United Arab Emirates",
+	"Afghanistan",
+	"Antigua and Barbuda",
+	"Anguilla",
+	"Albania",
+	"Armenia",
+	"Angola",
+	"Argentina",
+	"American Samoa",
+	"Austria",
+	"Australia",
+	"Aruba",
+	"Azerbaijan" ,
+	"Bosnia and Herzegovina",
+	"Barbados",
+	"Bangladesh",
+	"Belgium",
+	"Burkina Faso",
+	"Bulgaria" ,
+	"Bahrain" ,
+	"Burundi" ,
+	"Benin" ,
+	"Bermuda" ,
+	"Burnei" ,
+	"Bolivia" ,
+	"Brazil" ,
+	"Bahamas" ,
+	"Botswana",
+	"Belarus" ,
+	"Belize" ,
+	"Canada",
+	"Democratic Republic of the Congo" ,
+	"Central African Republic" ,
+	"Congo" ,
+	"Switzerland" ,
+	"Côte d'Ivoire",
+	"Chile" ,
+	"Cameroon" ,
+	"China",
+	"Colombia" ,
+	"Costa Rica",
+	"Cuba" ,
+	"Cyprus" ,
+	'Czech Republic',
+	"Germany" ,
+	"Djibouti" , 
+	"Denmark",
+	"Dominican Republic",
+	"Algeria",
+	"Ecuador",
+	"Estonia",
+	"Egypt",
+	"Spain",
+	"Ethiopia",
+	"Finland",
+	"Fiji",
+	"Falkland Islands",
+	"Faroe Islands",
+	"France" ,
+	"Gabon" ,
+	"England",
+	"Scotland",
+	"Wales" ,
+	"Northern Ireland",
+	"Republic of Ireland",
+	"Grenada",
+	"Georgia",
+	"Ghana",
+	"Gambia",
+	"Greenland",
+	"Greece",
+	"Guatemala", 
+	"Honduras",
+	"Croatia",
+	"Hungary",
+	"Haiti" ,
+	"Israel",
+	"India",
+	"Iraq",
+	"Iran",
+	"Iceland" ,
+	"Italy",
+	"Jamaica",
+	"Japan" ,
+	"Kenya",
+	"Kyrgyzstan",
+	"Republic of Korea",
+	"Kazakhstan",
+	"Morocco",
+	"Montenegro" ,
+	"Macedonia",
+	"Mali",
+	"Mexico",
+	"Nigeria",
+	"Netherlands",
+	"Norway",
+	"New Zealand",
+	"Panama" ,
+	"Peru",
+	"Poland" ,
+	"Portugal",
+	"Paraguay",
+	"Qatar" ,
+	"Romania",
+	"Serbia" ,
+	"Russia",
+	"Saudi Arabia" ,
+	"Sweden" ,
+	"Slovenia",
+	"Slovakia" ,
+	"San Marino",
+	"Senegal" ,
+	"El Salvador" ,
+	"Togo" ,
+	"Tunisia",
+	"Turkey" ,
+	"Trinidad and Tobago",
+	"Tanzania" ,
+	"Ukraine" ,
+	"United States of America" ,
+	"Uruguay",
+	"Venezuela",
+	"South Africa" ,
+	"Zambia",
+	"Zimbabwe"]
+
 //Football API requests
 
 // const EnglandCountryID = "41";
@@ -522,50 +650,56 @@ function createGeoJSON(players) {
 	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
 	// 				    }
  //        	
+ 	var countryCounts = [];
+ 	for (const country in countries) {
+ 		var count = players.filter((el) => el.country === country).length;
+ 		countryCounts.push({country: count});
+ 	}
+ 	console.log(countryCounts);
+ 	
+	// for(var i = 0; i < players.length; i ++) {
 
-	for(var i = 0; i < players.length; i ++) {
+	// 	var player = players[i];
 
-		var player = players[i];
+	// 	if (locationJSON["features"].length == 0) {
+	// 		console.log("features length is zero");
+	// 		var newPlayerJSON =  createPlayerJSON(player);
+	// 		locationJSON["features"].push(newPlayerJSON);	
+	// 	} else {
 
-		if (locationJSON["features"].length == 0) {
-			console.log("features length is zero");
-			var newPlayerJSON =  createPlayerJSON(player);
-			locationJSON["features"].push(newPlayerJSON);	
-		} else {
+	// 			locationJSON["features"].forEach(function(feature) {
+	// 				console.log("Feature: " + feature);
+	// 				if (feature["properties"]["place"] == player.country) {
+	// 					console.log("found duplicate");
+	// 					feature["properties"]["count"] += 1;
+	// 					feature["properties"]["names"].push(player.name);
+	// 					feature["properties"]["teams"].push(player.team);
+	// 				} else {
+	// 					var newPlayerJSON = createPlayerJSON(player);
+	// 					locationJSON["features"].push(newPlayerJSON);	
+	// 				}
 
-				locationJSON["features"].forEach(function(feature) {
-					console.log("Feature: " + feature);
-					if (feature["properties"]["place"] == player.country) {
-						console.log("found duplicate");
-						feature["properties"]["count"] += 1;
-						feature["properties"]["names"].push(player.name);
-						feature["properties"]["teams"].push(player.team);
-					} else {
-						var newPlayerJSON = createPlayerJSON(player);
-						locationJSON["features"].push(newPlayerJSON);	
-					}
+	// 		});
+	// 		// for(const [item, value] in JSON.parse(locationJSON["features"])){
+	// 		// 	console.log("item: " + item);
+	// 		// 	console.log("value: " + value);
+	// 		// 	if (value["properties"]["place"] == player.country) {
+	// 		// 		console.log("found duplicate");
+	// 		// 		value["properties"]["count"] += 1;
+	// 		// 		value["properties"]["names"].push(player.name);
+	// 		// 		value["properties"]["teams"].push(player.team);
 
-			});
-			// for(const [item, value] in JSON.parse(locationJSON["features"])){
-			// 	console.log("item: " + item);
-			// 	console.log("value: " + value);
-			// 	if (value["properties"]["place"] == player.country) {
-			// 		console.log("found duplicate");
-			// 		value["properties"]["count"] += 1;
-			// 		value["properties"]["names"].push(player.name);
-			// 		value["properties"]["teams"].push(player.team);
-
-			// 	} else {
-			// 		var newPlayerJSON = createPlayerJSON(player);
-			// 		locationJSON["features"].push(newPlayerJSON);	
-			// 	}
-			// }
+	// 		// 	} else {
+	// 		// 		var newPlayerJSON = createPlayerJSON(player);
+	// 		// 		locationJSON["features"].push(newPlayerJSON);	
+	// 		// 	}
+	// 		// }
 		
-		}
+	// 	}
 		
-	}
+	// }
 
-	return locationJSON;
+	// return locationJSON;
 	
 }
 
