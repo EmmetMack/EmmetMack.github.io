@@ -13,8 +13,8 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 128,
+    id: 'mapbox/dark-v10',
+    tileSize: 512,
     zoomOffset: -1,
     accessToken: mapboxToken
 }).addTo(mymap);
@@ -626,6 +626,7 @@ function createPlayerForLeague(teams) {
 
 	var soccerPoints = [];
 	myGeoJSON["features"].forEach(function(feature){
+		console.log("creating heatmap points");
 		var cords = feature["geometry"]["coordinates"];
 		var count = feature["properties"]["count"];
 		soccerPoints.push([cords[1], cords[0], count]);
@@ -639,7 +640,7 @@ function createPlayerForLeague(teams) {
             max: 400,
       }).addTo(mymap);
 
-	 mymap.redraw();
+	 heat.redraw();
 
 }
 
