@@ -638,9 +638,9 @@ function createPlayerForLeague(teams) {
 
 	map.addLayer({
 
-		'id': 'earthquakes-heat',
+		'id': 'soccer-heat',
 		'type': 'heatmap',
-		'source': 'earthquakes',
+		'source': 'soccer',
 		'maxzoom': 9,
 		'paint': {
 		// Increase the heatmap weight based on frequency and property magnitude
