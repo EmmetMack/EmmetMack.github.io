@@ -625,7 +625,7 @@ function createPlayerForLeague(teams) {
 		console.log("feature: " + feature);
 		var cords = feature["geometry"]["coordinates"];
 		var count = feature["properties"]["count"];
-		var latLng = L.latLng(cords[0], cords[1], count);
+		var latLng = new L.latLng(cords[0], cords[1], count);
 		console.log(latLng);
 		if (count > maxCount) {
 			maxCount = count;
