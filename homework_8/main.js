@@ -650,14 +650,35 @@ function createGeoJSON(players) {
 	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
 	// 				    }
  //        	
- 	var countryCounts = [];
+ 	var countryCounts = {};
  	 countries.forEach(function(place) {
  	 	console.log(place);
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
- 		countryCounts.push({[place]:count});
+ 		if (count !== 0) {
+ 			countryCounts[place] = count;
+ 		}
  	});
+
  	console.log(countryCounts);
  	
+ 	for (key in countryCounts) {
+ 		var countryJSON = {
+ 			"geometry": {
+
+				"type": "Point",
+				"cords" : [
+					country_lat[key], country_lng[key]]},
+
+			"type": "Feature",
+			"properties": {
+				"country": key,
+				"count": countryCounts[key]
+			}
+ 		}
+ 		locationJSON["features"].push(countryJSON);
+ 	}
+
+
 	// for(var i = 0; i < players.length; i ++) {
 
 	// 	var player = players[i];
@@ -700,30 +721,30 @@ function createGeoJSON(players) {
 		
 	// }
 
-	return countryCounts;
+	return locationJSON;
 	
 }
 
-function createPlayerJSON(player) {
+// function createPlayerJSON(player) {
 
-	var playerJSON = {
-		"geometry": {
-			"type": "Point",
-			"cords" : [
-				player.lat, player.lng]},
+// 	var playerJSON = {
+// 		"geometry": {
+// 			"type": "Point",
+// 			"cords" : [
+// 				player.lat, player.lng]},
 
-			"type": "Feature",
-			"properties": {
-				"place": player.country,
-				"count": 1,
-				"names" : [player.name],
-				"teams" : [player.team]
-			}
-	}
+// 			"type": "Feature",
+// 			"properties": {
+// 				"place": player.country,
+// 				"count": 1,
+// 				"names" : [player.name],
+// 				"teams" : [player.team]
+// 			}
+// 	}
 
-	return playerJSON;
+// 	return playerJSON;
 
-}
+// }
 
 function Player(name, city, country, team, lat, lng) {
 		this.name = name;
