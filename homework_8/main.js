@@ -276,8 +276,6 @@ const country_lng = {
 	"Zimbabwe": 29.154857
 }
 
-var geocoder = new google.maps.Geocoder();
-
 //Football API requests
 
 // const EnglandCountryID = "41";
