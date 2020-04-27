@@ -349,7 +349,7 @@ function createPlayerForLeague(teams) {
 							lng = google_location.lng();
 
 						console.log("player name: " + player['player_name']);
-						var playerObj = new Player(player[j]['player_name'], player[j]['birth_place'], player[j]['birth_country'], player[j]["team_name"], lat, lng);
+						var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], lat, lng);
 
 					
 						console.log(player);
