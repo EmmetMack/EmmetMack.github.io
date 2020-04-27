@@ -473,7 +473,6 @@ function createPlayerForLeague(teams) {
 		var nameJSON = prefix + "." + name.replace(/ /g,'');
 		var data = JSON.parse(eval(nameJSON));
 		var players = data;
-		console.log(players);
 		
 		players.forEach(function(player) {
 			var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], country_lat[player["birth_country"]], country_lng[player["birth_country"]]);
@@ -487,8 +486,8 @@ function createPlayerForLeague(teams) {
 
 	console.log(leaguePlayers);
 
-	// var geoJSON = createGeoJSON(leaguePlayers);
-	// console.log(geoJSON);
+	var geoJSON = createGeoJSON(leaguePlayers);
+	console.log(geoJSON);
 			
 }
 
