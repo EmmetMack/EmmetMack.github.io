@@ -628,7 +628,7 @@ function createPlayerForLeague(teams) {
 		if (count > maxCount) {
 			maxCount = count;
 		}
-		soccerPoints.push([cords[0], cords[1], count]);
+		soccerPoints.push([[cords[0], cords[1], count]]);
 	});
 	console.log("soccerPoints: " + soccerPoints);
 
