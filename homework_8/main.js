@@ -654,7 +654,7 @@ function createGeoJSON(players) {
  	 countries.forEach(function(place) {
  	 	console.log(place);
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
- 		countryCounts.push({place : count});
+ 		countryCounts.push({[place]:count});
  	});
  	console.log(countryCounts);
  	
