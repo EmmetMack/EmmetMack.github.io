@@ -24,7 +24,8 @@ var map = new mapboxgl.Map({
 	container: 'mapid',
 	style: 'mapbox://styles/mapbox/dark-v10',
 	center: [-120, 50],
-	zoom: 2
+	zoom: 2,
+	accessToken: mapboxToken
 });
 
 
