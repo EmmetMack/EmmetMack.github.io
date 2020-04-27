@@ -696,8 +696,7 @@ function createPlayerForLeague(teams) {
 		0
 		]
 		}
-		},
-		'waterway-label'
+		}
 		);
 
 	//L.geoJSON(myGeoJSON["features"]).addTo(mymap);
