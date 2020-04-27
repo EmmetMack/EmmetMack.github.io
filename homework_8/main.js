@@ -154,7 +154,7 @@ const country_lat = {
 	"Trinidad and Tobago": 	10.691803,
 	"Tanzania" : -6.369028,
 	"Ukraine" :48.379433,
-	"United States of America" : 37.09024,
+	"USA" : 37.09024,
 	"Uruguay" : -32.522779,
 	"Venezuela" : 6.42375,
 	"South Africa" : -30.559482,
@@ -281,7 +281,7 @@ const country_lng = {
 	"Trinidad and Tobago": -61.222503,
 	"Tanzania" : 34.888822,
 	"Ukraine" : 31.16558,
-	"United States" : -95.712891,
+	"USA" : -95.712891,
 	"Uruguay" : -55.765835,
 	"Venezuela": -66.58973,
 	"South Africa" : 22.937506,
@@ -410,7 +410,7 @@ const countries = [
 	"Trinidad and Tobago",
 	"Tanzania" ,
 	"Ukraine" ,
-	"United States of America" ,
+	"USA" ,
 	"Uruguay",
 	"Venezuela",
 	"South Africa" ,
@@ -715,7 +715,15 @@ function createPlayerForLeague(teams) {
 	'minzoom': 7,
 	'paint': {
 	// Size circle radius by earthquake magnitude and zoom level
-		'circle-radius': [['number', ['get', 'count']]],
+		'circle-radius': [
+			'interpolate',
+			['linear'],
+			['zoom'],
+			7,
+			['interpolate', ['linear'], ['get', 'mag'], 1, 1, 6, 4],
+			16,
+			['interpolate', ['linear'], ['get', 'mag'], 1, 5, 6, 50]
+			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
 		'interpolate',
