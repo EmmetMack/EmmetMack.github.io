@@ -19,6 +19,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: mapboxToken
 }).addTo(mymap);
 
+var gl = L.mapboxGL({
+    accessToken: mapboxToken,
+    style: 'mapbox://styles/mapbox/bright-v8'
+}).addTo(mymap);
+
 //country names to codes for geodecoding 
 const country_lat = {
 	"Andorra": 42.546245,
