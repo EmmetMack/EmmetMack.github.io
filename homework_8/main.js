@@ -359,16 +359,16 @@ function createPlayerForLeague(teams) {
 					
 			}
 			
-		}
+		});
 	}
 
-	//createGeoJSON(leaguePlayers);
+	createGeoJSON(leaguePlayers);
 			
 }
 
 
 
-async function createGeoJSON(players) {
+function createGeoJSON(players) {
 
 	var locationJSON = {
 					    "type": "FeatureCollection",
