@@ -486,8 +486,8 @@ function createPlayerForLeague(teams) {
 
 	console.log(leaguePlayers);
 
-	var geoJSON = createGeoJSON(leaguePlayers);
-	console.log(geoJSON);
+	// var geoJSON = createGeoJSON(leaguePlayers);
+	// console.log(geoJSON);
 			
 }
 
@@ -528,14 +528,16 @@ function createGeoJSON(players) {
 		var player = players[i];
 
 		if (locationJSON["features"].length == 0) {
+			console.log("features legnth is zero");
 			var newPlayerJSON =  createPlayerJSON(player);
 			locationJSON["features"].push(newPlayerJSON);	
 		} else {
-			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
-				if (locationJSON["features"][j]["properties"]["place"] == player.country) {
-					locationJSON["features"][j]["properties"]["count"] += 1;
-					locationJSON["features"][j]["properties"]["names"].push(player.name);
-					locationJSON["features"][j]["properties"]["teams"].push(player.team);
+			for(const value in locationJSON["features"]){
+				if (value["properties"]["place"] == player.country) {
+					console.log("found duplicate");
+					value["properties"]["count"] += 1;
+					value["properties"]["names"].push(player.name);
+					value["properties"]["teams"].push(player.team);
 
 				} else {
 					var newPlayerJSON = createPlayerJSON(player);
