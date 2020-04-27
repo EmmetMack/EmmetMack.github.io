@@ -13,15 +13,10 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 4);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/dark-v10',
-    tileSize: 512,
+    id: 'mapbox/light-v10',
+    tileSize: 256,
     zoomOffset: -1,
     accessToken: mapboxToken
-}).addTo(mymap);
-
-var gl = L.mapboxGL({
-    accessToken: mapboxToken,
-    style: 'mapbox://styles/mapbox/bright-v8'
 }).addTo(mymap);
 
 //country names to codes for geodecoding 
