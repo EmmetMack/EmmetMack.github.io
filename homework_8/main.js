@@ -631,8 +631,7 @@ function createPlayerForLeague(teams) {
 
 	map.addSource('soccer', {
 		'type': 'geojson',
-		'data': myGeoJSON;
-		
+		'data': myGeoJSON,
 	});
 
 	map.addLayer({
