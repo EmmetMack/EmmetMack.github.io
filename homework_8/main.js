@@ -276,8 +276,6 @@ const country_lng = {
 	"Zimbabwe": 29.154857
 }
 
-const maps_api_key = "AIzaSyATi23iBvfHagwQ5C_U3-qPzCfBJCTzouE";
-
 var geocoder = new google.maps.Geocoder();
 
 //Football API requests
@@ -482,15 +480,17 @@ function createPlayerForLeague(teams) {
 		players.forEach(function(player) {
 			var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], country_lat[player["birth_country"]], country_lng[player["birth_country"]]);
 			var found = leaguePlayers.some(el => (el.name === playerObj.name && el.team === playerObj.team));
-			if (!found) {
+			if (not found) {
 				leaguePlayers.push(playerObj);				
 			}
 
 		});
 	}
 
-	var geoJSON = createGeoJSON(leaguePlayers);
-	console.log(geoJSON);
+	console.log(leaguePlayers);
+
+	// var geoJSON = createGeoJSON(leaguePlayers);
+	// console.log(geoJSON);
 			
 }
 
