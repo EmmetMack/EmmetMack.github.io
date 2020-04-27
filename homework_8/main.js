@@ -484,10 +484,10 @@ function createPlayerForLeague(teams) {
 		});
 	}
 
-	console.log(leaguePlayers);
+	// console.log(leaguePlayers);
 
-	// var geoJSON = createGeoJSON(leaguePlayers);
-	// console.log(geoJSON);
+	var geoJSON = createGeoJSON(leaguePlayers);
+	console.log(geoJSON);
 			
 }
 
