@@ -532,7 +532,8 @@ function createGeoJSON(players) {
 			var newPlayerJSON =  createPlayerJSON(player);
 			locationJSON["features"].push(newPlayerJSON);	
 		} else {
-			for(const value in locationJSON["features"]){
+			for(const [item, value] in locationJSON["features"]){
+				console.log("item: " + item);
 				console.log("value: " + value);
 				if (value["properties"]["place"] == player.country) {
 					console.log("found duplicate");
