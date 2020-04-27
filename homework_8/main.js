@@ -532,20 +532,34 @@ function createGeoJSON(players) {
 			var newPlayerJSON =  createPlayerJSON(player);
 			locationJSON["features"].push(newPlayerJSON);	
 		} else {
-			for(const [item, value] in JSON.parse(locationJSON["features"])){
-				console.log("item: " + item);
-				console.log("value: " + value);
-				if (value["properties"]["place"] == player.country) {
-					console.log("found duplicate");
-					value["properties"]["count"] += 1;
-					value["properties"]["names"].push(player.name);
-					value["properties"]["teams"].push(player.team);
 
-				} else {
-					var newPlayerJSON = createPlayerJSON(player);
-					locationJSON["features"].push(newPlayerJSON);	
-				}
-			}
+				locationJSON["features"].forEach(function(feature) {
+					console.log("Feature: " + feature);
+					if (feature["properties"]["place"] == player.country) {
+						console.log("found duplicate");
+						feature["properties"]["count"] += 1;
+						feature["properties"]["names"].push(player.name);
+						feature["properties"]["teams"].push(player.team);
+					} else {
+						var newPlayerJSON = createPlayerJSON(player);
+						locationJSON["features"].push(newPlayerJSON);	
+					}
+
+			});
+			// for(const [item, value] in JSON.parse(locationJSON["features"])){
+			// 	console.log("item: " + item);
+			// 	console.log("value: " + value);
+			// 	if (value["properties"]["place"] == player.country) {
+			// 		console.log("found duplicate");
+			// 		value["properties"]["count"] += 1;
+			// 		value["properties"]["names"].push(player.name);
+			// 		value["properties"]["teams"].push(player.team);
+
+			// 	} else {
+			// 		var newPlayerJSON = createPlayerJSON(player);
+			// 		locationJSON["features"].push(newPlayerJSON);	
+			// 	}
+			// }
 		
 		}
 		
