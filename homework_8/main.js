@@ -528,11 +528,12 @@ function createGeoJSON(players) {
 		var player = players[i];
 
 		if (locationJSON["features"].length == 0) {
-			console.log("features legnth is zero");
+			console.log("features length is zero");
 			var newPlayerJSON =  createPlayerJSON(player);
 			locationJSON["features"].push(newPlayerJSON);	
 		} else {
 			for(const value in locationJSON["features"]){
+				console.log("value: " + value);
 				if (value["properties"]["place"] == player.country) {
 					console.log("found duplicate");
 					value["properties"]["count"] += 1;
