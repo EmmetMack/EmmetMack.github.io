@@ -531,22 +531,11 @@ function createGeoJSON(players) {
 
 		var player = players[i];
 
-		// var location = getLocationString(player.city, player.country);
-		console.log("features array length: " + locationJSON["features"].length);
-		console.log("features array: " + locationJSON["features"]);
 		if (locationJSON["features"].length == 0) {
 			var newPlayerJSON =  createPlayerJSON(player);
-			console.log("playerJSON: " + JSON.stringify(newPlayerJSON));
-			console.log("locationJSON: " + JSON.stringify(locationJSON));
-			console.log("features" + locationJSON["features"]);
 			locationJSON["features"].push(newPlayerJSON);	
-			console.log("features array length after pushing: " + locationJSON["features"].length);
 		} else {
-			console.log("feature length in else statement: " + locationJSON["features"].length);
 			for (var j = 0; j < locationJSON["features"].length; j ++ ) {
-				console.log("looping through features");
-				console.log("locationJSON: " + JSON.stringify(locationJSON));
-				console.log("features[j]: " + JSON.stringify(locationJSON["features"][j]["geometry"]));
 				if (locationJSON["features"][j]["properties"]["place"] == player.country) {
 					locationJSON["features"][j]["properties"]["count"] += 1;
 					locationJSON["features"][j]["properties"]["names"].push(player.name);
@@ -554,17 +543,13 @@ function createGeoJSON(players) {
 
 				} else {
 					var newPlayerJSON = createPlayerJSON(player);
-					console.log("playerJSON: " + newPlayerJSON);
 					locationJSON["features"].push(newPlayerJSON);	
-					console.log("features array length after pushing: " + locationJSON["features"].length);
 				}
 			}
 		
 		}
 		
 	}
-	
-	console.log(JSON.stringify(locationJSON));
 
 	return locationJSON;
 	
