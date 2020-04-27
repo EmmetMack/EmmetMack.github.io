@@ -679,6 +679,7 @@ function createGeoJSON(players) {
  //        	
  	var countryCounts = {};
  	 countries.forEach(function(place) {
+ 	 	console.log(place);
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
 
  		if (count !== 0) {
@@ -689,13 +690,12 @@ function createGeoJSON(players) {
  	console.log(countryCounts);
  	
  	Object.keys(countryCounts).forEach(function(key) {
- 		if (country_lat[key] && country_lng[key]) {
- 			var countryJSON = {
+  			var countryJSON = {
 	 			"geometry": {
 
 					"type": "Point",
 					"coordinates" : [
-						country_lng[key], country_lat[key]]},
+						country_lat[key], country_lng[key]]},
 
 				"type": "Feature",
 				"properties": {
@@ -704,7 +704,6 @@ function createGeoJSON(players) {
 				}
  			}
  			locationJSON["features"].push(countryJSON);
- 		}
  		
  	});
 
