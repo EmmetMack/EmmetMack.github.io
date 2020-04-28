@@ -712,14 +712,14 @@ function createPlayerForLeague(teams) {
         "text-size": 12
         },
         paint: {
-		  "text-color": "white"
+		  "text-color": "#FFFFFF"
 		}
       });
 
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
 	    .setLngLat(e.features[0].geometry.coordinates)
-	    .setHTML('<b>Country: </b>' + e.features[0].properties.country + '<b> Count: </b>' + e.features[0].properties.count)
+	    .setHTML('<b>Country: </b>' + " " + e.features[0].properties.country + '<b> Count: </b>' + " " + e.features[0].properties.count)
 	    .addTo(map);
 	});
 	
