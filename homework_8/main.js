@@ -798,10 +798,9 @@ function createGeoJSON(players) {
 
  		if (count !== 0) {
  			countryCounts[place] = count;
- 		}
-
- 		if (count > maxCount) {
- 			maxCount = count;
+ 			if (count > maxCount) {
+ 				maxCount = count;
+ 			}
  		}
  	});
 
