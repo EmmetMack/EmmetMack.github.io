@@ -711,7 +711,7 @@ function createPlayerForLeague(teams) {
         "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
         "text-size": 12
         }
-      });
+      }, 'soccer-point');
 
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
