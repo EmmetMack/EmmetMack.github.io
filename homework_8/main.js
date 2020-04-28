@@ -666,15 +666,15 @@ function createPlayerForLeague(teams) {
 	'id': 'soccer-point',
 	'type': 'circle',
 	'source': 'soccer',
-	'minzoom': 2,
+	'minzoom': 1,
 	'paint': {
 	// Size circle radius by earthquake magnitude and zoom level
 		'circle-radius': [
 			'interpolate',
 			['linear'],
 			['zoom'],
-			2,
-			['interpolate', ['linear'], ['get', "count"], 0, 1, 3, 5, 7, 10, 15, 20],
+			1,
+			['interpolate', ['linear'], ['get', "count"], 0, 1, 3, 5, 7, 10, 15, 25],
 			7,
 			['interpolate', ['linear'], ['get', "count"], 0, 1, 3, 5, 7, 10, 15, 20],
 			16, ['interpolate', ['linear'], ['get', 'count'],0, 1, 3, 5, 7, 10, 15, 20]
@@ -705,7 +705,7 @@ function createPlayerForLeague(teams) {
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
 	    .setLngLat(e.features[0].geometry.coordinates)
-	    .setHTML('<b>Count:</b> ' + e.features[0].properties.count)
+	    .setHTML('<b>Country: ' + e.features[0].properites.country + '<b>Count:</b>' + e.features[0].properties.count)
 	    .addTo(map);
 	});
 	
