@@ -644,16 +644,10 @@ function createPlayerForLeague(teams) {
 			'source': 'soccer',
 			'maxzoom': 9,
 			'paint': {
-			// Increase the heatmap weight based on frequency and property magnitude
-				'heatmap-weight': [
-				'interpolate',
-				['linear'],
-				['get', 'count'],
-				0,
-				0,
-				6,
-				1
-				],
+				'heatmap-weight': {
+			      property: 'rel_mag',
+			      type: 'linear',
+    			},
 				// Increase the heatmap color weight weight by zoom level
 				// heatmap-intensity is a multiplier on top of heatmap-weight
 				'heatmap-intensity': [
@@ -671,14 +665,14 @@ function createPlayerForLeague(teams) {
 			'heatmap-color': [
 			'interpolate',
 			['linear'],
-			['heatmap-density'],
-			0.01,
+			['rel_mag'],
+			0.001,
 			'rgba(33,102,172,0)',
-			0.05,
+			0.005,
 			'rgb(103,169,207)',
-			0.1,
+			0.05,
 			'rgb(209,229,240)',
-			0.2,
+			0.1,
 			'rgb(253,219,199)',
 			0.4,
 			'rgb(239,138,98)',
@@ -721,15 +715,15 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			7,
-			['interpolate', ['linear'], ['get', 'count'], 1, 1, 6, 4],
+			['interpolate', ['linear'], ['get', '"rel_mag"'], 1, 1, 6, 4],
 			16,
-			['interpolate', ['linear'], ['get', 'count'], 1, 5, 6, 50]
+			['interpolate', ['linear'], ['get', '"rel_mag"'], 1, 5, 6, 50]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
 		'interpolate',
 		['linear'],
-		['get', 'count'],
+		['get', '"rel_mag"'],
 		0.01,
 		'rgba(33,102,172,0)',
 		0.05,
@@ -817,7 +811,8 @@ function createGeoJSON(players) {
 				"type": "Feature",
 				"properties": {
 					"country": key,
-					"count": countryCounts[key]/ maxCount
+					"rel_mag": countryCounts[key]/ maxCount,
+					"count": countryCounts[key]
 				}
  			}
  			locationJSON["features"].push(countryJSON);
