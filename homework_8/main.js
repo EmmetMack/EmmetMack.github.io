@@ -761,7 +761,7 @@ function createPlayerForLeague(teams) {
 		20,
 		'yellow',
 		40,
-		'red-orange',
+		'pink',
 		maxCount,
 		'red'
 		],
