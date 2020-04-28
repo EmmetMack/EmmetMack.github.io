@@ -631,14 +631,14 @@ function createPlayerForLeague(teams) {
 	var myGeoJSON = createGeoJSON(leaguePlayers);
 	console.log(myGeoJSON);
 	
-	var heatLayer = map.getLayer("soccer-heat");
+	var text = map.getLayer("country-count");
 	var circleLayer = map.getLayer("soccer-point");
 	var source = map.getSource("soccer");
 
-	if (typeof heatLayer === "undefined") {
+	if (typeof text === "undefined") {
 
 	} else {
-		map.removeLayer("soccer-heat");
+		map.removeLayer("country-count");
 	}
 
 	if (typeof circleLayer === "undefined") {
@@ -701,6 +701,17 @@ function createPlayerForLeague(teams) {
 		'circle-stroke-width': 1
 		
 		}});
+
+	 map.addLayer({
+        id: "country-count",
+        type: "symbol",
+        source: "soccer",
+        layout: {
+        "text-field": ['get', "country"],
+        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+        "text-size": 12
+        }
+      });
 
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
