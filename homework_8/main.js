@@ -631,6 +631,7 @@ function createPlayerForLeague(teams) {
 	var myGeoJSON = createGeoJSON(leaguePlayers);
 	console.log(myGeoJSON);
 	
+	map.removeSource(soccer);
 
 	map.addSource('soccer', {
 		'type': 'geojson',
@@ -711,9 +712,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			7,
-			['interpolate', ['linear'], ['get', '"rel_mag"'], 1, 1, 6, 4],
+			['interpolate', ['linear'], ['get', '"rel_mag"'], 0.001, 1, 6, 4],
 			16,
-			['interpolate', ['linear'], ['get', '"rel_mag"'], 1, 5, 6, 50]
+			['interpolate', ['linear'], ['get', '"rel_mag"'], 0.001, 5, 6, maxCount]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
