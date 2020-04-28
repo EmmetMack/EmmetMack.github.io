@@ -707,10 +707,13 @@ function createPlayerForLeague(teams) {
         type: "symbol",
         source: "soccer",
         layout: {
-        "text-field": ['get', "country"],
+        "text-field": ['get', "count"],
         "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
         "text-size": 12
-        }
+        },
+        paint: {
+		  "text-color": "white"
+		}
       }, 'soccer-point');
 
 	map.on('click', 'soccer-point', function(e) {
