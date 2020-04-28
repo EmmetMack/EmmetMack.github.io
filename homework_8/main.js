@@ -631,8 +631,31 @@ function createPlayerForLeague(teams) {
 	var myGeoJSON = createGeoJSON(leaguePlayers);
 	console.log(myGeoJSON);
 	
-	map.removeSource(soccer);
+	var heatLayer = map.getLayer("soccer-heat");
+	var circleLayer = map.getLayer("soccer-point");
+	var source = map.getSource("soccer");
 
+	if (typeof heatLayer === "undefined") {
+
+	} else {
+		map.removeLayer(heatLayer);
+	}
+
+	if (typeof circleLayer === "undefined") {
+
+	} else {
+		map.removeLayer(heatLayer);
+	}
+
+
+	if (typeof source === "undefined") {
+
+	} else {
+		map.removeSource(soccer);
+
+	}
+	
+	
 	map.addSource('soccer', {
 		'type': 'geojson',
 		'data': myGeoJSON,
