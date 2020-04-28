@@ -646,8 +646,8 @@ function createPlayerForLeague(teams) {
 			'paint': {
 				'heatmap-weight': {
 			      property: 'rel_mag',
-			      type: 'interval',
-			      stop: [0, maxCount]
+			      type: 'exponential',
+			      stops: [0, maxCount]
     			},
 				// Increase the heatmap color weight weight by zoom level
 				// heatmap-intensity is a multiplier on top of heatmap-weight
@@ -765,6 +765,7 @@ function createPlayerForLeague(teams) {
 
 
 var maxCount = -1;
+var total = 0;
 function createGeoJSON(players) {
 
 	console.log("createGeoJSON called");
@@ -803,6 +804,8 @@ function createGeoJSON(players) {
  			if (count > maxCount) {
  				maxCount = count;
  			}
+
+ 			total += count;
  		}
  	});
 
