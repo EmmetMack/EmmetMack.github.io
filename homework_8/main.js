@@ -638,20 +638,20 @@ function createPlayerForLeague(teams) {
 	if (typeof heatLayer === "undefined") {
 
 	} else {
-		map.removeLayer(heatLayer);
+		map.removeLayer("soccer-heat");
 	}
 
 	if (typeof circleLayer === "undefined") {
 
 	} else {
-		map.removeLayer(heatLayer);
+		map.removeLayer("soccer-points");
 	}
 
 
 	if (typeof source === "undefined") {
 
 	} else {
-		map.removeSource(soccer);
+		map.removeSource("soccer");
 
 	}
 	
@@ -668,6 +668,16 @@ function createPlayerForLeague(teams) {
 			'source': 'soccer',
 			'maxzoom': 9,
 			'paint': {
+
+				'heatmap-weight': [
+					'interpolate',
+					['linear'],
+					['get', 'mag'],
+					0,
+					0,
+					maxCount,
+					1
+					]
 				// Increase the heatmap color weight weight by zoom level
 				// heatmap-intensity is a multiplier on top of heatmap-weight
 				'heatmap-intensity': [
