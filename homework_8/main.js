@@ -742,9 +742,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			3,
-			['interpolate', ['linear'], ['get', "count"], 0, 1, 6, maxCount],
+			['interpolate', ['linear'], ['get', "count"], 0, 2, 5, 10],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 5, 6, maxCount],
+			['interpolate', ['linear'], ['get', "count"], 0, 1, 2, 4],
 			16, ['interpolate', ['linear'], ['get', 'count'], 0, 1, 2, 4]
 			],
 		// Color circle by earthquake magnitude
@@ -766,18 +766,8 @@ function createPlayerForLeague(teams) {
 		'red'
 		],
 		'circle-stroke-color': 'white',
-		'circle-stroke-width': 1,
-		// Transition from heatmap to circle layer by zoom level
-		'circle-opacity': [
-		'interpolate',
-		['linear'],
-		['zoom'],
-		7,
-		0,
-		8,
-		1
-		]
-		}
+		'circle-stroke-width': 1
+		
 		}
 	);
 
