@@ -661,73 +661,73 @@ function createPlayerForLeague(teams) {
 		'data': myGeoJSON,
 	});
 
-	map.addLayer({
+	// map.addLayer({
 
-			'id': 'soccer-heat',
-			'type': 'heatmap',
-			'source': 'soccer',
-			'maxzoom': 9,
-			'paint': {
+	// 		'id': 'soccer-heat',
+	// 		'type': 'heatmap',
+	// 		'source': 'soccer',
+	// 		'maxzoom': 9,
+	// 		'paint': {
 
-				'heatmap-weight': {
-					property: "count",
-					type: "exponential",
-					stops: [[1, 0],
-					[maxCount, 1]],
-				},
-				// Increase the heatmap color weight weight by zoom level
-				// heatmap-intensity is a multiplier on top of heatmap-weight
-				'heatmap-intensity': [
-				'interpolate',
-				['linear'],
-				['zoom'],
-				0,
-				1,
-				9,
-				3
-				],
-			// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-			// Begin color ramp at 0-stop with a 0-transparancy color
-			// to create a blur-like effect.
-			'heatmap-color': [
-			'interpolate',
-			['linear'],
-			['heatmap-density'],
-			0.001,
-			'rgba(33,102,172,0)',
-			0.005,
-			'rgb(103,169,207)',
-			0.05,
-			'rgb(209,229,240)',
-			0.1,
-			'rgb(253,219,199)',
-			0.4,
-			'rgb(239,138,98)',
-			1,
-			'rgb(178,24,43)'
-			],
-			// Adjust the heatmap radius by zoom level
-			'heatmap-radius': [
-			'interpolate',
-			['linear'],
-			['zoom'],
-			0,
-			2,
-			9,
-			20
-			],
-			// Transition from heatmap to circle layer by zoom level
-			'heatmap-opacity': [
-			'interpolate',
-			['linear'],
-			['zoom'],
-			7,
-			1,
-			9,
-			0
-			]
-		}
-	});
+	// 			'heatmap-weight': {
+	// 				property: "count",
+	// 				type: "exponential",
+	// 				stops: [[1, 0],
+	// 				[maxCount, 1]],
+	// 			},
+	// 			// Increase the heatmap color weight weight by zoom level
+	// 			// heatmap-intensity is a multiplier on top of heatmap-weight
+	// 			'heatmap-intensity': [
+	// 			'interpolate',
+	// 			['linear'],
+	// 			['zoom'],
+	// 			0,
+	// 			1,
+	// 			9,
+	// 			3
+	// 			],
+	// 		// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+	// 		// Begin color ramp at 0-stop with a 0-transparancy color
+	// 		// to create a blur-like effect.
+	// 		'heatmap-color': [
+	// 		'interpolate',
+	// 		['linear'],
+	// 		['heatmap-density'],
+	// 		0.001,
+	// 		'rgba(33,102,172,0)',
+	// 		0.005,
+	// 		'rgb(103,169,207)',
+	// 		0.05,
+	// 		'rgb(209,229,240)',
+	// 		0.1,
+	// 		'rgb(253,219,199)',
+	// 		0.4,
+	// 		'rgb(239,138,98)',
+	// 		1,
+	// 		'rgb(178,24,43)'
+	// 		],
+	// 		// Adjust the heatmap radius by zoom level
+	// 		'heatmap-radius': [
+	// 		'interpolate',
+	// 		['linear'],
+	// 		['zoom'],
+	// 		0,
+	// 		2,
+	// 		9,
+	// 		20
+	// 		],
+	// 		// Transition from heatmap to circle layer by zoom level
+	// 		'heatmap-opacity': [
+	// 		'interpolate',
+	// 		['linear'],
+	// 		['zoom'],
+	// 		7,
+	// 		1,
+	// 		9,
+	// 		0
+	// 		]
+	// 	}
+	// });
 
 	map.addLayer(
 	{
@@ -742,9 +742,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			7,
-			['interpolate', ['linear'], ['get', '"rel_mag"'], 0.001, 1, 6, 4],
+			['interpolate', ['linear'], ['get', "count"], 0, 1, 6, maxCount],
 			16,
-			['interpolate', ['linear'], ['get', '"rel_mag"'], 0.001, 5, 6, maxCount]
+			['interpolate', ['linear'], ['get', "count"], 0, 5, 6, maxCount]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
