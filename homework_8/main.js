@@ -8,7 +8,7 @@ import * as LaLiga from './modules/laliga-JSON.js'
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
 
 //Leaflet map stuff
-var mymap = L.map('mapid').setView([51.509865, -0.118092], 4);
+// var mymap = L.map('mapid').setView([51.509865, -0.118092], 4);
 
 // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
 //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -18,7 +18,8 @@ var mymap = L.map('mapid').setView([51.509865, -0.118092], 4);
 //     zoomOffset: -1,
 //     accessToken: mapboxToken
 // }).addTo(mymap);
-17
+
+//changed to mapbox only bc makes it easier to do the heatmap
 
 var map = new mapboxgl.Map({
 	container: 'mapid',
@@ -720,9 +721,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			7,
-			['interpolate', ['linear'], ['get', 'mag'], 1, 1, 6, 4],
+			['interpolate', ['linear'], ['get', 'count'], 1, 1, 6, 4],
 			16,
-			['interpolate', ['linear'], ['get', 'mag'], 1, 5, 6, 50]
+			['interpolate', ['linear'], ['get', 'count'], 1, 5, 6, 50]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
@@ -761,7 +762,7 @@ function createPlayerForLeague(teams) {
 }
 
 
-
+var maxCount = -1;
 function createGeoJSON(players) {
 
 	console.log("createGeoJSON called");
@@ -797,6 +798,10 @@ function createGeoJSON(players) {
 
  		if (count !== 0) {
  			countryCounts[place] = count;
+ 		}
+
+ 		if (count > maxCount) {
+ 			maxCount = count;
  		}
  	});
 
