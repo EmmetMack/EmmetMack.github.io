@@ -644,7 +644,7 @@ function createPlayerForLeague(teams) {
 	if (typeof circleLayer === "undefined") {
 
 	} else {
-		map.removeLayer("soccer-points");
+		map.removeLayer("soccer-point");
 	}
 
 
