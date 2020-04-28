@@ -671,7 +671,7 @@ function createPlayerForLeague(teams) {
 
 				'heatmap-weight': [
 					'interpolate',
-					['linear'],
+					['exponential'],
 					['get', 'rel_mag'],
 					0,
 					0,
