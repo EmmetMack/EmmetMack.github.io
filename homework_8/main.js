@@ -705,7 +705,7 @@ function createPlayerForLeague(teams) {
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
 	    .setLngLat(e.features[0].geometry.coordinates)
-	    .setHTML('<b>Country: ' + e.features[0].properites.country + '<b>Count:</b>' + e.features[0].properties.count)
+	    .setHTML('<b>Country:</b>' + e.features[0].properties.country + '<b>Count:</b>' + e.features[0].properties.count)
 	    .addTo(map);
 	});
 	
