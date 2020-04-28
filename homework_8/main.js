@@ -768,8 +768,7 @@ function createPlayerForLeague(teams) {
 		'circle-stroke-color': 'white',
 		'circle-stroke-width': 1
 		
-		}
-	);
+		}});
 
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
