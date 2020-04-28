@@ -704,7 +704,7 @@ function createPlayerForLeague(teams) {
 
 	map.addLayer(
 	{
-	'id': 'soocer-point',
+	'id': 'soccer-point',
 	'type': 'circle',
 	'source': 'soccer',
 	'minzoom': 7,
@@ -751,7 +751,14 @@ function createPlayerForLeague(teams) {
 		]
 		}
 		}
-);
+	);
+
+	map.on('click', 'soccer-point', function(e) {
+	  new mapboxgl.Popup()
+	    .setLngLat(e.features[0].geometry.coordinates)
+	    .setHTML('<b>Count:</b> ' + e.features[0].properties.count)
+	    .addTo(map);
+	});
 	
 }
 
