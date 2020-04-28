@@ -661,91 +661,23 @@ function createPlayerForLeague(teams) {
 		'data': myGeoJSON,
 	});
 
-	// map.addLayer({
-
-	// 		'id': 'soccer-heat',
-	// 		'type': 'heatmap',
-	// 		'source': 'soccer',
-	// 		'maxzoom': 9,
-	// 		'paint': {
-
-	// 			'heatmap-weight': {
-	// 				property: "count",
-	// 				type: "exponential",
-	// 				stops: [[1, 0],
-	// 				[maxCount, 1]],
-	// 			},
-	// 			// Increase the heatmap color weight weight by zoom level
-	// 			// heatmap-intensity is a multiplier on top of heatmap-weight
-	// 			'heatmap-intensity': [
-	// 			'interpolate',
-	// 			['linear'],
-	// 			['zoom'],
-	// 			0,
-	// 			1,
-	// 			9,
-	// 			3
-	// 			],
-	// 		// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-	// 		// Begin color ramp at 0-stop with a 0-transparancy color
-	// 		// to create a blur-like effect.
-	// 		'heatmap-color': [
-	// 		'interpolate',
-	// 		['linear'],
-	// 		['heatmap-density'],
-	// 		0.001,
-	// 		'rgba(33,102,172,0)',
-	// 		0.005,
-	// 		'rgb(103,169,207)',
-	// 		0.05,
-	// 		'rgb(209,229,240)',
-	// 		0.1,
-	// 		'rgb(253,219,199)',
-	// 		0.4,
-	// 		'rgb(239,138,98)',
-	// 		1,
-	// 		'rgb(178,24,43)'
-	// 		],
-	// 		// Adjust the heatmap radius by zoom level
-	// 		'heatmap-radius': [
-	// 		'interpolate',
-	// 		['linear'],
-	// 		['zoom'],
-	// 		0,
-	// 		2,
-	// 		9,
-	// 		20
-	// 		],
-	// 		// Transition from heatmap to circle layer by zoom level
-	// 		'heatmap-opacity': [
-	// 		'interpolate',
-	// 		['linear'],
-	// 		['zoom'],
-	// 		7,
-	// 		1,
-	// 		9,
-	// 		0
-	// 		]
-	// 	}
-	// });
-
 	map.addLayer(
 	{
 	'id': 'soccer-point',
 	'type': 'circle',
 	'source': 'soccer',
-	'minzoom': 3,
+	'minzoom': 2,
 	'paint': {
 	// Size circle radius by earthquake magnitude and zoom level
 		'circle-radius': [
 			'interpolate',
 			['linear'],
 			['zoom'],
-			3,
-			['interpolate', ['linear'], ['get', "count"], 0, 2, 5, 10],
+			2,
+			['interpolate', ['linear'], ['get', "count"], 0, 1, 3, 5, 7, 10, 15, 20],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 1, 2, 4],
-			16, ['interpolate', ['linear'], ['get', 'count'], 0, 1, 2, 4]
+			['interpolate', ['linear'], ['get', "count"], 0, 1, 3, 5, 7, 10, 15, 20],
+			16, ['interpolate', ['linear'], ['get', 'count'],0, 1, 3, 5, 7, 10, 15, 20]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
@@ -755,14 +687,14 @@ function createPlayerForLeague(teams) {
 		0,
 		'white',
 		1,
-		'green',
+		'blue',
 		10,
-		'orange',
+		'green',
 		20,
 		'yellow',
-		40,
-		'pink',
-		maxCount,
+		35,
+		'orange',
+		100,
 		'red'
 		],
 		'circle-stroke-color': 'white',
