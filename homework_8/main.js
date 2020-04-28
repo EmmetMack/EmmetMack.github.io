@@ -647,7 +647,9 @@ function createPlayerForLeague(teams) {
 				'heatmap-weight': {
 			      property: 'rel_mag',
 			      type: 'exponential',
-			      stops: [0, maxCount]
+			      stops: [	[0.0001, 0],
+			      			[maxCount, 1]
+			      		]
     			},
 				// Increase the heatmap color weight weight by zoom level
 				// heatmap-intensity is a multiplier on top of heatmap-weight
