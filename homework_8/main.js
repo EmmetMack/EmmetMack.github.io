@@ -818,7 +818,7 @@ function createGeoJSON(players) {
 				"type": "Feature",
 				"properties": {
 					"country": key,
-					"count": countryCounts[key]
+					"count": countryCounts[key]/ maxCount
 				}
  			}
  			locationJSON["features"].push(countryJSON);
