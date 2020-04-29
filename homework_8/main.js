@@ -506,34 +506,6 @@ function addTeams(teams) {
 	
 }
 
-// function getPlayers() {
-
-// 	selectElement = document.querySelector('#team-sel'); 
-
-// 	console.log(selectElement);
-                      
-//     output = selectElement.options[selectElement.selectedIndex].value;
-
-//     console.log(output);
-
-//     fetch("https://api-football-v1.p.rapidapi.com/v2/players/team/" + output + "/2019-2020", {
-// 		"method": "GET",
-// 		"headers": {
-// 			"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-// 			"x-rapidapi-key": "51276867f1mshd9408b183cf575ap1f800djsn1decb01b15c8"
-// 		}
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		console.log(data);
-// 		for (var i = 0; i < data.length; i++) {
-// 			console.log(data['api']['player_name']);
-// 		}
-// 	})
-// 	.catch(err => {
-// 		console.log(err);
-// 	});
-// }
 
 // found at this link https://www.quora.com/How-do-I-make-a-JSON-file-with-JavaScript, just used to download JSON so i wouldn't run into API rate limits
 var saveData = (function () {
@@ -629,19 +601,25 @@ function createPlayerForLeague(teams) {
 	// console.log(leaguePlayers);
 
 	var selectElement = document.getElementById('team-sel'); 
-    if (selectElement.value !== "Pick team here") {
-    console.log("In team select if")
-       var output = selectElement.options[selectElement.selectedIndex].value; 
-       console.log("output.value: " + output.value);
-       var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
-       		return el.team === output;
-       });
+	var teamSelected = false;
+	selectElement.addEventListener('change', function() {  
 
+		if (selectElement.value !== "Pick team here") {
+		    console.log("In team select if")
+		   	var output = selectElement.options[selectElement.selectedIndex].value; 
+		    console.log("output.value: " + output.value);
+		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
+		    	return el.team === output;
+       		});
        console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
+       teamSelected = true;
        var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
-    } else {
+   }});
+   
+   if (!teamSelected) {
 		var myGeoJSON = createGeoJSON(leaguePlayers);
-    }
+   }
+    
 
 
 	console.log(myGeoJSON);
