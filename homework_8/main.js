@@ -674,10 +674,10 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			1,
-			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 30, 35],
+			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 35],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 30, 35],
-			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 3, 5, 7, 10, 15, 25]
+			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 35],
+			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 4, 5, 7, 10, 15, 25]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
@@ -685,17 +685,17 @@ function createPlayerForLeague(teams) {
 		['linear'],
 		['get', 'count'],
 		0,
-		'white',
+		'#FFFFFF',
 		1,
-		'blue',
+		'#D8EBCC',
 		10,
-		'green',
+		'#B1D799',
 		20,
-		'yellow',
+		'#8BC467',
 		35,
-		'orange',
+		'#64B034',
 		100,
-		'red'
+		'#3E9DO2'
 		],
 		'circle-stroke-color': 'white',
 		'circle-stroke-width': 1
@@ -756,7 +756,7 @@ function createGeoJSON(players) {
 	// 				            ],
 	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
 	// 				    }
- //        	
+ 	total = 0;
  	var countryCounts = {};
  	 countries.forEach(function(place) {
  		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
@@ -772,7 +772,7 @@ function createGeoJSON(players) {
  	});
  	console.log("total: " + total);
  	console.log(countryCounts);
- 	
+ 	var countryProbs = {};
  	Object.keys(countryCounts).forEach(function(key) {
   			var countryJSON = {
 	 			"geometry": {
@@ -788,6 +788,7 @@ function createGeoJSON(players) {
 					"count": countryCounts[key]
 				}
  			}
+ 			countryProbs[key] = countryCounts[key] / total; //probabilitiy of a player being from that country for that league
  			locationJSON["features"].push(countryJSON);
  		
  	});
