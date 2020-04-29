@@ -793,7 +793,7 @@ function createGeoJSON(players) {
  		
  	});
 
- 	console.log("countryProbs: " + countryProbs);
+ 	console.log("countryProbs: " + JSON.stringify(countryProbs));
 	// for(var i = 0; i < players.length; i ++) {
 
 	// 	var player = players[i];
