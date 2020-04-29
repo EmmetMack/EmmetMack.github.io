@@ -674,9 +674,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			1,
-			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 35],
+			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 30, 35],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 35],
+			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 25, 30, 35],
 			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 3, 5, 7, 10, 15, 25]
 			],
 		// Color circle by earthquake magnitude
