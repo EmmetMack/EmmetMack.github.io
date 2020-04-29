@@ -770,7 +770,7 @@ function createGeoJSON(players) {
  			total += count;
  		}
  	});
-
+ 	console.log("total: " + total);
  	console.log(countryCounts);
  	
  	Object.keys(countryCounts).forEach(function(key) {
