@@ -674,9 +674,9 @@ function createPlayerForLeague(teams) {
 			['linear'],
 			['zoom'],
 			1,
-			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 35],
+			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 30],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 35],
+			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 30],
 			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 4, 5, 7, 10, 15, 25]
 			],
 		// Color circle by earthquake magnitude
@@ -695,7 +695,7 @@ function createPlayerForLeague(teams) {
 		35,
 		'#64B034',
 		100,
-		'#3E9DO2'
+		'#3E9D02'
 		],
 		'circle-stroke-color': 'white',
 		'circle-stroke-width': 1
@@ -770,7 +770,7 @@ function createGeoJSON(players) {
  			total += count;
  		}
  	});
- 	console.log("total: " + total);
+ 	
  	console.log(countryCounts);
  	var countryProbs = {};
  	Object.keys(countryCounts).forEach(function(key) {
@@ -793,7 +793,7 @@ function createGeoJSON(players) {
  		
  	});
 
-
+ 	console.log("countryProbs: " + countryProbs);
 	// for(var i = 0; i < players.length; i ++) {
 
 	// 	var player = players[i];
