@@ -630,10 +630,14 @@ function createPlayerForLeague(teams) {
 
 	var selectElement = document.getElementById('team-sel'); 
     if (selectElement.value !== "Pick team here") {
+    console.log("In team select if")
        var output = selectElement.options[selectElement.selectedIndex].value; 
+       console.log("output.value: " + output.value);
        var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
        		return el.team === output;
        });
+
+       console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
        var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
     } else {
 		var myGeoJSON = createGeoJSON(leaguePlayers);
