@@ -500,7 +500,7 @@ function addTeams(teams) {
 	for (var i = 0; i < teams.length; i ++) {
 		var option = document.createElement("option");
 		option.text = teams[i]["name"];
-		option.value = teams[i]["team_id"];
+		option.value = teams[i]["name"];
 		dropdown.add(option);
 	}
 	
@@ -628,7 +628,17 @@ function createPlayerForLeague(teams) {
 
 	// console.log(leaguePlayers);
 
-	var myGeoJSON = createGeoJSON(leaguePlayers);
+	var selectElement = document.getElementById('team-sel'); 
+    if (selectElement.value !== "Pick Team Here") {
+       var output = selectElement.options[selectElement.selectedIndex].value; 
+       var myGeoJSON = leaguePlayers.filter(function(el) {
+       		return el.team === output;
+       });
+    } else {
+		var myGeoJSON = createGeoJSON(leaguePlayers);
+    }
+
+
 	console.log(myGeoJSON);
 	
 	var text = map.getLayer("country-count");
