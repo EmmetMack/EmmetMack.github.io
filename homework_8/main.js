@@ -695,18 +695,18 @@ function createPlayerForLeague(teams) {
 	'id': 'soccer-point',
 	'type': 'circle',
 	'source': 'soccer',
-	'minzoom': 1,
+	'minzoom': 0,
 	'paint': {
 	// Size circle radius by earthquake magnitude and zoom level
 		'circle-radius': [
 			'interpolate',
 			['linear'],
 			['zoom'],
-			1,
-			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 30],
+			0,
+			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 30],
 			7,
-			['interpolate', ['linear'], ['get', "count"], 0, 5,7, 10, 15, 20, 25, 30],
-			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 4, 5, 7, 10, 15, 25]
+			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 30],
+			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 5, 7, 10, 25]
 			],
 		// Color circle by earthquake magnitude
 		'circle-color': [
