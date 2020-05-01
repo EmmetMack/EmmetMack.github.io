@@ -594,22 +594,14 @@ var saveData = (function () {
 // 	}
 // }
 
+
+var teamSelected = false;
 //code to add circles to map for a specific team
 var select = document.getElementById('team-sel'); // event listner for when a team is selected
 
 select.addEventListener('change', function() {
-	
-		if (select.value !== "Pick team here") {
-		    console.log("In team select if")
-		   	var output = select.options[select.selectedIndex].value; 
-		    console.log("output.value: " + output.value);
-		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
-		    	return el.team === output;
-       		});
-       console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
-       
-       createPlayerForLeague(filteredLeaguePlayers);
- }}); 
+	teamSelected = true;
+ }); 
 
 function createPlayerForLeague(teams) {
 
@@ -650,14 +642,22 @@ function createPlayerForLeague(teams) {
 
 	// console.log(leaguePlayers);
 
-
-   
-  
-	var myGeoJSON = createGeoJSON(leaguePlayers);
-   
-    
-
-
+	if (teamSelected && select.value !== "Pick team here") {
+		    console.log("In team select if")
+		   	var output = select.options[select.selectedIndex].value; 
+		    console.log("output.value: " + output.value);
+		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
+		    	return el.team === output;
+       		});
+    	console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
+       
+    	createPlayerForLeague(filteredLeaguePlayers);
+    	var myGeoJSON = createGeoJSON(leaguePlayers);
+    	teamSelected = false;
+    } else {
+    	var myGeoJSON = createGeoJSON(leaguePlayers);
+    }
+ 
 	console.log(myGeoJSON);
 	
 	var text = map.getLayer("country-count");
