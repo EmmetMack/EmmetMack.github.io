@@ -128,7 +128,7 @@ const country_lat = {
 	"Japan" : 36.204824,
 	"Kenya" : -0.023559,
 	"Kyrgyzstan" : 41.20438,
-	"South Korea" : 35.907757,
+	"Republic of Korea" : 35.907757,
 	"Kazakhstan" : 48.019573,
 	"Lithuania": 55.169438,
 	"Luxembourg": 49.815273,
@@ -266,7 +266,7 @@ const country_lng = {
 	"Japan" : 138.252924,
 	"Kenya" : 37.906193	,
 	"Kyrgyzstan" : 74.766098,
-	"South Korea" : 127.766922,
+	"Republic of Korea" : 127.766922,
 	"Kazakhstan" : 66.923684,
 	"Lithuania": 23.881275,
 	"Luxembourg": 6.129583,
@@ -405,7 +405,7 @@ const countries = [
 	"Japan" ,
 	"Kenya",
 	"Kyrgyzstan",
-	"South Korea",
+	"Republic of Korea",
 	"Kazakhstan",
 	"Lithuania",
 	"Luxembourg",
@@ -597,9 +597,9 @@ var saveData = (function () {
 
 var teamSelected = false;
 //code to add circles to map for a specific team
-var select = document.getElementById('team-sel'); // event listner for when a team is selected
+var teamSelect = document.getElementById('team-sel'); // event listner for when a team is selected
 
-select.addEventListener('change', function() {
+teamSelect.addEventListener('change', function() {
 	teamSelected = true;
  }); 
 
@@ -642,9 +642,9 @@ function createPlayerForLeague(teams) {
 
 	// console.log(leaguePlayers);
 
-	if (typeof (select) !== "undefined" && select.value !== "Pick team here") {
+	if (typeof(teamSelect) !== "undefined" && teamSelect.value !== "Pick team here") {
 		    console.log("In team select if")
-		   	var output = select.options[select.selectedIndex].value; 
+		   	var output = teamSelect.options[teamSelect.selectedIndex].value; 
 		    console.log("output.value: " + output.value);
 		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
 		    	return el.team === output;
