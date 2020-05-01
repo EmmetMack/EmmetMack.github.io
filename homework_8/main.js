@@ -507,6 +507,7 @@ function getTeams() {
 		.then(response => response.json())
 		.then(data => {
 			teams = data['api']['teams'];
+			teamsGlobal = teams; //global array of teams that changes when a new team was selected
 			addTeams(teams);
 			createPlayerForLeague(teams);
 		})
@@ -517,6 +518,7 @@ function getTeams() {
     	
 
 }
+var teamsGlobal;
 
 // document.getElementById('team-sel').addEventListener('change', getPlayers());  event listner for getting the players from a team
 
@@ -592,6 +594,23 @@ var saveData = (function () {
 // 	}
 // }
 
+//code to add circles to map for a specific team
+var select = document.getElementById('team-sel'); // event listner for when a team is selected
+
+select.addEventListener('change', function() {
+	
+		if (selectElement.value !== "Pick team here") {
+		    console.log("In team select if")
+		   	var output = selectElement.options[selectElement.selectedIndex].value; 
+		    console.log("output.value: " + output.value);
+		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
+		    	return el.team === output;
+       		});
+       console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
+       
+       createPlayerForLeague(filteredLeaguePlayers);
+ }}); 
+
 function createPlayerForLeague(teams) {
 
 	var leaguePlayers = [];
@@ -631,25 +650,11 @@ function createPlayerForLeague(teams) {
 
 	// console.log(leaguePlayers);
 
-	var selectElement = document.getElementById('team-sel'); 
-	var teamSelected = false;
-	selectElement.addEventListener('change', function() {  
 
-		if (selectElement.value !== "Pick team here") {
-		    console.log("In team select if")
-		   	var output = selectElement.options[selectElement.selectedIndex].value; 
-		    console.log("output.value: " + output.value);
-		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
-		    	return el.team === output;
-       		});
-       console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
-       teamSelected = true;
-       var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
-   }});
    
-   if (!teamSelected) {
-		var myGeoJSON = createGeoJSON(leaguePlayers);
-   }
+  
+	var myGeoJSON = createGeoJSON(leaguePlayers);
+   
     
 
 
