@@ -599,9 +599,9 @@ var select = document.getElementById('team-sel'); // event listner for when a te
 
 select.addEventListener('change', function() {
 	
-		if (selectElement.value !== "Pick team here") {
+		if (select.value !== "Pick team here") {
 		    console.log("In team select if")
-		   	var output = selectElement.options[selectElement.selectedIndex].value; 
+		   	var output = select.options[select.selectedIndex].value; 
 		    console.log("output.value: " + output.value);
 		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
 		    	return el.team === output;
