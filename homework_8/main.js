@@ -651,9 +651,7 @@ function createPlayerForLeague(teams) {
 		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
 		    	return el.team === output;
        		});
-    	console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
-       
-    	createPlayerForLeague(filteredLeaguePlayers);
+    	console.log("filteredLeaguePlayers: " + JSON.stringify(filteredLeaguePlayers));
     	var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
     	teamSelected = false;
     } else {
