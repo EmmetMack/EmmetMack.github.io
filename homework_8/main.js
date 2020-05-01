@@ -594,7 +594,7 @@ var saveData = (function () {
 // 	}
 // }
 
-var countryCounts = {};
+var countryProbs = {};
 var teamSelected = false;
 //code to add circles to map for a specific team
 var teamSelect = document.getElementById("team-sel"); // event listner for when a team is selected
