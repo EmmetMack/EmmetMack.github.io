@@ -597,10 +597,12 @@ var saveData = (function () {
 
 var teamSelected = false;
 //code to add circles to map for a specific team
-var teamSelect = document.getElementById('team-sel'); // event listner for when a team is selected
+var teamSelect = document.getElementById("team-sel"); // event listner for when a team is selected
 
 teamSelect.addEventListener('change', function() {
+	console.log("Even listener called");
 	teamSelected = true;
+	createPlayerForLeague(teamsGlobal);
  }); 
 
 function createPlayerForLeague(teams) {
