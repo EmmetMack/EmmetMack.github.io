@@ -751,12 +751,13 @@ function createPlayerForLeague(teams) {
 	    .setHTML('<b>Country: </b>' + " " + e.features[0].properties.country + '<b> Count: </b>' + " " + e.features[0].properties.count)
 	    .addTo(map);
 	});
-	console.log("countryProbs keys" + Object.keys(countryProbs));
 	
+	console.log("countryProbs keys: " + Object.keys(countryProbs));
+
 	var ctx = document.getElementById('myChart').getContext('2d');
 
 	var myChart = new Chart(ctx, {
-    type: 'horizontal-bar',
+    type: 'horizontalBar',
     data: {
         labels: Object.keys(countryProbs),
         datasets: [{
