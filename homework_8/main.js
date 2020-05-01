@@ -642,7 +642,7 @@ function createPlayerForLeague(teams) {
 
 	// console.log(leaguePlayers);
 
-	if (teamSelected && select.value !== "Pick team here") {
+	if (typeof (select) !== "undefined" && select.value !== "Pick team here") {
 		    console.log("In team select if")
 		   	var output = select.options[select.selectedIndex].value; 
 		    console.log("output.value: " + output.value);
@@ -652,7 +652,7 @@ function createPlayerForLeague(teams) {
     	console.log("filteredLeaguePlayers: " + filteredLeaguePlayers);
        
     	createPlayerForLeague(filteredLeaguePlayers);
-    	var myGeoJSON = createGeoJSON(leaguePlayers);
+    	var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
     	teamSelected = false;
     } else {
     	var myGeoJSON = createGeoJSON(leaguePlayers);
