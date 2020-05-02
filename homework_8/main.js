@@ -752,10 +752,12 @@ function createPlayerForLeague(teams) {
 	    .addTo(map);
 	});
 	
+	console.log(countryProbs);
 	console.log("countryProbs keys: " + Object.keys(countryProbs));
 
 	var ctx = document.getElementById('myChart').getContext('2d');
 
+	
 	var myChart = new Chart(ctx, {
     type: 'horizontalBar',
     data: {
