@@ -759,11 +759,6 @@ function createPlayerForLeague(teams) {
 	if (typeof myChart !== "undefined") {
 		myChart.destroy();
 	}
-	var randomColorGenerator = function () { 
-
-    	return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
-	};
-
 	var ctx = document.getElementById('myChart').getContext('2d');
 
 	
@@ -774,7 +769,7 @@ function createPlayerForLeague(teams) {
         datasets: [{
             label: 'Probability Player is from Country',
             data: Object.values(countryProbs),
-            fillColor: randomColorGenerator()
+         	backgroundColor: "#3E9D02"
         }]
     }});
 	
@@ -842,7 +837,7 @@ function createGeoJSON(players) {
 					"count": countryCounts[key]
 				}
  			}
- 			countryProbs[key] = countryCounts[key] / total; //probabilitiy of a player being from that country for that league
+ 			countryProbs[key] = Number(countryCounts[key] / total).fixed(4); //probabilitiy of a player being from that country for that league
  			locationJSON["features"].push(countryJSON);
  		
  	});
