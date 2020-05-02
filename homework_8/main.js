@@ -837,7 +837,7 @@ function createGeoJSON(players) {
 					"count": countryCounts[key]
 				}
  			}
- 			countryProbs[key] = Number(countryCounts[key] / total).fixed(4); //probabilitiy of a player being from that country for that league
+ 			countryProbs[key] = Number(countryCounts[key] / total).toFixed(4); //probabilitiy of a player being from that country for that league
  			locationJSON["features"].push(countryJSON);
  		
  	});
