@@ -756,7 +756,7 @@ function createPlayerForLeague(teams) {
 	console.log("countryProbs keys: " + Object.keys(countryProbs));
 
 
-	if (typeof myChart !== "undefined") {
+	if (typeof(myChart) !== "undefined") {
 		myChart.destroy();
 	}
 	var ctx = document.getElementById('myChart').getContext('2d');
@@ -820,7 +820,7 @@ function createGeoJSON(players) {
  			total += count;
  		}
  	});
- 	
+ 	countryProbs = {};
  	console.log(countryCounts);
  	Object.keys(countryCounts).forEach(function(key) {
   			var countryJSON = {
