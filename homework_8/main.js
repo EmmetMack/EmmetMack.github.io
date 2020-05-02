@@ -751,7 +751,7 @@ function createPlayerForLeague(teams) {
 	    .setHTML('<b>Country: </b>' + " " + e.features[0].properties.country + '<b> Count: </b>' + " " + e.features[0].properties.count)
 	    .addTo(map);
 	});
-	
+
 	console.log(countryProbs);
 	console.log("countryProbs keys: " + Object.keys(countryProbs));
 
@@ -787,7 +787,7 @@ function createPlayerForLeague(teams) {
 	
 }
 
-
+var countryProbs = {};
 var maxCount = -1;
 var total = 0;
 function createGeoJSON(players) {
@@ -834,7 +834,6 @@ function createGeoJSON(players) {
  	});
  	
  	console.log(countryCounts);
- 	var countryProbs = {};
  	Object.keys(countryCounts).forEach(function(key) {
   			var countryJSON = {
 	 			"geometry": {
@@ -855,7 +854,6 @@ function createGeoJSON(players) {
  		
  	});
 
- 	console.log("countryProbs: " + JSON.stringify(countryProbs));
 	// for(var i = 0; i < players.length; i ++) {
 
 	// 	var player = players[i];
