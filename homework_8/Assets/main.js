@@ -7,18 +7,6 @@ import * as LaLiga from './modules/laliga-JSON.js'
 //mapbox library api access token
 const mapboxToken = "pk.eyJ1IjoiZW1hY2siLCJhIjoiY2s5N2JrNHduMHRlOTNwbGNraHEwaWd3MyJ9.VvKNrlGdjwUi6dUOaWDx8A"
 
-//Leaflet map stuff
-// var mymap = L.map('mapid').setView([51.509865, -0.118092], 4);
-
-// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxToken, {
-//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//     maxZoom: 17,
-//     id: 'mapbox/light-v10',
-//     tileSize: 516,
-//     zoomOffset: -1,
-//     accessToken: mapboxToken
-// }).addTo(mymap);
-
 //changed to mapbox only bc makes it easier to do the heatmap
 
 var map = new mapboxgl.Map({
@@ -29,11 +17,7 @@ var map = new mapboxgl.Map({
 	accessToken: mapboxToken
 });
 
-
-// Add a geojson point source.
-// Heatmap layers also work with a vector tile source.
-
-//country names to codes for geodecoding 
+//country names to lat and longitude because geocoding apis were rate limited
 const country_lat = {
 	"Andorra": 42.546245,
 	"United Arab Emirates": 23.424076,
@@ -311,6 +295,7 @@ const country_lng = {
 	"Zimbabwe": 29.154857
 }
 
+//list of countries that is looped through when creating the player counts
 const countries = [
 	"Andorra",
 	"United Arab Emirates",
@@ -518,7 +503,7 @@ function getTeams() {
     	
 
 }
-var teamsGlobal;
+var teamsGlobal; //create global variable
 
 // document.getElementById('team-sel').addEventListener('change', getPlayers());  event listner for getting the players from a team
 
@@ -556,7 +541,8 @@ var saveData = (function () {
     };
 }());
 
-//using this function create player JSON per team in a league, then once JSON is loaded will create player information 
+//using this function create player JSON per team in a league, then once JSON is loaded will create player information
+//this created the player json for each league and then I saved it as a module 
 // function createLeagueStats(teams) {
 // 	
 
@@ -594,17 +580,14 @@ var saveData = (function () {
 // 	}
 // }
 
-var countryProbs = {};
-var teamSelected = false;
-//code to add circles to map for a specific team
-var teamSelect = document.getElementById("team-sel"); // event listner for when a team is selected
+var teamSelect = document.getElementById("team-sel"); // event listener for when a team is selected
 
 teamSelect.addEventListener('change', function() {
 	console.log("Even listener called");
-	teamSelected = true;
-	createPlayerForLeague(teamsGlobal);
+	createPlayerForLeague(teamsGlobal); //create player for league for the teams (when )
  }); 
 
+//function that creates the player objects for a league, then calls function for GeoJSON then updates map and creates a graph
 function createPlayerForLeague(teams) {
 
 	var leaguePlayers = [];
@@ -632,9 +615,10 @@ function createPlayerForLeague(teams) {
 		var data = JSON.parse(eval(nameJSON));
 		var players = data;
 		
+		//create Player object for each player in array
 		players.forEach(function(player) {
 			var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], country_lat[player["birth_country"]], country_lng[player["birth_country"]]);
-			var found = leaguePlayers.some(el => (el.name === playerObj.name && el.team === playerObj.team));
+			var found = leaguePlayers.some(el => (el.name === playerObj.name && el.team === playerObj.team)); //used to prevent duplicates 
 			if (!found) {
 				leaguePlayers.push(playerObj);				
 			}
@@ -642,24 +626,23 @@ function createPlayerForLeague(teams) {
 		});
 	}
 
-	// console.log(leaguePlayers);
+	//check if a specifc team from the league is selected, otherwise, create geoJSON for all players in league
 
 	if (typeof(teamSelect) !== "undefined" && teamSelect.value !== "Pick team here") {
-		    console.log("In team select if")
+		    // console.log("In team select if")
 		   	var output = teamSelect.options[teamSelect.selectedIndex].value; 
-		    console.log("output.value: " + output.value);
+		    // console.log("output.value: " + output.value);
 		    var filteredLeaguePlayers = leaguePlayers.filter(function(el) {
 		    	return el.team === output;
        		});
-    	console.log("filteredLeaguePlayers: " + JSON.stringify(filteredLeaguePlayers));
+    	// console.log("filteredLeaguePlayers: " + JSON.stringify(filteredLeaguePlayers));
     	var myGeoJSON = createGeoJSON(filteredLeaguePlayers);
-    	teamSelected = false;
     } else {
     	var myGeoJSON = createGeoJSON(leaguePlayers);
     }
  
-	console.log(myGeoJSON);
-	
+
+	//check if map layers exist and if they do remove them
 	var text = map.getLayer("country-count");
 	var circleLayer = map.getLayer("soccer-point");
 	var source = map.getSource("soccer");
@@ -676,7 +659,7 @@ function createPlayerForLeague(teams) {
 		map.removeLayer("soccer-point");
 	}
 
-
+	//check if source exists, if so, then remove it
 	if (typeof source === "undefined") {
 
 	} else {
@@ -684,12 +667,13 @@ function createPlayerForLeague(teams) {
 
 	}
 	
-	
+	//add geoJSON source that was created above
 	map.addSource('soccer', {
 		'type': 'geojson',
 		'data': myGeoJSON,
 	});
 
+	//add circles to the map
 	map.addLayer(
 	{
 	'id': 'soccer-point',
@@ -697,7 +681,6 @@ function createPlayerForLeague(teams) {
 	'source': 'soccer',
 	'minzoom': 0,
 	'paint': {
-	// Size circle radius by earthquake magnitude and zoom level
 		'circle-radius': [
 			'interpolate',
 			['linear'],
@@ -708,7 +691,6 @@ function createPlayerForLeague(teams) {
 			['interpolate', ['linear'], ['get', "count"], 0, 5, 10, 15, 20, 30],
 			16, ['interpolate', ['linear'], ['get', 'count'],0, 3, 5, 7, 10, 25]
 			],
-		// Color circle by earthquake magnitude
 		'circle-color': [
 		'interpolate',
 		['linear'],
@@ -731,6 +713,7 @@ function createPlayerForLeague(teams) {
 		
 		}});
 
+	//add counts after the circles
 	 map.addLayer({
         id: "country-count",
         type: "symbol",
@@ -745,6 +728,7 @@ function createPlayerForLeague(teams) {
 		}
       });
 
+	//function that pops out information when a point is clicked
 	map.on('click', 'soccer-point', function(e) {
 	  new mapboxgl.Popup()
 	    .setLngLat(e.features[0].geometry.coordinates)
@@ -752,10 +736,7 @@ function createPlayerForLeague(teams) {
 	    .addTo(map);
 	});
 
-	console.log(countryProbs);
-	console.log("countryProbs keys: " + Object.keys(countryProbs));
-
-
+	//creates graph that shows the probability of a player being from that country for that league
 	if (typeof(myChart) !== "undefined") {
 		myChart.destroy();
 	}
@@ -775,9 +756,9 @@ function createPlayerForLeague(teams) {
 	
 }
 
-var countryProbs = {};
-var maxCount = -1;
-var total = 0;
+var countryProbs = {}; //probability that a player is from the country for the league
+var maxCount = -1; //find the max value for each country
+var total = 0; //sums the amount of players to get the probability 
 function createGeoJSON(players) {
 
 	console.log("createGeoJSON called");
@@ -807,22 +788,21 @@ function createGeoJSON(players) {
 	// 				           "address": "1411 Southern Avenue, Temple Hills, MD 20748"
 	// 				    }
  	total = 0;
- 	var countryCounts = {};
- 	 countries.forEach(function(place) {
- 		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0);
+ 	var countryCounts = {}; //count for each country 
+ 	 countries.forEach(function(place) { //loop through the constant country area and use reduce to get the count
+ 		var count = players.reduce((acc, cur) => cur.country === place ? ++acc : acc, 0); 
 
- 		if (count !== 0) {
+ 		if (count !== 0) { //if count isn't 0 add country to dictinoary and then check max count and update if necessary
  			countryCounts[place] = count;
  			if (count > maxCount) {
  				maxCount = count;
  			}
 
- 			total += count;
+ 			total += count; //increment the total value
  		}
  	});
- 	countryProbs = {};
- 	console.log(countryCounts);
- 	Object.keys(countryCounts).forEach(function(key) {
+ 	countryProbs = {}; //reset country probs each time
+ 	Object.keys(countryCounts).forEach(function(key) { //for each key, create GeoJSON per format above
   			var countryJSON = {
 	 			"geometry": {
 
@@ -833,7 +813,7 @@ function createGeoJSON(players) {
 				"type": "Feature",
 				"properties": {
 					"country": key,
-					"rel_mag": countryCounts[key]/ maxCount,
+					"rel_mag": countryCounts[key]/ maxCount, //relative maginitude compared to maxvalue, thought might be useful but don't really use
 					"count": countryCounts[key]
 				}
  			}
@@ -842,53 +822,11 @@ function createGeoJSON(players) {
  		
  	});
 
-	// for(var i = 0; i < players.length; i ++) {
-
-	// 	var player = players[i];
-
-	// 	if (locationJSON["features"].length == 0) {
-	// 		console.log("features length is zero");
-	// 		var newPlayerJSON =  createPlayerJSON(player);
-	// 		locationJSON["features"].push(newPlayerJSON);	
-	// 	} else {
-
-	// 			locationJSON["features"].forEach(function(feature) {
-	// 				console.log("Feature: " + feature);
-	// 				if (feature["properties"]["place"] == player.country) {
-	// 					console.log("found duplicate");
-	// 					feature["properties"]["count"] += 1;
-	// 					feature["properties"]["names"].push(player.name);
-	// 					feature["properties"]["teams"].push(player.team);
-	// 				} else {
-	// 					var newPlayerJSON = createPlayerJSON(player);
-	// 					locationJSON["features"].push(newPlayerJSON);	
-	// 				}
-
-	// 		});
-	// 		// for(const [item, value] in JSON.parse(locationJSON["features"])){
-	// 		// 	console.log("item: " + item);
-	// 		// 	console.log("value: " + value);
-	// 		// 	if (value["properties"]["place"] == player.country) {
-	// 		// 		console.log("found duplicate");
-	// 		// 		value["properties"]["count"] += 1;
-	// 		// 		value["properties"]["names"].push(player.name);
-	// 		// 		value["properties"]["teams"].push(player.team);
-
-	// 		// 	} else {
-	// 		// 		var newPlayerJSON = createPlayerJSON(player);
-	// 		// 		locationJSON["features"].push(newPlayerJSON);	
-	// 		// 	}
-	// 		// }
-		
-	// 	}
-		
-	// }
-
 	return locationJSON;
 	
 }
 
-
+//player object that just lists location information, name, team, etc
 function Player(name, city, country, team, lat, lng) {
 		this.name = name;
 		this.city = city;
