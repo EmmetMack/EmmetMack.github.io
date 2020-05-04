@@ -737,15 +737,15 @@ function createPlayerForLeague(teams) {
 	});
 
 	//creates graph that shows the probability of a player being from that country for that league
-	if (typeof(myChart) !== "undefined") {
-		removeData(myChart);
-		addData(myChart,Object.keys(countryProbs), Object.values(countryProbs));
-	} else {
-		var ctx = document.getElementById('myChart').getContext('2d');
+	if (window.myChart != undefined) {
+		myChart.destroy();
+	}
+	
+	var ctx = document.getElementById('myChart').getContext('2d');
 
 	
-		var myChart = new Chart(ctx, {
-	    type: 'horizontalBar',
+	var myChart = new Chart(ctx, {
+	   	type: 'horizontalBar',
 	    data: {
 	        labels: Object.keys(countryProbs),
 	        datasets: [{
@@ -753,27 +753,11 @@ function createPlayerForLeague(teams) {
 	            data: Object.values(countryProbs),
 	         	backgroundColor: "#3E9D02"
 	        }]
-	    }});
-	}
+	}});
+	
 	
 }
 
-//functions from https://www.chartjs.org/docs/latest/developers/updates.html
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
 
 var countryProbs = {}; //probability that a player is from the country for the league
 var maxCount = -1; //find the max value for each country
