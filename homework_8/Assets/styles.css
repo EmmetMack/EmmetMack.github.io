@@ -7,6 +7,10 @@ h1, h3 {
 	width: 100%;
 }
 
+img {
+	max-height: 150px;
+}
+
 .gallery {
 	-webkit-column-count: 3;
 	-moz-column-count: 3;
