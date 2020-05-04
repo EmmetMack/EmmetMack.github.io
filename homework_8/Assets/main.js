@@ -608,12 +608,17 @@ function createPlayerForLeague(teams) {
 
 	for(var i = 0; i < teams.length; i++) {
 
-		var name = teams[i]["name"] 
+		var name = teams[i]["name"]
+
 
 		if (name === "1899 Hoffenheim") {
 			name = "Hoffenheim";
 		}
+
+		console.log("name: " + name);
 		var nameJSON = prefix + "." + name.replace(/ /g,'');
+		console.log("nameJSON: " + nameJSON);
+
 		var data = JSON.parse(eval(nameJSON));
 		var players = data;
 		
