@@ -757,6 +757,8 @@ function createPlayerForLeague(teams) {
 	}
 	
 }
+
+//functions from https://www.chartjs.org/docs/latest/developers/updates.html
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
