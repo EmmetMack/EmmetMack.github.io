@@ -619,6 +619,10 @@ function createPlayerForLeague(teams) {
 		
 		//create Player object for each player in array
 		players.forEach(function(player) {
+
+			if (player["team_name"] === 'Manchester City') {
+				console.log(player);
+			}
 			var playerObj = new Player(player['player_name'], player['birth_place'], player['birth_country'], player["team_name"], country_lat[player["birth_country"]], country_lng[player["birth_country"]]);
 			var found = leaguePlayers.some(el => (el.name === playerObj.name && el.team === playerObj.team)); //used to prevent duplicates 
 			if (!found) {
