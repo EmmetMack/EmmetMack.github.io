@@ -225,7 +225,7 @@ const country_lng = {
 	"Scotland" : -3.188267,
 	"Wales" : -3.179090,
 	"Northern Ireland" : -5.926437,
-	"Republic Ireland" : -8.24389,
+	"Republic of Ireland" : -8.24389,
 	"Grenada" : -61.604171,
 	"Georgia" : 43.356892,
 	"French Guiana": -53.125782,
