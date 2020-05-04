@@ -7,9 +7,6 @@ h1, h3 {
 	width: 100%;
 }
 
-img {
-	max-height: 150px;
-}
 
 .gallery {
 	-webkit-column-count: 3;
@@ -17,7 +14,8 @@ img {
 	column-count: 2;
 	-webkit-column-width: 33%;
 	-moz-column-width: 33%;
-	column-width: 50%; }
+	column-width: 50%; 
+	max-height: 25%;}
 	.gallery .pics {
 	-webkit-transition: all 350ms ease;
 	transition: all 350ms ease; }
