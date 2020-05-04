@@ -620,6 +620,11 @@ function createPlayerForLeague(teams) {
 		console.log("nameJSON: " + nameJSON);
 
 		var data = JSON.parse(eval(nameJSON));
+
+		if (name === "Manchester City") {
+			console.log("players: " + JSON.stringify(players));
+		}
+		
 		var players = data;
 		
 		//create Player object for each player in array
