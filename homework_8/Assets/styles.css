@@ -8,6 +8,14 @@ h1, h2, h3, h4, h5, p {
 	width: 100%;
 }
 
+#myChart {
+	height: 500px;
+	width: 100%;
+}
+
+.bg-light {
+	color: #FFB347;
+}
 
 .gallery {
 	-webkit-column-count: 3;
