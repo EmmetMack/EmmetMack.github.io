@@ -737,7 +737,7 @@ function createPlayerForLeague(teams) {
 	});
 
 	//creates graph that shows the probability of a player being from that country for that league
-	if (window.myChart != undefined) {
+	if (typeof(myChart) !== "undefined") {
 		myChart.destroy();
 	}
 	
