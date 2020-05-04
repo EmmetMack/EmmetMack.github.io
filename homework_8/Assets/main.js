@@ -738,24 +738,24 @@ function createPlayerForLeague(teams) {
 
 	//creates graph that shows the probability of a player being from that country for that league
 	if (typeof(myChart) !== "undefined") {
-		myChart.destroy();
-	}
-	
-	var ctx = document.getElementById('myChart').getContext('2d');
+		myChart.data.datasets[0].data = Object.values(countryProbs);
+		myChart.data.labels = Object.keys(countryProbs);
+		myChart.update();
+	} else {
+		var ctx = document.getElementById('myChart').getContext('2d');
 
 	
-	var myChart = new Chart(ctx, {
-	   	type: 'horizontalBar',
-	    data: {
-	        labels: Object.keys(countryProbs),
-	        datasets: [{
-	            label: 'Probability Player is from Country',
-	            data: Object.values(countryProbs),
-	         	backgroundColor: "#3E9D02"
-	        }]
-	}});
-	
-	
+		var myChart = new Chart(ctx, {
+		   	type: 'horizontalBar',
+		    data: {
+		        labels: Object.keys(countryProbs),
+		        datasets: [{
+		            label: 'Probability Player is from Country',
+		            data: Object.values(countryProbs),
+		         	backgroundColor: "#3E9D02"
+		        }]
+		}});
+	}
 }
 
 
