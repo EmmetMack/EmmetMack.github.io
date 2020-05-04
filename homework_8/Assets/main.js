@@ -615,15 +615,9 @@ function createPlayerForLeague(teams) {
 			name = "Hoffenheim";
 		}
 
-		console.log("name: " + name);
 		var nameJSON = prefix + "." + name.replace(/ /g,'');
-		console.log("nameJSON: " + nameJSON);
 
 		var data = JSON.parse(eval(nameJSON));
-
-		if (name === "Manchester City") {
-			console.log("players: " + JSON.stringify(players));
-		}
 		
 		var players = data;
 		
