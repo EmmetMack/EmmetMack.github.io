@@ -587,6 +587,8 @@ teamSelect.addEventListener('change', function() {
 	createPlayerForLeague(teamsGlobal); //create player for league for the teams (when )
  }); 
 
+var myChart; //instantiate myChart outside to try and fix issue with flickering
+
 //function that creates the player objects for a league, then calls function for GeoJSON then updates map and creates a graph
 function createPlayerForLeague(teams) {
 
@@ -737,25 +739,23 @@ function createPlayerForLeague(teams) {
 	});
 
 	//creates graph that shows the probability of a player being from that country for that league
-	if (typeof(myChart) !== "undefined") {
-		myChart.data.datasets[0].data = Object.values(countryProbs);
-		myChart.data.labels = Object.keys(countryProbs);
-		myChart.update();
-	} else {
-		var ctx = document.getElementById('myChart').getContext('2d');
-
-	
-		var myChart = new Chart(ctx, {
-		   	type: 'horizontalBar',
-		    data: {
-		        labels: Object.keys(countryProbs),
-		        datasets: [{
-		            label: 'Probability Player is from Country',
-		            data: Object.values(countryProbs),
-		         	backgroundColor: "#3E9D02"
-		        }]
-		}});
+	if (myChart) { //if exists, destroy it
+		myChart.destroy();
 	}
+
+	var ctx = document.getElementById('myChart').getContext('2d');
+
+	myChart = new Chart(ctx, {
+		type: 'horizontalBar',
+		data: {
+		    labels: Object.keys(countryProbs),
+		    datasets: [{
+		        label: 'Probability Player is from Country',
+		        data: Object.values(countryProbs),
+		        backgroundColor: "#3E9D02"
+		    }]
+	}});
+	
 }
 
 
