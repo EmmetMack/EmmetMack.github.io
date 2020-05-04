@@ -15,8 +15,9 @@ h1, h3 {
 	-webkit-column-width: 33%;
 	-moz-column-width: 33%;
 	column-width: 50%; 
-	max-height: 250;}
+	}
 	.gallery .pics {
+	max-height: 250px;
 	-webkit-transition: all 350ms ease;
 	transition: all 350ms ease; }
 	.gallery .animation {
