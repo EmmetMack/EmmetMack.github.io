@@ -1,11 +1,185 @@
 h3 {
     color: white;
+    font-size: 40px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 28px;
 }
 
-label { 
+label {
+    color: white;
+    font-family: Ubuntu;
+    font-size: medium;
+}
+
+hr{
+    width: 95%;
+    border: none;
+    height: 3px;
+    background-color: white;
+}
+
+#titleBox{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3%;
+}
+
+.primaryButtons{
+    margin-right: 3%;
+    margin-top: 3%;
+}
+
+.primaryButtons button{
+    bottom: 2%;
+}
+
+.svg {
+    margin-left: 5px;
+}
+
+.primaryIcon{
+
+}
+/*.svg:after{*/
+/*    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);*/
+/*}*/
+
+#bottom{
+    margin-left: 3%;
+}
+
+#visualizationBox{
+    vertical-align: top;
+    display: inline-block;
+    width: 40%;
+    margin-left: 7%;
+
+}
+
+#manipulationBox{
+    vertical-align: top;
+    display: inline-block;
+    width: 40%;
+    margin-left: 7%;
+}
+
+.vl {
+    vertical-align: top;
+    display: inline-block;
+    border-left: 4px solid white;
+    height: 300px;
+    margin-top: 30px;
+}
+
+.manipulationButtons, .visualizationButtons{
+    height: 90px;
+}
+
+
+.instructionBox{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-family: Ubuntu;
+    font-size: medium;
+}
+
+i{
     color: white;
 }
 
-h1 {
+.manipulationButtons button{
+    background-color: black;
+    border: 1px solid white;
     color: white;
+    padding: 18px 40px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Ubuntu;
+    display: inline-block;
+    font-size: x-large;
+    cursor: pointer;
+    float: left;
+}
+
+.manipulationButtons button:not(:last-child){
+    border-right: none;
+}
+
+.manipulationButtons button:hover{
+    background-color: white;
+    color: black;
+}
+
+.manipulationButtons button:focus{
+    background-color: white;
+    color: black;
+}
+
+.primaryButtons button{
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-family: Ubuntu;
+    font-size: x-large;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/*  gradient color
+    background: -moz-linear-gradient(left, #5954A4 0%, #8AD5EA 100%);
+    background: -webkit-linear-gradient(left, #5954A4 0%, #8AD5EA 100%);
+    background: linear-gradient(to right, #5954A4 0%, #8AD5EA 100%);*/
+
+#title {
+    font-family: Monoton;
+}
+
+.visualizationButtons img{
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+
+@media only screen and (min-width: 1490px)
+{
+}
+@media only screen and (max-width: 1490px) and (min-width: 1366px)
+{
+}
+@media only screen and (max-width: 1366px) and (min-width: 1280px)
+{
+}
+@media only screen and (max-width: 1280px) and (min-width: 1024px)
+{
+}
+@media only screen and (max-width: 1024px) and (min-width: 768px)
+{
+    #titleImage  {
+        width: 100%;
+        height: auto;
+    }
+
+    .visualizationButtons img {
+        width: auto;
+        height: auto;
+    }
+}
+@media only screen and (max-width: 768px) and (min-width: 375px)
+{
+    #titleImage {
+        width: 100%;
+        height: auto;
+    }
+
+    .visualizationButtons img {
+        width: auto;
+        height: auto;
+    }
 }
